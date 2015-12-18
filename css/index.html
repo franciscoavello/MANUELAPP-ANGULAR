@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html lang="en" ng-app="myApp" ng-init="logueado = false">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title >MANUEL</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/colores.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/arreglos.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/font-awesome.min.css" type="text/css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js" type="text/javascript"> </script>
+  <script src="//cdn.auth0.com/w2/auth0-6.js"></script>
+  <script src="//cdn.rawgit.com/auth0/angular-storage/master/dist/angular-storage.js" type="text/javascript"> </script>
+  <script src="//cdn.rawgit.com/auth0/angular-jwt/master/dist/angular-jwt.js" type="text/javascript"> </script>
+  <script src="//code.angularjs.org/1.4.8/angular-route.js" type="text/javascript"> </script>
+  <script src="//code.angularjs.org/1.4.8/angular-cookies.js" type="text/javascript"> </script>
+  <script src="//cdn.auth0.com/w2/auth0-angular-4.js"></script>
+  <script src="./scripts/myApp.js" type="text/javascript"> </script>
+  <script src="./scripts/controllers.js" type="text/javascript"> </script>
+
+  <nav class="barraSuperior sinSombra" ng-controller="MenuCtrl">
+      <div class="nav-wrapper container" ng-controller="LoginCtrl">
+        <ul id="nav-mobile" class="right hide-on-med-and-down" >
+          <li ng-controller="RootCtrl"><img class= "circle responsive-img" src="{{auth.profile.picture}}" style="width: 30px; heigth: 30px; margin-right: 10px; margin-top: 15px"></li>
+          <li><div class="azul-oscuro" class="message" ng-controller="RootCtrl">{{auth.profile.name | uppercase}}</div></li>
+          <li><a href="" class="azul-oscuro" ng-show="!logueado" ng-click="doGoogleAuthWithPopup()"><i class="fa fa-user fa-lg fa-pull-left"></i> Usuario</a></li>
+          <li><a href="" class="azul-oscuro" ng-show="logueado" ng-click="desloguear()"><i class="fa fa-power-off fa-2x fa-pull-left"></i> Salir</a></li>
+        </ul>
+        <a href="" data-activates="mobile-demo" class="button-collapse"><i class="fa fa-bars fa-fw azul-oscuro"></i></a>
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+        </ul>
+      <ul class="side-nav" id="mobile-demo">
+          <li><a href="" ng-show="!logueado" ng-click="doGoogleAuthWithPopup()">Usuario</a></li>
+          <div class="divider"></div>
+          <li><a href="" ng-show="logueado" ng-click="go('/inicioAlumno')">Inicio</a></li>
+          <li>
+          <li><a href="" ng-show="logueado">Encuestas</a></li>
+           <li>
+          <li><a href="" ng-show="logueado" ng-click="desloguear()">Salir</a></li>
+        </ul>
+        <ul id="nav-mobile" class="left">
+          <li><img src="imagenes/logom.gif"></li>
+        </ul>
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+          <li><a href="" class="azul-oscuro" ng-show="logueado" ng-click="go('/inicioAlumno')">Inicio</a></li>
+          <li><a href="" class="azul-oscuro" ng-show="logueado" >Encuestas</a></li>
+        </ul>
+      </div>
+    </nav>
+</head>
+<body>
+  <!-- Aqui empieza contenido -->
+<div ng-view></div>
+
+  <!-- Aqui termina contenido -->
+    <footer class="page-footer footerColor">
+      <div class="container">
+        <div class="row">
+          <div class="col s12 l8 ">
+              <h5 class="white-text">Mesa de ayuda</h5>
+                <p class="white-text text-lighten-4 ">(562) 2 999 99999 - 2 888 88888</p>
+                <p class="white-text text-lighten-4"><strong>Universidad de Santiago de Chile</strong><br/>Av. Libertador Bernardo O'Higgins 3363, Santiago, Región Metropolitana</p>
+          </div>
+          <div class="col s12 l4">
+               <div class="icon-block center">
+                  <h2>
+                    <img src="imagenes/logousach.png" style="max-width: 42.5%; max-height: 42.5%;"/>
+                  </h2>
+               </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container white-text">
+        © 2015 Copyright Text
+        </div>
+      </div>
+    </footer>
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.min.js"></script>
+  <script src="js/init.js"></script>
+
+  </body>
+</html>
