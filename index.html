@@ -40,24 +40,30 @@
       <ul class="side-nav" id="mobile-demo">
           <li><a href="" ng-show="!logueado" ng-click="doGoogleAuthWithPopup()">Ingresar</a></li>
           <div class="divider"></div>
-          <li><a href="" ng-show="logueado && esAlumno" ui-sref="inicioAlumno">Inicio</a></li>
-          <li><a href="" ng-show="logueado && esAdmin" ui-sref="inicioAdmin">Inicio</a></li>
-          <li><a href="" ng-show="logueado && esProfesor" ui-sref="inicioProfesor">Inicio</a></li>
+          <li><a href="" ng-show="logueado && esAlumno" ng-click="go('/inicioAlumno')">Inicio</a></li>
           <li>
           <li><a href="" ng-show="logueado && esAlumno" ui-sref="encuestas">Encuestas</a></li>
            <li>
           <li><a href="" ng-show="logueado && esProfesor" >Cursos</a></li>
            <li>
+            <li><a href="" ng-show="logueado && esAdmin" ui-sref="encuestas">Profesores</a></li>
+            <li><a href="" ng-show="logueado && esAdmin" ui-sref="encuestas">Alumnos</a></li>
+            <li><a href="" ng-show="logueado && esAdmin" ui-sref="encuestas">Encuestas</a></li>
+            <li><a href="" ng-show="logueado && esAdmin" ui-sref="encuestas">Tipos de Encuestas</a></li>
           <li><a href="" ng-show="logueado" ng-click="desloguear()">Salir</a></li>
         </ul>
         <ul id="nav-mobile" class="left">
           <li><img src="imagenes/logom.gif"></li>
         </ul>
         <ul id="nav-mobile" class="left hide-on-med-and-down">
-          <li><a href="" class="azul-oscuro" ng-show="logueado && esAlumno" ui-sref="inicioAlumno">Inicio</a></li>
-          <li><a href="" class="azul-oscuro" ng-show="logueado && esAdmin" ui-sref="inicioAdmin">Inicio</a></li>
-          <li><a href="" class="azul-oscuro" ng-show="logueado && esProfesor" ui-sref="inicioProfesor">Inicio</a></li>
+          <li><a href="" class="azul-oscuro" ng-show="logueado && esAlumno" ng-click="go('/inicioAlumno')">Inicio</a></li>
+          <li><a href="" class="azul-oscuro" ng-show="logueado && esAdmin" ng-click="go('/inicioAdmin')">Inicio</a></li>
+          <li><a href="" class="azul-oscuro" ng-show="logueado && esProfesor" ng-click="go('/inicioProfesor')">Inicio</a></li>
           <li><a href="" class="azul-oscuro" ng-show="logueado && esAlumno"  ui-sref="encuestas">Encuestas</a></li>
+          <li><a href="" class="azul-oscuro" ng-show="logueado && esAdmin"  ui-sref="encuestas">Profesores</a></li>
+          <li><a href="" class="azul-oscuro" ng-show="logueado && esAdmin"  ui-sref="encuestas">Alumnos</a></li>
+          <li><a href="" class="azul-oscuro" ng-show="logueado && esAdmin"  ui-sref="encuestas">Encuestas</a></li>
+          <li><a href="" class="azul-oscuro" ng-show="logueado && esAdmin"  ui-sref="encuestas">Tipos de Encuestas</a></li>
           <li><a href="" class="azul-oscuro" ng-show="logueado && esProfesor" >Cursos</a></li>
         </ul>
       </div>
