@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  Encuesta_id: 1
+  Encuesta_estado: false
+  Encuesta_nombre: MyString
+  Encuesta_descripcion: MyText
+
+two:
+  Encuesta_id: 1
+  Encuesta_estado: false
+  Encuesta_nombre: MyString
+  Encuesta_descripcion: MyText

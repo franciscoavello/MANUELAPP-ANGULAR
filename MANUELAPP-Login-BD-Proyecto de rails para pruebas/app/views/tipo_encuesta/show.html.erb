@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Tipo:</strong>
+  <%= @tipo_encuestum.Tipo_id %>
+</p>
+
+<p>
+  <strong>Tipo nombre:</strong>
+  <%= @tipo_encuestum.Tipo_nombre %>
+</p>
+
+<%= link_to 'Edit', edit_tipo_encuestum_path(@tipo_encuestum) %> |
+<%= link_to 'Back', tipo_encuesta_path %>

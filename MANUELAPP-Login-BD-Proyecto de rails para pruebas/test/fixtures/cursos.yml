@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  Curso_id: 1
+  Curso_nombre: MyString
+  Curso_semestre: 1
+  Curso_año: 1
+
+two:
+  Curso_id: 1
+  Curso_nombre: MyString
+  Curso_semestre: 1
+  Curso_año: 1

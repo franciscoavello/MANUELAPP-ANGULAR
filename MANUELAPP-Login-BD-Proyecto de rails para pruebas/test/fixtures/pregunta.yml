@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  Pregunta_id: 1
+  Pregunta_enunciado: MyText
+  Pregunta_Descripcion: MyText
+
+two:
+  Pregunta_id: 1
+  Pregunta_enunciado: MyText
+  Pregunta_Descripcion: MyText

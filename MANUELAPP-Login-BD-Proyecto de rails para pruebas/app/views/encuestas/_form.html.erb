@@ -1,0 +1,33 @@
+<%= form_for(@encuesta) do |f| %>
+  <% if @encuesta.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@encuesta.errors.count, "error") %> prohibited this encuesta from being saved:</h2>
+
+      <ul>
+      <% @encuesta.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :Encuesta_id %><br>
+    <%= f.number_field :Encuesta_id %>
+  </div>
+  <div class="field">
+    <%= f.label :Encuesta_estado %><br>
+    <%= f.check_box :Encuesta_estado %>
+  </div>
+  <div class="field">
+    <%= f.label :Encuesta_nombre %><br>
+    <%= f.text_field :Encuesta_nombre %>
+  </div>
+  <div class="field">
+    <%= f.label :Encuesta_descripcion %><br>
+    <%= f.text_area :Encuesta_descripcion %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

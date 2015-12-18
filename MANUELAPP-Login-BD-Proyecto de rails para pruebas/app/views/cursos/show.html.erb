@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Curso:</strong>
+  <%= @curso.Curso_id %>
+</p>
+
+<p>
+  <strong>Curso nombre:</strong>
+  <%= @curso.Curso_nombre %>
+</p>
+
+<p>
+  <strong>Curso semestre:</strong>
+  <%= @curso.Curso_semestre %>
+</p>
+
+<p>
+  <strong>Curso año:</strong>
+  <%= @curso.Curso_año %>
+</p>
+
+<%= link_to 'Edit', edit_curso_path(@curso) %> |
+<%= link_to 'Back', cursos_path %>

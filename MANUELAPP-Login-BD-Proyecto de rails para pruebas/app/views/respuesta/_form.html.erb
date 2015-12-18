@@ -1,0 +1,25 @@
+<%= form_for(@respuestum) do |f| %>
+  <% if @respuestum.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@respuestum.errors.count, "error") %> prohibited this respuestum from being saved:</h2>
+
+      <ul>
+      <% @respuestum.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :Respuesta_id %><br>
+    <%= f.number_field :Respuesta_id %>
+  </div>
+  <div class="field">
+    <%= f.label :Respuesta_modulo %><br>
+    <%= f.number_field :Respuesta_modulo %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

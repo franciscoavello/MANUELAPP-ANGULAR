@@ -1,0 +1,42 @@
+.barraSuperior{
+	background-color: #CADDCF;
+}
+
+.barraSuperior2{
+  background-color: #1BBE9E;
+}
+
+.footerColor{
+	background-color: #CADDCF;
+}
+
+.fuentes{
+	color: #000000;
+}
+
+footer.page-footer {
+
+    background-color: #1BBE9E !important;
+}
+
+body{
+   background-color: #F9F9FB;
+}
+.blanco{
+	background-color: #ffffff;
+
+}
+
+.contain{
+  margin: 0 auto;
+  max-width: 1280px;
+
+  width: 85%
+}
+.azul-oscuro{
+  color: #333C4E !important;
+}
+
+.turquesa{
+  color: #1BBE9E !important;
+}

@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  Grupo_id: 1
+  Grupo_lider: MyString
+
+two:
+  Grupo_id: 1
+  Grupo_lider: MyString

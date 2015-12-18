@@ -1,0 +1,135 @@
+<% provide :title, 'Home' %>
+<!-- Aqui empieza contenido -->
+
+      <% if current_user %>
+        <% if params[:rol] %>
+          <%if params[:rol] == "0" %>
+            <div class="section no-pad-bot" id="index-banner">
+                    <div class="container">
+                      <br><br>
+                      <div class="row center"><%= image_tag "manuel.gif" %></div>
+                      <div class="row center">
+                        <h5 class="header col s12 light azul-oscuro">Cuenta de administrador</h5>
+                      </div>
+                      <br><br>
+
+                    </div>
+                  </div>
+          <%end%>
+          <%if params[:rol] == "1" %>
+            <div class="section no-pad-bot" id="index-banner">
+                    <div class="container">
+                      <br><br>
+                      <div class="row center"><%= image_tag "manuel.gif" %></div>
+                      <div class="row center">
+                        <h5 class="header col s12 light azul-oscuro">Cuenta de profesor</h5>
+                      </div>
+                      <br><br>
+
+                    </div>
+                  </div>
+          <%end%>
+          <%if params[:rol] == "2" %>
+                  <div class="section no-pad-bot" id="index-banner">
+                    <div class="container">
+                      <br><br>
+                      <div class="row center"><%= image_tag "manuel.gif" %></div>
+                      <div class="row center">
+                        <h5 class="header col s12 light azul-oscuro">Cuenta de alumno</h5>
+                      </div>
+                      <br><br>
+
+                    </div>
+                  </div>
+                  <div class="container">
+              <div class="section">
+
+                <!--   Icon Section   -->
+                <div class="row">
+                  <div class="col s12 m4">
+                    <div class="icon-block">
+                      <h2 class="center"><a href="#" class="turquesa"><i class="fa fa-check-square-o"></i></a></h2>
+                      <h5 class="center"><a href="#" class="azul-oscuro">Encuestas pendientes</a></h5>
+
+                      <p class="azul-oscuro" align="justify">Lista de encuestas enviadas al alumno que aún no ha contestado.</p>
+                    </div>
+                  </div>
+
+                  <div class="col s12 m4">
+                    <div class="icon-block">
+                      <h2 class="center"><a href="#" class="turquesa"><i class="fa fa-bar-chart"></i></a></h2>
+                      <h5 class="center"><a href="#" class="azul-oscuro">Encuestas Respondidas</a></h5>
+
+                      <p class="azul-oscuro" align="justify">Lista de encuestas en las que participa el alumno que ya fueron respondidas</p>
+                    </div>
+                  </div>
+
+                  <div class="col s12 m4">
+                    <div class="icon-block">
+                      <h2 class="center"><a href="#" class="turquesa"><i class="fa fa-bell"></i></a></h2>
+                      <h5 class="center"><a href="#" class="azul-oscuro">Recordatorios</a></h5>
+
+                      <p class="azul-oscuro" align="justify">Mandar mensaje a todos los integrantes de un grupo que no han contestado encuestas.</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <br><br>
+            </div>
+          <%end%>
+
+        <% end %>
+        
+      <% else %>
+          <div class="section no-pad-bot" id="index-banner">
+          <div class="container">
+            <br><br>
+            <h1 class="header center orange-text"><%= image_tag "manuel.gif"%></h1>
+            <div class="row center">
+              <h5 class="header col s12 light azul-oscuro">
+                MANejador Universal de Encuestas Libres para trabajo en equipo
+              </h5>
+              <p class="azul-oscuro">A través de esta aplicación usted podrá crear, 
+              editar, enviar y obtener resultados de encuestas aplicadas a grupos de 
+              estudiantes con los cuales podrá medir habilidades y capacidades de 
+              ellos.</p>
+            </div>
+            <div class="row center">
+              <%= link_to "Ingresar",'auth/google_oauth2', class: "btn-large waves-effect waves-light" %>
+            </div>
+            <br><br>
+            </div>
+            </div>
+
+            <div class="container">
+  <div class="section">
+
+    <!--   Icon Section   -->
+    <div class="row">
+      <div class="col s12 m6">
+        <div class="icon-block">
+          <h2 class="center turquesa"><%= icon 'university' %></h2>
+          <h5 class="center azul-oscuro">Profesor</h5>
+
+          <p class="azul-oscuro" align="justify">Académico encargado del desarrollo de un curso. Su rol principal es subir encuestas para que los estudiantes puedan contestarlas.</p>
+        </div>
+      </div>
+
+      <div class="col s12 m6">
+        <div class="icon-block">
+          <h2 class="center turquesa"><i class="fa fa-graduation-cap"></i></h2>
+          <h5 class="center azul-oscuro">Alumno</h5>
+
+          <p class="azul-oscuro" align="justify">Estudiante que cursa uno o varios cursos. Su rol principal es contestar las encuestas enviadas por el profesor encargado.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <br><br>
+</div>
+      <% end %>
+
+
+<!-- Aqui termina contenido -->

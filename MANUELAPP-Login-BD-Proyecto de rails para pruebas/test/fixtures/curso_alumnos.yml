@@ -1,0 +1,7 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  Curso_Alumno_id: 1
+
+two:
+  Curso_Alumno_id: 1

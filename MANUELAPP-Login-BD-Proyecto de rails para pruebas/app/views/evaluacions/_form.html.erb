@@ -1,0 +1,25 @@
+<%= form_for(@evaluacion) do |f| %>
+  <% if @evaluacion.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@evaluacion.errors.count, "error") %> prohibited this evaluacion from being saved:</h2>
+
+      <ul>
+      <% @evaluacion.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :Evaluacion_id %><br>
+    <%= f.number_field :Evaluacion_id %>
+  </div>
+  <div class="field">
+    <%= f.label :Evaluacion_contestada %><br>
+    <%= f.number_field :Evaluacion_contestada %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

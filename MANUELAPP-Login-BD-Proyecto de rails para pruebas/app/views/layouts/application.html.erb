@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= set_page_title yield(:title) %></title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'https://fonts.googleapis.com/icon?family=Material+Icons' %>
+  <%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Lato:400,700' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= favicon_link_tag 'logom_square.ico' %>
+  <%= csrf_meta_tags %>
+  <%= render 'static_pages/navbar' %>
+</head>
+<body>
+
+<%= yield %>
+
+<%= render 'static_pages/footer' %>
+
+</body>
+</html>
