@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Modulo:</strong>
+  <%= @respuestum.modulo %>
+</p>
+
+<p>
+  <strong>Encuestado:</strong>
+  <%= @respuestum.encuestado_id %>
+</p>
+
+<p>
+  <strong>Encuestador:</strong>
+  <%= @respuestum.encuestador_id %>
+</p>
+
+<p>
+  <strong>Evaluacion:</strong>
+  <%= @respuestum.evaluacion_id %>
+</p>
+
+<%= link_to 'Edit', edit_respuestum_path(@respuestum) %> |
+<%= link_to 'Back', respuesta_path %>

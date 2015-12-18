@@ -1,0 +1,29 @@
+<%= form_for(@opcione) do |f| %>
+  <% if @opcione.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@opcione.errors.count, "error") %> prohibited this opcione from being saved:</h2>
+
+      <ul>
+      <% @opcione.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :valor %><br>
+    <%= f.number_field :valor %>
+  </div>
+  <div class="field">
+    <%= f.label :opcion_text %><br>
+    <%= f.text_field :opcion_text %>
+  </div>
+  <div class="field">
+    <%= f.label :pregunta_id %><br>
+    <%= f.number_field :pregunta_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
