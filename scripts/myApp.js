@@ -15,39 +15,44 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
     url: "/inicioAdmin",
     templateUrl: "views/inicioAdmin.html",
     controller: 'LoginCtrl',
-    requiresLogin: true
+    authenticate: true    
   })
   .state('inicioProfesor', {
     url: "/inicioProfesor",
     templateUrl: "views/inicioProfesor.html",
     controller: 'LoginCtrl',
-    requiresLogin: true
+    authenticate: true
   })
   .state('inicioAlumno',   {
     url: '/inicioAlumno',
     templateUrl: 'views/inicioAlumno.html',
     controller: 'LoginCtrl',
-    requiresLogin: true
+    authenticate: true
   })
   .state('encuestas', {
       url: "/encuestas",
-      templateUrl: "views/alumno/encuestas.html"
+      templateUrl: "views/alumno/encuestas.html",
+      authenticate: true
     })
     .state('encuestas.recordatorios', {
       url: "/recordatorios",
-      templateUrl: "views/alumno/alumnos-recordatorios.html"
+      templateUrl: "views/alumno/alumnos-recordatorios.html",
+      authenticate: true
     })
     .state('encuestas.pendientes', {
       url: "/pendientes",
-      templateUrl: "views/alumno/alumnos-pendientes.html"
+      templateUrl: "views/alumno/alumnos-pendientes.html",
+      authenticate: true
     })
     .state('encuestas.completadas', {
       url: "/completadas",
-      templateUrl: "views/alumno/alumnos-completadas.html"
+      templateUrl: "views/alumno/alumnos-completadas.html",
+      authenticate: true
     })
     .state('encuestas.responder', {
       url: "/responder",
-      templateUrl: "views/alumno/responder-encuestas.html"
+      templateUrl: "views/alumno/responder-encuestas.html",
+      authenticate: true
     })
   .state('404',   {
     url: '/404',
@@ -62,7 +67,6 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
     templateUrl: 'views/500.html'
   });
 });
-
 
 myApp.config(function ($routeProvider, authProvider, $httpProvider,
   jwtInterceptorProvider) {
@@ -80,18 +84,12 @@ myApp.config(function ($routeProvider, authProvider, $httpProvider,
 // Solo configuracion del login
 
   $httpProvider.interceptors.push('jwtInterceptor');
-}).run(function($rootScope, auth, store, jwtHelper, $location) { 
-  $rootScope.$on('$locationChangeStart', function() {    
-    if (!auth.isAuthenticated) {
-      var token = store.get('token');
-      if (token) {
-        if (!jwtHelper.isTokenExpired(token)) {
-          auth.authenticate(store.get('profile'), token);
-        } else {
-          $location.path('inicio');
-        }
-      }
+}).run(function($rootScope, auth, store, jwtHelper, $location, $state) { 
+  $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+    if (toState.authenticate && !auth.isAuthenticated){
+      // User isn’t authenticated
+      $state.go('500');
+      event.preventDefault(); 
     }
-
   });
 });
