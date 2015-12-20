@@ -5,21 +5,18 @@
       <table class="striped">
         <thead>
           <tr >
-              <th data-field="id"></th>
-              <th data-field="name">Nombre del Tipo de Encuesta</th>
+              <th data-field="id">Nombre del Tipo de Encuesta</th>
+              <th data-field="name">Fecha de Creacion</th>
           </tr>
         </thead>
 
         <tbody ng-repeat="encuesta in encuestas| limitTo:15" id="{{encuesta.id}}">
-          
-          <td>
-          <button class="btn waves-effect waves-light" type="submit" name="action">Modificar
-          </button>
-          </td>
-            <td>{{encuesta.nombre}}</td>
-            <td>{{encuesta.curso}}</td>
             <td>{{encuesta.tipo}}</td>
             <td>{{encuesta.fecha}}</td>
+            <td>
+              
+            <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">mode_edit</i></a>
+            </td>
         </tbody>
       </table>
   </div>

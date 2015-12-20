@@ -55,21 +55,23 @@ myApp.controller("verProfesores", function($scope,$http){
         {
           id: 1,
           nombre: "Jorge Salas",
+          curso: "Algoritmos Avanzados",
           
         },
         { 
           id: 2,
           nombre: "Pedro Guzman",
-          
+          curso: "Calculo Avanzado",
         },
         {
           id: 3,
           nombre: "Carlos Antillanca",
-          
+          curso: "Topicos de Matematica",
         },
         {
           id: 4,
           nombre: "Eduardo Gamboa",
+          curso: "Futbol Avanzado",
           
         }
       ];
