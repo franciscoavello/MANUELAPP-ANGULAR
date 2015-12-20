@@ -26,6 +26,7 @@
   <script src="./scripts/myApp.js" type="text/javascript"> </script>
   <script src="./scripts/controllers.js" type="text/javascript"> </script> 
   <script src="./scripts/alumnosController.js" type="text/javascript"> </script>   
+  <script src="./scripts/adminController.js" type="text/javascript"> </script>   
 
   <nav class="barraSuperior sinSombra" ng-controller="MenuCtrl">
       <div class="nav-wrapper container" >
@@ -61,6 +62,13 @@
           <li><a href="" class="azul-oscuro" ng-show="logueado && esProfesor" ui-sref="inicioProfesor">Inicio</a></li>
           <li><a href="" class="azul-oscuro" ng-show="logueado && esAlumno"  ui-sref="encuestas">Encuestas</a></li>
           <li><a href="" class="azul-oscuro" ng-show="logueado && esProfesor" >Cursos</a></li>
+          <li><a href="" class="azul-oscuro" ng-show="logueado && esAdmin"  ui-sref="adminprofesores">Profesores</a></li>
+          <li><a href="" class="azul-oscuro" ng-show="logueado && esAdmin"  ui-sref="adminalumnos">Alumnos</a></li>
+          <li><a href="" class="azul-oscuro dropdown-button bttn" ng-show="logueado && esAdmin" data-activates="dropdown1">Encuestas</a></li>
+            <ul id="dropdown1" class="dropdown-content">
+              <li><a href="" class="azul-oscuro" ng-show="logueado && esAdmin"  ui-sref="adminencuestas">Ver Encuestas</a></li>
+              <li><a href="" class="azul-oscuro" ng-show="logueado && esAdmin"  ui-sref="admintencuestas  ">Tipos de Encuestas</a></li>
+            </ul>
         </ul>
       </div>
     </nav>
