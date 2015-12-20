@@ -1,1 +1,32 @@
-  <div>Recordatorios</div>
+  <div class="container" ng-controller="VerEncuestas">
+  <div class="row">
+  <h5 class="azul-oscuro">Enviar recordatorio</h5> 
+      <div class="input-field col s12">
+          <p>
+          En esta sección usted puede enviar recordatorios para su compañeros que no han respondido una encuesta de grupos en los cuales usted es jefe.
+          </p>
+      </div>
+      <table class="striped">
+        <thead>
+          <tr >
+              <th data-field="id"></th>
+              <th data-field="name">Nombre de la encuesta</th>
+              <th data-field="curso">Curso</th>
+              <th data-field="tipo">Tipo</th>
+              <th data-field="date">Fecha</th>
+          </tr>
+        </thead>
+
+        <tbody ng-repeat="encuesta in encuestas| limitTo:15" id="{{encuesta.id}}">
+          <tr ng-if="encuesta.estado=='pendiente'">
+          <td>
+          <button class="btn waves-effect waves-light" type="submit" name="action">Recordatorio</button>
+          </td>
+            <td>{{encuesta.nombre}}</td>
+            <td>{{encuesta.curso}}</td>
+            <td>{{encuesta.tipo}}</td>
+            <td>{{encuesta.fecha}}</td>
+          </tr>
+        </tbody>
+      </table>
+  </div>

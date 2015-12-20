@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  estado: false
+  nombre: MyString
+  descripcion: MyText
+  tipo_encuesta_id: 1
+
+two:
+  estado: false
+  nombre: MyString
+  descripcion: MyText
+  tipo_encuesta_id: 1

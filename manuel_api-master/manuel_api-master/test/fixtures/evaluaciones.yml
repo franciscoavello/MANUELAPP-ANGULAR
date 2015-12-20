@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  contestada: 1
+  curso_id: 1
+  encuesta_id: 1
+
+two:
+  contestada: 1
+  curso_id: 1
+  encuesta_id: 1

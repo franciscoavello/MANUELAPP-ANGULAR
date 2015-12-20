@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  modulo: 1
+  encuestado_id: 1
+  encuestador_id: 1
+  evaluacion_id: 1
+
+two:
+  modulo: 1
+  encuestado_id: 1
+  encuestador_id: 1
+  evaluacion_id: 1

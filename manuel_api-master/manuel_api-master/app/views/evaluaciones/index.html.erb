@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Evaluaciones</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Contestada</th>
+      <th>Curso</th>
+      <th>Encuesta</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @evaluaciones.each do |evaluacione| %>
+      <tr>
+        <td><%= evaluacione.contestada %></td>
+        <td><%= evaluacione.curso_id %></td>
+        <td><%= evaluacione.encuesta_id %></td>
+        <td><%= link_to 'Show', evaluacione %></td>
+        <td><%= link_to 'Edit', edit_evaluacione_path(evaluacione) %></td>
+        <td><%= link_to 'Destroy', evaluacione, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Evaluacione', new_evaluacione_path %>

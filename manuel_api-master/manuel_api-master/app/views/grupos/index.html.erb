@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Grupos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Alumno</th>
+      <th>Curso</th>
+      <th>Descripcion</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @grupos.each do |grupo| %>
+      <tr>
+        <td><%= grupo.nombre %></td>
+        <td><%= grupo.alumno_id %></td>
+        <td><%= grupo.curso_id %></td>
+        <td><%= grupo.descripcion %></td>
+        <td><%= link_to 'Show', grupo %></td>
+        <td><%= link_to 'Edit', edit_grupo_path(grupo) %></td>
+        <td><%= link_to 'Destroy', grupo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Grupo', new_grupo_path %>

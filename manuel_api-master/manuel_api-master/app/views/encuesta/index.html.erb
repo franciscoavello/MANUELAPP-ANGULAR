@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Encuesta</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Estado</th>
+      <th>Nombre</th>
+      <th>Descripcion</th>
+      <th>Tipo encuesta</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @encuesta.each do |encuestum| %>
+      <tr>
+        <td><%= encuestum.estado %></td>
+        <td><%= encuestum.nombre %></td>
+        <td><%= encuestum.descripcion %></td>
+        <td><%= encuestum.tipo_encuesta_id %></td>
+        <td><%= link_to 'Show', encuestum %></td>
+        <td><%= link_to 'Edit', edit_encuestum_path(encuestum) %></td>
+        <td><%= link_to 'Destroy', encuestum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Encuestum', new_encuestum_path %>
