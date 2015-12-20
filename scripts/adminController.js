@@ -1,29 +1,107 @@
-myApp.config(function($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.otherwise("/404");
-  $stateProvider
-    .state('adminalumnos', {
-      url: "/adminalumnos",
-      templateUrl: "views/admin/admin-alumnos.html",
-      authenticate: true
-    })
-    .state('adminprofesores', {
-      url: "/adminprofesores",
-      templateUrl: "views/admin/admin-profesores.html",
-      authenticate: true
-    })
-    .state('adminencuestas', {
-      url: "/adminencuestas",
-      templateUrl: "views/admin/admin-encuestas.html",
-      authenticate: true
-    })
-    .state('admintencuestas', {
-      url: "/admintencuestas",
-      templateUrl: "views/admin/admin-tencuestas.html",
-      authenticate: true
-    })
-    .state('admintencuestasnueva', {
-      url: "/admintencuestasnueva",
-      templateUrl: "views/admin/admin-te-nueva.html",
-      authenticate: true
-    })
+var myApp = angular.module('myApp');
+
+myApp.controller("verEncuestas", function($scope,$http){
+      $scope.encuestas = [
+        {
+          id: 1,
+          nombre: "Encuesta PINGESO",
+          tipo: "Encuesta 360",
+          curso: "Proyecto de Ingeniería de Software",
+          fecha: "25/11/2015",
+          estado: "finalizada",
+          grupo: "1",
+          jefe: "Juan Peréz"
+        },
+        { 
+          id: 2,
+          nombre: "Encuesta IHC",
+          tipo: "Encuesta 360",
+          curso: "Interfaz humano-computador",
+          fecha: "15/11/2015",
+          estado: "pendiente",
+          grupo: "3",
+          jefe: "Francisco Riquelme"
+        },
+        {
+          id: 3,
+          nombre: "Encuesta IHC",
+          tipo: "Encuesta Liderazgo",
+          curso: "Interfaz humano-computador",
+          fecha: "18/11/2015",
+          estado: "pendiente",
+          grupo: "3",
+          jefe: "Francisco Riquelme"
+        },
+        {
+          id: 4,
+          nombre: "Encuesta PBD",
+          tipo: "Encuesta 360",
+          curso: "Proyecto de Base de Datos",
+          fecha: "01/11/2015",
+          estado: "finalizada",
+          grupo: "4",
+          jefe: "Pedro Paredes"
+        }
+
+      ];
+      $scope.cursos = [];
+
+
 });
+
+
+myApp.controller("verProfesores", function($scope,$http){
+        $scope.profesores = [
+        {
+          id: 1,
+          nombre: "Jorge Salas",
+          
+        },
+        { 
+          id: 2,
+          nombre: "Pedro Guzman",
+          
+        },
+        {
+          id: 3,
+          nombre: "Carlos Antillanca",
+          
+        },
+        {
+          id: 4,
+          nombre: "Eduardo Gamboa",
+          
+        }
+      ];
+
+});
+
+
+
+myApp.controller("verAlumnos", function($scope,$http){
+        $scope.profesores = [
+        {
+          id: 1,
+          nombre: "Sergio Carmona",
+          
+        },
+        { 
+          id: 2,
+          nombre: "Manuel Guzman",
+          
+        },
+        {
+          id: 3,
+          nombre: "Carlos Salas",
+          
+        },
+        {
+          id: 4,
+          nombre: "Claudio Bravo",
+          
+        }
+      ];
+
+});
+
+
