@@ -1,5 +1,5 @@
 var myApp = angular.module('myApp', [
-  'ngCookies', 'auth0', 'ngRoute', 'angular-storage', 'angular-jwt', 'ui.router','ui.materialize', 'nvd3ChartDirectives']);
+  'ngCookies', 'auth0', 'ngRoute', 'angular-storage', 'angular-jwt', 'ui.router','ui.materialize']);
 
 // Aqui van las rutas que tendra la aplicación.
 // requiresLogin significa que se necesita que haya iniciado sesión.
