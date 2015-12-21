@@ -23,9 +23,9 @@
           <tbody ng-repeat="encuesta in encuestas">
             <tr >
             <td>
-            <button ng-if="encuesta.tipo_encuesta_id==1" id="{{encuesta.id}}" class="btn waves-effect waves-light" type="submit" name="action" ui-sref="encuestas.responder360({idEncuesta: {{encuesta.id}} })">Responder
+            <button ng-click="ingresarNombreEncuesta(encuesta.nombre)" ng-if="encuesta.tipo_encuesta_id==1" id="{{encuesta.id}}" class="btn waves-effect waves-light" type="submit" name="action" ui-sref="encuestas.responder360({idEncuesta: {{encuesta.id}} })">Responder
             </button>
-            <button ng-if="encuesta.tipo_encuesta_id!=1" id="{{encuesta.id}}" class="btn waves-effect waves-light" type="submit" name="action" ui-sref="encuestas.responder({idEncuesta: {{encuesta.id}} })">Responder
+            <button ng-click="ingresarNombreEncuesta(encuesta.nombre)" ng-if="encuesta.tipo_encuesta_id!=1" id="{{encuesta.id}}" class="btn waves-effect waves-light" type="submit" name="action" ui-sref="encuestas.responder({idEncuesta: {{encuesta.id}} })">Responder
             </button>
             </td>
               <td>{{encuesta.nombre}}</td>

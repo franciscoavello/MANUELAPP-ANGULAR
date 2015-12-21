@@ -34,8 +34,8 @@
   <script src="//cdn.auth0.com/w2/auth0-angular-4.js"></script>
   <script src="js/angular-ui-router.js"></script>
   <script src="./scripts/myApp.js" type="text/javascript"> </script>
-  <script src="./scripts/controllers.js" type="text/javascript"> </script> 
-  <script src="./scripts/alumnosController.js" type="text/javascript"> </script>   
+  <script src="./scripts/controllers.js" type="text/javascript"> </script>
+  <script src="./scripts/alumnosController.js" type="text/javascript"> </script>
   <script src="./scripts/adminController.js" type="text/javascript"> </script>
 
   <nav class="barraSuperior sinSombra" ng-controller="MenuCtrl">
@@ -57,7 +57,7 @@
           <li><a href="" ng-show="logueado && esProfesor" ui-sref="inicioProfesor">Inicio</a></li>
 
           <li>
-          <li><a href="" ng-show="logueado && esAlumno" ui-sref="encuestas">Encuestas</a></li>
+          <li><a href="" ng-show="logueado && esAlumno" ui-sref="encuestas.pendientes">Encuestas</a></li>
            <li>
           <li><a href="" ng-show="logueado && esProfesor" >Cursos</a></li>
            <li>
@@ -70,7 +70,7 @@
           <li><a href="" class="azul-oscuro" ng-show="logueado && esAlumno" ui-sref="inicioAlumno">Inicio</a></li>
           <li><a href="" class="azul-oscuro" ng-show="logueado && esAdmin" ui-sref="inicioAdmin">Inicio</a></li>
           <li><a href="" class="azul-oscuro" ng-show="logueado && esProfesor" ui-sref="inicioProfesor">Inicio</a></li>
-          <li><a href="" class="azul-oscuro" ng-show="logueado && esAlumno"  ui-sref="encuestas">Encuestas</a></li>
+          <li><a href="" class="azul-oscuro" ng-show="logueado && esAlumno"  ui-sref="encuestas.pendientes">Encuestas</a></li>
           <li><a href="" class="azul-oscuro" ng-show="logueado && esProfesor" >Cursos</a></li>
           <li><a href="" class="azul-oscuro" ng-show="logueado && esAdmin"  ui-sref="adminprofesores">Profesores</a></li>
           <li><a href="" class="azul-oscuro" ng-show="logueado && esAdmin"  ui-sref="adminalumnos">Alumnos</a></li>
