@@ -80,6 +80,50 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
       },
       authenticate: true
     })
+  .state('cursos', {
+      url: "/cursos",
+      templateUrl: "views/profesor/cursos.html",
+      controller: 'VerCursos',
+      authenticate: true
+    })
+  .state('detalle-curso', {
+      url: "/detalle-curso",
+      templateUrl: "views/profesor/detalle-curso.html",
+      controller: 'CursoCtrl',
+      authenticate: true
+
+    })
+    .state('detalle-curso.perfil', {
+      url: "/perfil",
+      templateUrl: "views/profesor/profesor-perfil.html",
+      controller: 'CursoCtrl',
+      authenticate: true
+    })
+    .state('detalle-curso.grupos', {
+      url: "/grupos",
+      templateUrl: "views/profesor/profesor-grupos.html",
+      controller: 'VerGrupos',
+      authenticate: true
+
+    })
+    .state('detalle-curso.alumnos', {
+      url: "/alumnos",
+      templateUrl: "views/profesor/profesor-alumnos.html",
+      authenticate: true
+      
+    })
+    .state('detalle-curso.evaluaciones', {
+      url: "/evaluaciones",
+      templateUrl: "views/profesor/profesor-evaluaciones.html",
+      authenticate: true
+
+    })
+  .state('detalle-grupo',{
+    url:"/detalle-grupo",
+    templateUrl: "views/profesor/detalle-grupo.html",
+    authenticate: true
+
+  })
   .state('404',   {
     url: '/404',
     templateUrl: 'views/404.html'
