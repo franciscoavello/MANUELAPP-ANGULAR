@@ -81,7 +81,7 @@ myApp.controller("verProfesores", function($scope,$http){
 
 
 myApp.controller("verAlumnos", function($scope,$http){
-        $scope.profesores = [
+        $scope.alumnos = [
         {
           id: 1,
           nombre: "Sergio Carmona",

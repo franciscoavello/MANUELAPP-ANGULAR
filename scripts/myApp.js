@@ -67,6 +67,19 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
       templateUrl: "views/admin/admin-profesores.html",
       authenticate: true
     })
+
+     .state('adminalumnos.ver', {
+      url: "/adminveralumnos",
+      templateUrl: "views/admin/admin-alumnos-ac.html",
+      authenticate: true
+    })
+
+     .state('adminalumnos.nuevo', {
+      url: "/adminnuevoalumno",
+      templateUrl: "views/admin/admin-alumnos-nuevo.html",
+      authenticate: true
+    })
+
     .state('adminprofesores.ver', {
       url: "/adminverprofesores",
       templateUrl: "views/admin/admin-profesores-ac.html",
