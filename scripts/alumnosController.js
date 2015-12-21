@@ -12,7 +12,7 @@ myApp.controller("VerEncuestas", function($scope,$http){
           grupo: "1",
           jefe: "Juan Peréz"
         },
-        { 
+        {
           id: 2,
           nombre: "Encuesta IHC",
           tipo: "Encuesta 360",
@@ -58,49 +58,23 @@ myApp.controller("VerEncuestas", function($scope,$http){
 });
 
 myApp.controller("ResponderEncuesta", function($scope,$http){
-      $scope.preguntas = [
-        {
-          id: 1,
-          pregunta: "Hola",
-          resp1: "sdads",
-          resp2: "fsdfsf",
-          resp3: "sdfqq",
-          resp4: "fsdfgqgq"
-        },
-        {
-          id: 2,
-          pregunta: "Que tal",
-          resp1: "sdads",
-          resp2: "fsdfsf",
-          resp3: "sdfqq",
-          resp4: "fsdfgqgq"
-        },
-        {
-          id: 3,
-          pregunta: "QueOnda",
-          resp1: "sdads",
-          resp2: "fsdfsf",
-          resp3: "sdfqq",
-          resp4: "fsdfgqgq"
-        },
-        {
-          id: 4,
-          pregunta: "Shwnstaiga",
-          resp1: "sdads",
-          resp2: "fsdfsf",
-          resp3: "sdfqq",
-          resp4: "fsdfgqgq"
-        }
-      ];
-      /*
-      $http.get("http://jsonplaceholder.typicode.com/photos")
+      $http.get("http://localhost:3000/buscar_por_grupo?grupo_id=1")
         .success(function(data){
           console.log(data);
-          $scope.encuestas = data;
+          $scope.datosGrupo = data;
         })
         .error(function(err){
 
-        });*/
-
+        });
 });
 
+myApp.controller("ObtenerPreguntas", function($scope,$http){
+  $http.get("http://localhost:3000/preguntas_encuesta?encuesta_id=1")
+    .success(function(data){
+      console.log(data);
+      $scope.preguntas = data;
+    })
+    .error(function(err){
+
+    });
+});

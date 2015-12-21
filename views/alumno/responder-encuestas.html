@@ -1,32 +1,13 @@
-Nombre de la encuesta:
+<p>Nombre de la encuesta:</p>
+
 
 <div class="row center" ng-controller="ResponderEncuesta">
-        <div class="input-field col s12" ng-repeat="pregunta in preguntas" id="{{pregunta.id}}">
-        <p class="azul-oscuro">{{pregunta.pregunta}}</p>
-        <p>
-          <input name="{{pregunta.id}}" type="radio" id="{{pregunta.id}}+t1" />
-          <label for="t1">{{pregunta.resp1}}</label>
-        </p>
-        <p>
-          <input name="{{pregunta.id}}" type="radio" id="{{pregunta.id}}+t2" />
-          <label for="t2">{{pregunta.resp2}}</label>
-        </p>
-        <p>
-          <input name="{{pregunta.id}}" type="radio" id="{{pregunta.id}}+t3"  />
-          <label for="t3">{{pregunta.resp3}}</label>
-        </p>
-          <p>
-            <input name="{{pregunta.id}}" type="radio" id="{{pregunta.id}}+t4" />
-            <label for="t4">{{pregunta.resp4}}</label>
-        </p>
+
+      <div class="collection col s4" >
+        <a ng-repeat="grupo in datosGrupo" class="collection-item" id="{{grupo.id}}" ui-sref="encuestas.responder.preguntas">{{grupo.nombre}}  {{grupo.apellido_paterno}} {{grupo.apellido_materno}} </a>
       </div>
-      
-      <div class="row center" >
-        <div class="input-field col s12">
-          <button class="btn waves-effect waves-light" type="submit" name="action">Enviar respuestas
-          </button>
-          <a class="waves-effect waves-light btn grey">Cancelar</a>
-        </div>
+      <div class="col s8">
+        <div ui-view></div>
       </div>
 
     </div>

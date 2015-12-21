@@ -1,5 +1,5 @@
 var myApp = angular.module('myApp', [
-  'ngCookies', 'auth0', 'ngRoute', 'angular-storage', 'angular-jwt', 'ui.router']);
+  'ngCookies', 'auth0', 'ngRoute', 'angular-storage', 'angular-jwt', 'ui.router','ui.materialize']);
 
 // Aqui van las rutas que tendra la aplicación.
 // requiresLogin significa que se necesita que haya iniciado sesión.
@@ -9,13 +9,13 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
   .state('root', {
     url: "",
-    templateUrl: "views/inicio.html",   
+    templateUrl: "views/inicio.html",
   })
   .state('inicioAdmin', {
     url: "/inicioAdmin",
     templateUrl: "views/inicioAdmin.html",
     controller: 'LoginCtrl',
-    authenticate: true    
+    authenticate: true
   })
   .state('inicioProfesor', {
     url: "/inicioProfesor",
@@ -32,26 +32,36 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
   .state('encuestas', {
       url: "/encuestas",
       templateUrl: "views/alumno/encuestas.html",
-      authenticate: true
+      authenticate: true,
     })
     .state('encuestas.recordatorios', {
       url: "/recordatorios",
       templateUrl: "views/alumno/alumnos-recordatorios.html",
+      parent: 'encuestas',
       authenticate: true
     })
     .state('encuestas.pendientes', {
       url: "/pendientes",
       templateUrl: "views/alumno/alumnos-pendientes.html",
+      parent: 'encuestas',
       authenticate: true
     })
     .state('encuestas.completadas', {
       url: "/completadas",
       templateUrl: "views/alumno/alumnos-completadas.html",
+      parent: 'encuestas',
       authenticate: true
     })
     .state('encuestas.responder', {
       url: "/responder",
       templateUrl: "views/alumno/responder-encuestas.html",
+      parent: 'encuestas',
+      authenticate: true
+    })
+    .state('encuestas.responder.preguntas', {
+      url: "/preguntas",
+      templateUrl: "views/alumno/preguntas-encuesta.html",
+      parent: 'encuestas.responder',
       authenticate: true
     })
   .state('404',   {
@@ -84,12 +94,12 @@ myApp.config(function ($routeProvider, authProvider, $httpProvider,
 // Solo configuracion del login
 
   $httpProvider.interceptors.push('jwtInterceptor');
-}).run(function($rootScope, auth, store, jwtHelper, $location, $state) { 
+}).run(function($rootScope, auth, store, jwtHelper, $location, $state) {
   $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
     if (toState.authenticate && !auth.isAuthenticated){
       // User isn’t authenticated
       $state.go('500');
-      event.preventDefault(); 
+      event.preventDefault();
     }
   });
 });
