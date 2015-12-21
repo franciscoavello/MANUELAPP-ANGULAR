@@ -52,16 +52,32 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
       parent: 'encuestas',
       authenticate: true
     })
-    .state('encuestas.responder', {
-      url: "/responder",
-      templateUrl: "views/alumno/responder-encuestas.html",
+    .state('encuestas.responder360', {
+      url: "/responder360?idEncuesta",
+      templateUrl: "views/alumno/responder-encuestas-360.html",
       parent: 'encuestas',
+      controller: function($scope, $stateParams) {
+         $scope.idEncuesta = $stateParams.idEncuesta;
+      },
       authenticate: true
     })
-    .state('encuestas.responder.preguntas', {
-      url: "/preguntas",
+    .state('encuestas.responder360.preguntas', {
+      url: "/pregunta360?idAlumno",
+      templateUrl: "views/alumno/preguntas-encuesta-360.html",
+      parent: 'encuestas.responder360',
+      controller: function($scope, $stateParams) {
+         $scope.idEncuesta = $stateParams.idEncuesta;
+         $scope.idAlumno = $stateParams.idAlumno;
+      },
+      authenticate: true
+    })
+    .state('encuestas.responder', {
+      url: "/responder?idEncuesta",
       templateUrl: "views/alumno/preguntas-encuesta.html",
-      parent: 'encuestas.responder',
+      parent: 'encuestas',
+      controller: function($scope, $stateParams) {
+         $scope.idEncuesta = $stateParams.idEncuesta;
+      },
       authenticate: true
     })
   .state('404',   {

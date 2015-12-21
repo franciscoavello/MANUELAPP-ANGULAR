@@ -3,7 +3,7 @@ var myApp = angular.module('myApp');
 myApp.controller('MenuCtrl', function ($scope, $location) {
   $scope.go = function (target) {
     $location.path(target);
-  };  
+  };
 });
 
 myApp.controller('RootCtrl', function (auth, $scope) {
@@ -44,36 +44,36 @@ myApp.controller('LoginCtrl', function (auth, $scope, $location, store, $http, $
             }
           };
           if(data.length>0 && indexUser==true){
-            $scope.usuario = data;  
+            $scope.usuario = data;
             if(rolUser==0){
               $scope.esAdmin=true
               store.set('profile', profile);
-              store.set('token', token);    
+              store.set('token', token);
               $location.path('/inicioAdmin');
               $scope.logueado = !$scope.logueado;
-              $scope.loading = false; 
+              $scope.loading = false;
             }
             if(rolUser==1){
               $scope.esProfesor=true
               store.set('profile', profile);
-              store.set('token', token);    
+              store.set('token', token);
               $location.path('/inicioProfesor');
               $scope.logueado = !$scope.logueado;
-              $scope.loading = false; 
+              $scope.loading = false;
             }
             if(rolUser==2){
               $scope.esAlumno=true
               store.set('profile', profile);
-              store.set('token', token);    
+              store.set('token', token);
               $location.path('/inicioAlumno');
               $scope.logueado = !$scope.logueado;
-              $scope.loading = false;  
+              $scope.loading = false;
             }
           }
           else{
             $scope.logueado = true;
             $scope.desloguearNoAutorizado();
-          }          
+          }
         })
         .error(function(err){
             $scope.logueado = true;
@@ -124,19 +124,18 @@ myApp.controller('LoginCtrl', function (auth, $scope, $location, store, $http, $
     auth.signout();
     $scope.$parent.message = '';
     store.remove('profile');
-    store.remove('token'); 
+    store.remove('token');
     $scope.logueado = !$scope.logueado;
-    $state.go('root');  
+    $state.go('root');
   };
 
   $scope.desloguearNoAutorizado = function (profile, token) {
     auth.signout();
     $scope.$parent.message = '';
     store.remove('profile');
-    store.remove('token'); 
+    store.remove('token');
     $scope.logueado = !$scope.logueado;
-    $state.go('noAutorizado');  
-  };  
+    $state.go('noAutorizado');
+  };
 
 });
-
