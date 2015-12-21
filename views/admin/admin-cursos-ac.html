@@ -1,0 +1,23 @@
+  <div class="container" ng-controller="verEncuestas">
+  <div class="row">
+  <h5 class="azul-oscuro">Tipos de Encuestas Actuales en MANUEL</h5>
+
+      <table class="striped">
+        <thead>
+          <tr >
+              <th data-field="id">Nombre del Tipo de Encuesta</th>
+              <th data-field="name">Fecha de Creacion</th>
+          </tr>
+        </thead>
+
+        <tbody ng-repeat="encuesta in encuestas| limitTo:15" id="{{encuesta.id}}">
+            <td>{{encuesta.tipo}}</td>
+            <td>{{encuesta.fecha}}</td>
+            <td>
+              
+            <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">mode_edit</i></a>
+            </td>
+        </tbody>
+      </table>
+  </div>
+</div>

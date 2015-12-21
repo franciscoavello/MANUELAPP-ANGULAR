@@ -1,0 +1,24 @@
+  
+  <div class="container" ng-controller="verProfesores">
+  <div class="row">
+  <h5 class="azul-oscuro">Profesores Actuales</h5>
+
+      <table class="striped">
+        <thead>
+          <tr >
+              <th data-field="name">Nombre del Profesor</th>
+              <th data-field="name">Curso</th>
+          </tr>
+        </thead>
+
+        <tbody ng-repeat="profesor in profesores| limitTo:15" id="{{profesor.id}}">
+
+            <td>{{profesor.nombre}}</td>
+            <td>{{profesor.curso}}</td>
+            <td>
+            <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">mode_edit</i></a>
+            </td>
+              
+        </tbody>
+      </table>
+  </div>
