@@ -6,10 +6,10 @@
     
     <div class="input-field col 12 center">
     <label for="name">Nombre</label>
-    <input type="text" id="name" ng-model="user.name" name="uName" required="" class="validate"/>
+    <input type="text" id="name" ng-model="user.name" name="uName" required="" class="validate" placeholder="Nombre y Apellido"/>
     <br />
     <div ng-show="form.$submitted || form.uName.$touched">
-      <div ng-show="form.uName.$error.required">Se necesita ingresar un nombre.</div>
+      <div ng-show="form.uName.$error.required">Dinos tu nombre.</div>
     </div>
     </div>
     
@@ -17,10 +17,10 @@
 
     <div class="input-field col 12 center">
     <label for="correo">Correo</label>
-    <input type="email" id="correo" ng-model="user.email" name="uEmail" required="" class="validate" />
+    <input type="email" id="correo" ng-model="user.email" name="uEmail" required="" class="validate" placeholder="Correo@usach.cl" />
     <br />
     <div ng-show="form.$submitted || form.uEmail.$touched">
-      <span ng-show="form.uEmail.$error.required">Se necesita ingresar un Correo.</span>
+      <span ng-show="form.uEmail.$error.required">Dinos tu correo.</span>
       <span ng-show="form.uEmail.$error.email">No es un correo valido.</span>
     </div>
     </div>
@@ -30,6 +30,7 @@
     <input type="button" ng-click="reset(form)" class="waves-effect waves-light btn grey" value="Borrar" />
     <input type="submit" ng-click="update(user)" value="Añadir" class="btn waves-effect waves-light"  name="action"/>
   </form>
+
  
 </div>
 </div>
