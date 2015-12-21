@@ -1,0 +1,29 @@
+
+<div class="container">
+<div class="row" ng-controller="agregarCurso">
+<h5 class="azul-oscuro">Nueva Encuesta: </h5>
+  <form name="form" novalidate>
+    
+
+    <div class="row" >
+      <div class="input-field col s12">
+      <label for="name">Nombre de la encuesta</label>
+      <input type="text" id="name" ng-model="curso.name" name="uName" required="" class="validate"/>
+      <br />
+      <div ng-show="form.$submitted || form.uName.$touched">
+        <div ng-show="form.uName.$error.required">Se necesita un Nombre.</div>
+      </div>
+      </div>
+    </div>
+    
+    
+    <input type="submit" ng-click="update(user)" value="Añadir" class="btn waves-effect waves-light"  name="action"/>
+    <input type="button" ng-click="reset(form)" class="waves-effect waves-light btn grey" value="Borrar" />
+    
+  </form>
+
+ 
+</div>
+</div>
+
+

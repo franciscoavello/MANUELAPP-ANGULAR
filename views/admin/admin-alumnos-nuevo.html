@@ -1,0 +1,70 @@
+
+<div class="container">
+<div class="row" ng-controller="agregarAlumno">
+<h5 class="azul-oscuro">Nuevo Alumno: </h5>
+  <form name="form" novalidate>
+    
+
+    <div class="row" >
+      <div class="input-field col s12">
+      <label for="name">Nombre</label>
+      <input type="text" id="name" ng-model="user.name" name="uName" required="" class="validate"/>
+      <br />
+      <div ng-show="form.$submitted || form.uName.$touched">
+        <div ng-show="form.uName.$error.required">Se necesita un Nombre.</div>
+      </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s6">
+      <label for="lastname">Apellido Paterno</label>
+      <input type="text" id="lastname" ng-model="user.lastname" name="uLastname" required="" class="validate"/>
+      <br />
+      <div ng-show="form.$submitted || form.uLastname.$touched">
+        <div ng-show="form.uLastname.$error.required">Se necesita un Apellido Paterno.</div>
+      </div>
+      </div>
+
+      <div class="input-field col s6">
+      <label for="mlastname">Apellido Materno</label>
+      <input type="text" id="mlastname" ng-model="user.Mlastname" name="uMLname" required="" class="validate"/>
+      <br />
+      <div ng-show="form.$submitted || form.uMLname.$touched">
+        <div ng-show="form.uMLname.$error.required">Se necesita un Apellido Materno.</div>
+      </div>
+      </div>
+    </div>
+    
+
+<div class="row">
+    <div class="input-field col s12">
+    <label for="rut">Rut</label>
+    <input type="text" id="rut" ng-model="user.rut" name="uRut" required="" class="validate"   />
+    <br />
+    <div ng-show="form.$submitted  || form.uRut.$touched">
+      <span ng-show="form.uRut.$error.required">Se necesita un Rut.</span>
+    </div>
+    </div>
+</div>   
+
+<div class="row">
+    <div class="input-field col s12 ">
+    <label for="correo">Correo</label>
+    <input type="email" id="correo" ng-model="user.email" name="uEmail" required="" class="validate"   />
+    <br />
+    <div ng-show="form.$submitted || form.uEmail.$touched">
+      <span ng-show="form.uEmail.$error.required">Se necesita un correo.</span>
+      <span ng-show="form.uEmail.$error.email">No es un correo valido.</span>
+    </div>
+    </div>
+</div>    
+    
+    <input type="submit" ng-click="update(user)" value="Añadir" class="btn waves-effect waves-light"  name="action"/>
+    <input type="button" ng-click="reset(form)" class="waves-effect waves-light btn grey" value="Borrar" />
+    
+  </form>
+
+ 
+</div>
+</div>

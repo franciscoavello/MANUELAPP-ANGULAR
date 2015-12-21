@@ -1,0 +1,24 @@
+  
+  <div class="container" ng-controller="verAlumnos">
+  <div class="row">
+  <h5 class="azul-oscuro">Alumnos Actuales</h5>
+
+      <table class="striped">
+        <thead>
+          <tr >
+              <th data-field="name">Nombre del Almuno</th>
+              
+          </tr>
+        </thead>
+
+        <tbody ng-repeat="alumno in alumnos| limitTo:15" id="{{alumno.id}}">
+
+            <td>{{alumno.nombre}}</td>
+            
+            <td>
+            <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">mode_edit</i></a>
+            </td>
+              
+        </tbody>
+      </table>
+  </div>

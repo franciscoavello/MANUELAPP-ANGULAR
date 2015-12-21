@@ -34,7 +34,7 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
       templateUrl: "views/alumno/encuestas.html",
       authenticate: true,
     })
-    .state('encuestas.recordatorios', {
+  .state('encuestas.recordatorios', {
       url: "/recordatorios",
       templateUrl: "views/alumno/alumnos-recordatorios.html",
       parent: 'encuestas',
@@ -124,6 +124,91 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
     authenticate: true
 
   })
+
+    //  ADMIN ----------------------------------------------
+
+    .state('adminalumnos', {
+      url: "/adminalumnos",
+      templateUrl: "views/admin/admin-alumnos.html",
+      authenticate: true
+    })
+
+    .state('adminprofesores', {
+      url: "/adminprofesores",
+      templateUrl: "views/admin/admin-profesores.html",
+      authenticate: true
+    })
+
+     .state('admincursos', {
+      url: "/admincursos",
+      templateUrl: "views/admin/admin-cursos.html",
+      authenticate: true
+    })
+     .state('admincursos.nuevo', {
+      url: "/nuevocurso",
+      templateUrl: "views/admin/admin-cursos-nuevo.html",
+      authenticate: true
+    })
+     .state('admincursos.ver', {
+      url: "/vercursos",
+      templateUrl: "views/admin/admin-cursos-ac.html",
+      authenticate: true
+    })
+
+     .state('adminalumnos.ver', {
+      url: "/adminveralumnos",
+      templateUrl: "views/admin/admin-alumnos-ac.html",
+      authenticate: true
+    })
+
+     .state('adminalumnos.nuevo', {
+      url: "/adminnuevoalumno",
+      templateUrl: "views/admin/admin-alumnos-nuevo.html",
+      authenticate: true
+    })
+
+    .state('adminprofesores.ver', {
+      url: "/adminverprofesores",
+      templateUrl: "views/admin/admin-profesores-ac.html",
+      authenticate: true
+    })
+    .state('adminprofesores.nuevo', {
+      url: "/adminnuevoprofesor",
+      templateUrl: "views/admin/admin-profesores-nuevo.html",
+      authenticate: true
+    })
+    .state('adminencuestas', {
+      url: "/adminencuestas",
+      templateUrl: "views/admin/admin-encuestas.html",
+      authenticate: true
+    })
+    .state('adminencuestas.ver', {
+      url: "/adminverencuestas",
+      templateUrl: "views/admin/admin-encuestas-ac.html",
+      authenticate: true
+    })
+    .state('adminencuestas.nuevo', {
+      url: "/adminencuestanueva",
+      templateUrl: "views/admin/admin-encuestas-nuevo.html",
+      authenticate: true
+    })
+    .state('admintencuestas', {
+      url: "/admintencuestas",
+      templateUrl: "views/admin/admin-tencuestas.html",
+      authenticate: true
+    })
+    .state('admintencuestas.ver', {
+      url: "/adminvertencuestas",
+      templateUrl: "views/admin/admin-tencuestas-ac.html",
+      authenticate: true
+    })
+    .state('admintencuestas.nuevo', {
+      url: "/admintencuestasnueva",
+      templateUrl: "views/admin/admin-te-nueva.html",
+      authenticate: true
+    })
+
+    // FIN ADMIN -------------------------------------------
   .state('404',   {
     url: '/404',
     templateUrl: 'views/404.html'
