@@ -119,9 +119,64 @@ myApp.controller('agregarAlumno', ['$scope', function($scope) {
     if (form) {
       form.$setPristine();
       form.$setUntouched();
-    }
+    } 
     $scope.user = angular.copy($scope.master);
   };
 
   $scope.reset();
 }]);
+
+myApp.controller('agregarProfesor', ['$scope', function($scope) {
+  $scope.master = {};
+
+  $scope.update = function(user) {
+    $scope.master = angular.copy(user);
+  };
+
+  $scope.reset = function(form) {
+    if (form) {
+      form.$setPristine();
+      form.$setUntouched();
+    } 
+    $scope.user = angular.copy($scope.master);
+  };
+
+  $scope.reset();
+}]);
+
+myApp.controller('agregarCurso', ['$scope', function($scope) {
+  $scope.master = {};
+
+  $scope.update = function(curso) {
+    $scope.master = angular.copy(curso);
+  };
+
+  $scope.reset = function(form) {
+    if (form) {
+      form.$setPristine();
+      form.$setUntouched();
+    } 
+    $scope.curso = angular.copy($scope.master);
+  };
+
+  $scope.reset();
+}]);  
+
+myApp.controller('agregarEncuesta', ['$scope', function($scope) {
+  $scope.master = {};
+
+  $scope.update = function(encuesta) {
+    $scope.master = angular.copy(encuesta);
+  };
+
+  $scope.reset = function(form) {
+    if (form) {
+      form.$setPristine();
+      form.$setUntouched();
+    } 
+    $scope.encuesta = angular.copy($scope.master);
+  };
+
+  $scope.reset();
+}]);
+
