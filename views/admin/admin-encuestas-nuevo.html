@@ -1,20 +1,36 @@
-
-<div class="row center" ng-controller="admin.vertdeencuestas">
-  <h5 class="azul-oscuro">Nueva Encuesta: </h5>
-
-        <div class="input-field col s12" ng-repeat="pregunta in preguntas" id="{{pregunta.id}}">
-        <p class="azul-oscuro">{{pregunta.nombre}}</p>
-       <p class="azul-oscuro">{{pregunta.curso}}</p>
-      </div>
-      
-      <div class="row center" >
-        <div class="input-field col s12">
-          <button class="btn waves-effect waves-light" type="submit" name="action">Añadir Alumno</button>
-          <a class="waves-effect waves-light btn grey">Cancelar</a>
-        </div>
-      </div>
-
+<div ng-controller="agregarEncuesta">
+  <form name="form" class="css-form" novalidate>
+    Nombre:
+    <input type="text" ng-model="user.name" name="uName" required="" />
+    <br />
+    <div ng-show="form.$submitted || form.uName.$touched">
+      <div ng-show="form.uName.$error.required">Tell us your name.</div>
     </div>
-    <br><br>
-  </div>
+
+    E-mail:
+    <input type="email" ng-model="user.email" name="uEmail" required="" />
+    <br />
+    <div ng-show="form.$submitted || form.uEmail.$touched">
+      <span ng-show="form.uEmail.$error.required">Tell us your email.</span>
+      <span ng-show="form.uEmail.$error.email">This is not a valid email.</span>
+    </div>
+
+    Gender:
+    <input type="radio" ng-model="user.gender" value="male" />male
+    <input type="radio" ng-model="user.gender" value="female" />female
+    <br />
+    <input type="checkbox" ng-model="user.agree" name="userAgree" required="" />
+
+    I agree:
+    <input ng-show="user.agree" type="text" ng-model="user.agreeSign" required="" />
+    <br />
+    <div ng-show="form.$submitted || form.userAgree.$touched">
+      <div ng-show="!user.agree || !user.agreeSign">Please agree and sign.</div>
+    </div>
+
+    <input type="button" ng-click="reset(form)" value="Reset" />
+    <input type="submit" ng-click="update(user)" value="Save" />
+  </form>
+  <pre>user = {{user | json}}</pre>
+  <pre>master = {{master | json}}</pre>
 </div>

@@ -1,19 +1,36 @@
 
-<div class="row center" ng-controller="admin.vertdeencuestas">
-  <h5 class="azul-oscuro">Nuevo Alumno: </h5>
-        <div class="input-field col s12" ng-repeat="pregunta in preguntas" id="{{pregunta.id}}">
-        <p class="azul-oscuro">{{pregunta.nombre}}</p>
-       <p class="azul-oscuro">{{pregunta.curso}}</p>
-      </div>
-      
-      <div class="row center" >
-        <div class="input-field col s12">
-          <button class="btn waves-effect waves-light" type="submit" name="action">Añadir Alumno</button>
-          <a class="waves-effect waves-light btn grey">Cancelar</a>
-        </div>
-      </div>
-
+<div class="container">
+<div class="row" ng-controller="agregarAlumno">
+<h5 class="azul-oscuro">Nuevo Alumno: </h5>
+  <form name="form" class="col s12 row center" novalidate>
+    
+    <div class="input-field col 12 center">
+    <label for="name">Nombre</label>
+    <input type="text" id="name" ng-model="user.name" name="uName" required="" class="validate" placeholder="Nombre y Apellido"/>
+    <br />
+    <div ng-show="form.$submitted || form.uName.$touched">
+      <div ng-show="form.uName.$error.required">Dinos tu nombre.</div>
     </div>
-    <br><br>
-  </div>
+    </div>
+    
+    
+
+    <div class="input-field col 12 center">
+    <label for="correo">Correo</label>
+    <input type="email" id="correo" ng-model="user.email" name="uEmail" required="" class="validate" placeholder="Correo@usach.cl" />
+    <br />
+    <div ng-show="form.$submitted || form.uEmail.$touched">
+      <span ng-show="form.uEmail.$error.required">Dinos tu correo.</span>
+      <span ng-show="form.uEmail.$error.email">No es un correo valido.</span>
+    </div>
+    </div>
+    
+    <br />
+
+    <input type="button" ng-click="reset(form)" class="waves-effect waves-light btn grey" value="Borrar" />
+    <input type="submit" ng-click="update(user)" value="Añadir" class="btn waves-effect waves-light"  name="action"/>
+  </form>
+
+ 
+</div>
 </div>

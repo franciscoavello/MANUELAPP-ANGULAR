@@ -101,7 +101,7 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
       authenticate: true
     })
     .state('adminencuestas.nuevo', {
-      url: "/encuestanueva",
+      url: "/adminencuestanueva",
       templateUrl: "views/admin/admin-encuestas-nuevo.html",
       authenticate: true
     })
