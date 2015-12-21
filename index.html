@@ -9,13 +9,23 @@
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
-  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+  <link rel="stylesheet" href="css/materialize.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.min.css">
+      <link rel="stylesheet" href="css/style.css">
+
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.min.js"></script>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.4/js/materialize.min.js"></script>
+
+      <script type="text/javascript" src="js/angular-materialize.js"></script>
+
   <link href="css/colores.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="css/arreglos.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="css/font-awesome.min.css" type="text/css" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js" type="text/javascript"> </script>
   <script src="//cdn.auth0.com/w2/auth0-6.js"></script>
   <script src="//cdn.rawgit.com/auth0/angular-storage/master/dist/angular-storage.js" type="text/javascript"> </script>
   <script src="//cdn.rawgit.com/auth0/angular-jwt/master/dist/angular-jwt.js" type="text/javascript"> </script>
@@ -26,13 +36,13 @@
   <script src="./scripts/myApp.js" type="text/javascript"> </script>
   <script src="./scripts/controllers.js" type="text/javascript"> </script> 
   <script src="./scripts/alumnosController.js" type="text/javascript"> </script>   
-  <script src="./scripts/adminController.js" type="text/javascript"> </script>   
+  <script src="./scripts/adminController.js" type="text/javascript"> </script>
 
   <nav class="barraSuperior sinSombra" ng-controller="MenuCtrl">
       <div class="nav-wrapper container" >
         <ul id="nav-mobile" class="right hide-on-med-and-down" >
           <li ng-controller="RootCtrl" ng-show="logueado"><img class= "circle responsive-img" src="{{auth.profile.picture}}" style="width: 30px; heigth: 30px; margin-right: 10px; margin-top: 15px"></li>
-          <li><div class="azul-oscuro" class="message" ng-controller="RootCtrl" ng-show="logueado">{{auth.profile.given_name}}</div></li>
+          <li><div class="azul-oscuro" class="message" ng-controller="RootCtrl" ng-show="logueado">{{auth.profile.name | uppercase}}</div></li>
           <li><a href="" class="azul-oscuro" ng-show="!logueado" ng-click="doGoogleAuthWithPopup()"><i class="fa fa-user fa-lg fa-pull-left"></i> Ingresar</a></li>
           <li><a href="" class="azul-oscuro" ng-show="logueado" ng-click="desloguear()"><i class="fa fa-power-off fa-2x fa-pull-left"></i> Salir</a></li>
         </ul>
@@ -101,11 +111,6 @@
         </div>
       </div>
     </footer>
-
-  <!--  Scripts-->
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="js/materialize.min.js"></script>
-  <script src="js/init.js"></script>
 
   </body>
 </html>
