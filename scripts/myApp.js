@@ -100,6 +100,11 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
       templateUrl: "views/admin/admin-encuestas-ac.html",
       authenticate: true
     })
+    .state('adminencuestas.nuevo', {
+      url: "/encuestanueva",
+      templateUrl: "views/admin/admin-encuestas-nuevo.html",
+      authenticate: true
+    })
     .state('admintencuestas', {
       url: "/admintencuestas",
       templateUrl: "views/admin/admin-tencuestas.html",
