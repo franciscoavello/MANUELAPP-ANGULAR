@@ -1,33 +1,32 @@
-<br></br>
-<br></br>
-<div class="row">
-  <div class="col s6 center"></div>
-  <div class="input-field col s8">
-    <input id="search" type="search" placeholder="Encontrar alumno" required>
-    <label for="search"><i class="material-icons prefix">search</i></label>
-    <i class="material-icons">close</i>
+<div ng-controller="VerAlumnos">
+  <br></br>
+  <br></br>
+  <div class="row">
+    <div class="col s6 center"></div>
+    <div class="input-field col s8">
+      <input id="search" type="search" placeholder="Encontrar alumno" required>
+      <label for="search"><i class="material-icons prefix">search</i></label>
+      <i class="material-icons">close</i>
+    </div>
+    <div class="col s4 right">
+      <p></p>
+      <button class="btn waves-effect waves-light" ui-sref="detalle_curso.agregar_alumno" align="middle" type="submit" name="action">            
+      Agregar alumno
+      </button>
+    </div>
   </div>
-  <div class="col s4 right">
-    <p></p>
-    <button class="btn waves-effect waves-light" align="middle" type="submit" name="action">            
-    Agregar alumno
-    </button>
+
+  <div class="divider row"></div>
+  <div ng-repeat="alumno in alumnos">
+    <div class="section row">
+        <div class="col s4"><h5 class="azul-oscuro">{{alumno.nombre}} {{alumno.apellido_paterno}}</h5></div>
+        <div class="col s2"><p class="azul-oscuro">{{alumno.correo}}</p></div> 
+        <div class="col s4">
+          <button class="btn waves-effect waves-light right" ng-click="seleccionarAlumno($index)" align="middle" type="button">  
+            Detalle
+          </button>
+        </div> 
+    </div>
+    <div class="divider row"></div>
   </div>
 </div>
-
-<div class="divider row"></div>
-<div class="section row">
-    <div class="col s2"><img class="circle responsive-img s2 foto-alumno" src="imagenes/foto.jpg"></div>
-    <div class="col s4"><h5 class="azul-oscuro">Pablo Salinas</h5></div>
-    <div class="col s2"><p class="azul-oscuro">Grupo 1</p></div>
-    <div class="col s2"><p class="azul-oscuro">1 encuesta respondida</p></div>  
-</div>
-<div class="divider row"></div>
-
-<div class="section row">
-    <div class="col s2"><img class="circle responsive-img s2 foto-alumno" src="imagenes/foto.jpg"></div>
-    <div class="col s4"><h5 class="azul-oscuro">Pablo Salinas</h5></div>
-    <div class="col s2"><p class="azul-oscuro">Grupo 1</p></div>
-    <div class="col s2"><p class="azul-oscuro">1 encuesta respondida</p></div>
-</div>
-<div class="divider row"></div>

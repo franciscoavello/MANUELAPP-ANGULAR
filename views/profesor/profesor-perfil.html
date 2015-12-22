@@ -3,7 +3,7 @@
     <div class="icon-block">
       <h2 class="turquesa"><i class="large material-icons">assignment</i></h2>
       <h5 class="azul-oscuro" align="left">Descripción</h5>
-      <p class="azul-oscuro" align="justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec elementum euismod placerat. Nunc et mauris sollicitudin risus dapibus accumsan. Proin convallis facilisis imperdiet. Nam sit amet nisi libero. Aliquam placerat vitae felis.</p>
+      <p class="azul-oscuro" align="justify">{{$parent.mi_curso.descripcion}}.</p>
     </div>
   </div>
 
@@ -12,9 +12,9 @@
       <h2 class="turquesa"><i class="large material-icons">info_outline</i></h2>
       <h5 class="azul-oscuro">Datos generales</h5>
       <p></p>
-      <p class="azul-oscuro" align="justify">11 alumnos</p>
-      <p class="azul-oscuro" align="justify">3 grupos</p>
-      <p class="azul-oscuro" align="justify">2 encuestas</p>
+      <p class="azul-oscuro" align="justify">{{cantidadAlumnos}} alumnos</p>
+      <p class="azul-oscuro" align="justify">{{cantidadGrupos}} grupos</p>
+      <p class="azul-oscuro" align="justify">{{cantidadEvaluaciones}} encuestas</p>
     </div>
   </div>
 </div>

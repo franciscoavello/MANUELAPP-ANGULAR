@@ -1,0 +1,38 @@
+<br><br><br>
+<div ng-controller="AlumnoCtrl">
+	<div class="row">
+		<div class="col s8">
+			<h4 class="azul-oscuro">{{$parent.mi_alumno.nombre}} {{$parent.mi_alumno.apellido_paterno}} {{$parent.mi_alumno.apellido_materno}}</h4>
+		</div>
+	</div>
+	<div class="row s12">
+		<div class="col s4">
+				<h5 class="azul-oscuro">Correo</h5>
+		</div>
+		<div class="col s4">
+				<p class="azul-oscuro">{{$parent.mi_alumno.correo}}</p>
+		</div>
+	</div>
+	<div class="row s12">
+		<div class="col s4">
+				<h5 class="azul-oscuro">RUT</h5>
+		</div>
+		<div class="col s4">
+				<p class="azul-oscuro">{{$parent.mi_alumno.rut}}</p>
+		</div>
+	</div>
+	<div class="row s12">
+		<div class="col s4">
+				<h5 class="azul-oscuro">Grupo(s)</h5>
+		</div>
+		<div class="col s8 row">
+				<div class="col s2" ng-repeat="grupo in grupos">
+				{{grupo.nombre}}
+				</div>
+		</div>
+	</div>
+  <button class="btn waves-effect waves-light" ui-sref="detalle-curso.alumnos" align="middle" type="submit" name="action">            
+		Volver
+	</button>
+</div>
+<br><br><br>

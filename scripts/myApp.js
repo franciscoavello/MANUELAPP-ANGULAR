@@ -87,26 +87,22 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
   .state('cursos', {
       url: "/cursos",
       templateUrl: "views/profesor/cursos.html",
-      controller: 'VerCursos',
       authenticate: true
     })
   .state('detalle-curso', {
       url: "/detalle-curso",
       templateUrl: "views/profesor/detalle-curso.html",
-      controller: 'CursoCtrl',
       authenticate: true
 
     })
     .state('detalle-curso.perfil', {
       url: "/perfil",
       templateUrl: "views/profesor/profesor-perfil.html",
-      controller: 'CursoCtrl',
       authenticate: true
     })
     .state('detalle-curso.grupos', {
       url: "/grupos",
       templateUrl: "views/profesor/profesor-grupos.html",
-      controller: 'VerGrupos',
       authenticate: true
 
     })
@@ -122,9 +118,39 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
       authenticate: true
 
     })
-  .state('detalle-grupo',{
+  .state('detalle-curso.detalle-grupo',{
     url:"/detalle-grupo",
     templateUrl: "views/profesor/detalle-grupo.html",
+    authenticate: true
+
+  })
+  .state('detalle-curso.detalle-alumno',{
+    url:"/detalle-alumno",
+    templateUrl: "views/profesor/detalle-alumno.html",
+    authenticate: true
+
+  })
+  .state('detalle-curso.detalle-evaluacion',{
+    url:"/detalle-evaluacion",
+    templateUrl: "views/profesor/detalle-evaluacion.html",
+    authenticate: true
+
+  })
+  .state('detalle-curso.agregar-alumno',{
+    url:"/agregar-alumno",
+    templateUrl: "views/profesor/agregar-alumno.html",
+    authenticate: true
+
+  })
+  .state('detalle-curso.agregar-grupo',{
+    url:"/agregar-alumno",
+    templateUrl: "views/profesor/agregar-grupo.html",
+    authenticate: true
+
+  })
+  .state('detalle-curso.nueva-encuesta',{
+    url:"/agregar-alumno",
+    templateUrl: "views/profesor/nueva-encuesta.html",
     authenticate: true
 
   })
