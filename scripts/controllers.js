@@ -21,7 +21,7 @@ myApp.controller('RootCtrl', function (auth, $scope) {
   });
 });
 
-myApp.controller('LoginCtrl', function (auth, $scope, $location, store, $http, $state) {
+myApp.controller('LoginCtrl', function (auth, $scope, $location, store, $http, $state, $rootScope) {
   $scope.user = '';
   $scope.pass = '';
   $scope.message = '';
@@ -40,6 +40,7 @@ myApp.controller('LoginCtrl', function (auth, $scope, $location, store, $http, $
           for (prop in data) {
             if(data[prop].correo == profile.email){
               rolUser=data[prop].rol;
+              $rootScope.rolUserGlobal = rolUser;
               indexUser=true;
             }
           };
