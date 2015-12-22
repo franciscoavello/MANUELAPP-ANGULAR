@@ -126,6 +126,9 @@ myApp.controller('LoginCtrl', function (auth, $scope, $location, store, $http, $
     store.remove('profile');
     store.remove('token');
     $scope.logueado = !$scope.logueado;
+    $scope.esAdmin=false
+    $scope.esProfesor=false
+    $scope.esAlumno=false
     $state.go('root2');
   };
 
@@ -135,6 +138,9 @@ myApp.controller('LoginCtrl', function (auth, $scope, $location, store, $http, $
     store.remove('profile');
     store.remove('token');
     $scope.logueado = !$scope.logueado;
+    $scope.esAdmin=false
+    $scope.esProfesor=false
+    $scope.esAlumno=false
     $state.go('noAutorizado');
   };
 
