@@ -11,6 +11,10 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
     url: "",
     templateUrl: "views/inicio.html",
   })
+  .state('root2', {
+    url: "/",
+    templateUrl: "views/inicio.html",
+  })
   .state('inicioAdmin', {
     url: "/inicioAdmin",
     templateUrl: "views/inicioAdmin.html",
@@ -110,7 +114,7 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
       url: "/alumnos",
       templateUrl: "views/profesor/profesor-alumnos.html",
       authenticate: true
-      
+
     })
     .state('detalle-curso.evaluaciones', {
       url: "/evaluaciones",

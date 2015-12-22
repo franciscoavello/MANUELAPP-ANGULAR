@@ -77,7 +77,7 @@ myApp.controller('LoginCtrl', function (auth, $scope, $location, store, $http, $
         })
         .error(function(err){
             $scope.logueado = true;
-            $scope.desloguear();
+            $scope.desloguearNoAutorizado();
         });
     } else {
       $scope.logueado = true;
@@ -126,7 +126,7 @@ myApp.controller('LoginCtrl', function (auth, $scope, $location, store, $http, $
     store.remove('profile');
     store.remove('token');
     $scope.logueado = !$scope.logueado;
-    $state.go('root');
+    $state.go('root2');
   };
 
   $scope.desloguearNoAutorizado = function (profile, token) {
