@@ -76,3 +76,13 @@ myApp.controller("ObtenerPreguntas", function($scope,$http){
 
     });
 });
+
+myApp.controller("BarCtrl", function ($scope) {
+  $scope.labels = ['Pregunta 1', 'Pregunta 2', 'Pregunta 3', 'Pregunta 4'];
+  $scope.series = ['Promedio grupo', 'Promedio curso'];
+
+  $scope.data = [
+    [4, 5, 6, 5],
+    [3, 2, 4, 6]
+  ];
+});
