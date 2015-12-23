@@ -1,50 +1,22 @@
+      <div class="container">
+      <div class="row" ng-controller="agregarTipoEncuesta">
+      <form name"form" novalidate>
+        <h5 class="azul-oscuro">Nuevo Tipo de Encuesta</h5>
+        <div class="row" align="center">
+          <div class="input-field col s12">
+            <input id="first_name" type="text" class="validate">
+            <label for="first_name">Nombre</label>
+          </div>
+        </div>
 
-
-<div class="container">
-<div class="row" ng-controller="agregarCurso">
-<h5 class="azul-oscuro">Nuevo Tipo de Encuesta: </h5>
-  <form name="form" novalidate>
-
-    <div class="row" >
-      <div class="input-field col s12">
-      <label for="name">Nombre del nuevo Tipo</label>
-      <input type="text" id="name" ng-model="curso.name" name="uName" required="" class="validate"/>
-      <br />
-      <div ng-show="form.$submitted || form.uName.$touched">
-        <div ng-show="form.uName.$error.required">Se necesita un Nombre.</div>
-      </div>
-      </div>
-    </div>
-    
-    <input type="submit" ng-click="update(user)" value="Añadir" class="btn waves-effect waves-light"  name="action"/>
-    <input type="button" ng-click="reset(form)" class="waves-effect waves-light btn grey" value="Borrar" />
-    
-  </form>
-
+         <div class="row">
  
-</div>
-</div>
 
-
-<!-- =======
-Nombre del nuevo tipo de Encuesta:
-
-<div class="row center" ng-controller="admin.vertdeencuestas">
-        <div class="input-field col s12" ng-repeat="pregunta in preguntas" id="{{pregunta.id}}">
-        <p class="azul-oscuro">{{pregunta.nombre}}</p>
-       
-      </div>
-      
-      <div class="row center" >
-        <div class="input-field col s12">
-          <button class="btn waves-effect waves-light" type="submit" name="action">Enviar respuestas
-          </button>
-          <a class="waves-effect waves-light btn grey">Cancelar</a>
+          <div class="input-field col s12">
+            <button class="btn waves-effect waves-light" type="submit" name="action">Aceptar
+            </button>
+            <a class="waves-effect waves-light btn grey">Cancelar</a>
+          </div>
         </div>
       </div>
 
-    </div>
-    <br><br>
-  </div>
-</div>
->>>>>>> master -->
