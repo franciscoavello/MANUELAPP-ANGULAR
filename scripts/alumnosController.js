@@ -44,9 +44,33 @@ myApp.controller("ResponderEncuesta", function($scope,$http){
 });
 
 myApp.controller("ObtenerPreguntas", function($scope,$http){
-  $http.get("http://localhost:3000/preguntas_encuesta?encuesta_id=1")
+  $http.get("http://localhost:3000/preguntas_encuesta?encuesta_id="+$scope.idEncuesta)
     .success(function(data){
       $scope.preguntas = data;
+      $http.get("http://localhost:3000/preguntas_encuesta_opciones?encuesta_id="+$scope.idEncuesta)
+        .success(function(data){
+          $scope.respuestas = data;
+          var j=0;
+          for (var i = 1; j < $scope.preguntas.length; i++) {
+              var k=0;
+              $scope.preguntas[j].respPreg={};
+              while($scope.respuestas[i].pregunta_id!= undefined){
+                $scope.preguntas[j].respPreg[k] = $scope.respuestas[i];
+
+                i++;
+
+                if(i==$scope.respuestas.length){
+                  break;
+                }
+                k++;
+              }
+              j++;
+              
+          }
+        })
+        .error(function(err){
+
+        });
     })
     .error(function(err){
 

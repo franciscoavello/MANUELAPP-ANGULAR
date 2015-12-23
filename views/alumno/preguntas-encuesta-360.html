@@ -1,6 +1,10 @@
 <div class="row center" ng-controller="ObtenerPreguntas">
   <div class="input-field col s12" ng-repeat="pregunta in preguntas" id="{{pregunta.id}}" name="{{pregunta.id}}">
     <p class="azul-oscuro">{{pregunta.enunciado}}</p>
+    <p ng-repeat="resp in pregunta.respPreg">
+        <input name="{{pregunta.id}}" value="{{resp.valor}}" type="radio" id="t{{pregunta.id}}+{{resp.id}}" />
+        <label for="t{{pregunta.id}}+{{resp.id}}">{{resp.opcion_text}}</label>
+      </p>
     </div>
 
     <div class="row center" >

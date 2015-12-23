@@ -3,8 +3,13 @@
     <h5 class="azul-oscuro">{{$parent.encuestaSeleccionada}}</h5>
     <div class="input-field col s12" ng-repeat="pregunta in preguntas" id="{{pregunta.id}}" name="{{pregunta.id}}">
       <p class="azul-oscuro">{{pregunta.enunciado}}</p>
-      </div>
+      <p ng-repeat="resp in pregunta.respPreg">
+        <input name="{{pregunta.id}}" value="{{resp.valor}}" type="radio" id="t{{pregunta.id}}+{{resp.id}}" />
+        <label for="t{{pregunta.id}}+{{resp.id}}">{{resp.opcion_text}}</label>
+      </p>
 
+    </div>
+      
       <div class="row center" >
       <div class="input-field col s12">
         <button class="btn waves-effect waves-light" type="submit" name="action">Enviar respuestas</button>
