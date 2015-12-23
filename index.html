@@ -43,7 +43,7 @@
       <div class="nav-wrapper container" >
         <ul id="nav-mobile" class="right hide-on-med-and-down" >
           <li ng-controller="RootCtrl" ng-show="logueado"><img class= "circle responsive-img" src="{{auth.profile.picture}}" style="width: 30px; heigth: 30px; margin-right: 10px; margin-top: 15px"></li>
-          <li><div class="azul-oscuro" class="message" ng-controller="RootCtrl" ng-show="logueado">{{auth.profile.name}}</div></li>
+          <li><div class="azul-oscuro" class="message" ng-controller="RootCtrl" ng-show="logueado">{{auth.profile.name | capitalize}}</div></li>
           <li><a href="" class="azul-oscuro" ng-show="!logueado" ng-click="doGoogleAuthWithPopup()"><i class="fa fa-user fa-lg fa-pull-left"></i> Ingresar</a></li>
           <li><a href="" class="azul-oscuro" ng-show="logueado" ng-click="desloguear()"><i class="fa fa-power-off fa-2x fa-pull-left"></i> Salir</a></li>
         </ul>
