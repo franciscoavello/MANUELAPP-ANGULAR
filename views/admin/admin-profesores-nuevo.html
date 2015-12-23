@@ -4,33 +4,33 @@
         <h5 class="azul-oscuro">Nuevo Profesor</h5>
         <div class="row" align="center">
           <div class="input-field col s12">
-            <input id="first_name" type="text" class="validate">
-            <label for="first_name">Primer nombre</label>
+            <input id="nombre" ng-model="nombre" type="text" class="validate">
+            <label for="nombre">Primer nombre</label>
           </div>
         </div>
 
         <div class="row" align="center">
           <div class="input-field col s6">
-            <input id="lastname" type="text" class="validate">
+            <input id="lastname" type="text" ng-model="apellido_paterno"  class="validate">
             <label for="lastname">Apellido Paterno</label>
           </div>
 
           <div class="input-field col s6">
-            <input id="mlastname" type="text" class="validate">
+            <input id="mlastname" type="text" ng-model="apellido_materno"  class="validate">
             <label for="mlastname">Apellido Materno</label>
           </div>
         </div>
 
         <div class="row">
           <div class="input-field col s12">
-            <input id="rut" type="text" class="validate">
+            <input id="rut" type="text" ng-model="rut"  class="validate">
             <label for="rut">Rut</label>
           </div>
         </div>
 
         <div class="row">
               <div class="input-field col s12">
-                <input id="email" type="email" class="validate">
+                <input id="email" type="email" ng-model="correo"  class="validate">
                 <label for="email" data-error="Correo inválido" data-success="Correcto">Correo</label>
               </div>
         </div>
@@ -38,7 +38,7 @@
  
 
           <div class="input-field col s12">
-            <button class="btn waves-effect waves-light" type="submit" name="action">Aceptar
+            <button class="btn waves-effect waves-light" ng-click="agregarProfe()" name="action">Aceptar
             </button>
             <a class="waves-effect waves-light btn grey">Cancelar</a>
           </div>

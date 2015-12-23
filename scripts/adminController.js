@@ -47,65 +47,54 @@ myApp.controller('verCursos', function ($http, $scope, $state) {
 
 
 
-myApp.controller('agregarAlumno', ['$scope', function($scope) {
-  $scope.master = {};
+myApp.controller('agregarAlumno', ['$scope','$http', function($scope,$http) {
+ $scope.SendData = function () {
+          var alumno={
+            nombre:$scope.nombre,
+            apellido_paterno: $scope.apellido_paterno,
+            apellido_materno: $scope.apellido_materno,
+            correo: $scope.correo,
+            rut: $scope.rut,
+            rol: 2
 
-  $scope.update = function(user) {
-    $scope.master = angular.copy(user);
-  };
+          }
+    $http.post("http://localhost:3000/usuarios",alumno)
+      .success(function() {
+        $scope.alertaAgregarAlumno=true;
+      });
 
-  $scope.reset = function(form) {
-    if (form) {
-      form.$setPristine();
-      form.$setUntouched();
-    } 
-    $scope.user = angular.copy($scope.master);
-  };
-
-  $scope.reset();
+        };
 }]);
 
-myApp.controller('agregarProfesor', ['$scope', function($scope) {
-  $scope.master = {};
+myApp.controller('agregarProfesor', ['$scope','$http', function($scope,$http) {
+  $scope.agregarProfe = function(){
 
-  $scope.update = function(user) {
-    $scope.master = angular.copy(user);
-  };
-
-  $scope.reset = function(form) {
-    if (form) {
-      form.$setPristine();
-      form.$setUntouched();
-    } 
-    $scope.user = angular.copy($scope.master);
-  };
-
-  $scope.reset();
+    $http.post("http://localhost:3000/usuarios", {
+        rut: $scope.rut,
+        nombre: $scope.nombre,
+        apellido_paterno:$scope.apellido_paterno,
+        apellido_materno:  $scope.apellido_materno,
+        correo: $scope.correo,
+        rol: 1
+    }).success(function() {
+        
+      });
+  }
 }]);
 
-myApp.controller('agregarCurso', ['$scope', function($scope) {
-  $scope.master = {};
+myApp.controller('agregarCurso', ['$scope','$http', function($scope,$http) {
 
-  $scope.update = function(curso) {
-    $scope.master = angular.copy(curso);
-  };
-
-  $scope.reset = function(form) {
-    if (form) {
-      form.$setPristine();
-      form.$setUntouched();
-    } 
-    $scope.curso = angular.copy($scope.master);
-  };
-
-  $scope.reset();
-}]);  
-
-myApp.controller('agregarEncuesta', ['$scope', function($scope) {
-  $scope.master = {};
-
-  $scope.update = function(encuesta) {
-    $scope.master = angular.copy(encuesta);
+  $scope.agregar = function() {
+    $http.post("http://localhost:3000/cursos", {
+        profesor_id: "1",
+        nombre: $scope.nombre,
+        semestre: $scope.semestre,
+        año: $scope.ano,
+        descripcion: $scope.descripcion
+}).success(function(data) {
+      //console.log(data);
+      //$scope.cantidadGrupos=data.length;
+    });
   };
 
   $scope.reset = function(form) {
@@ -119,4 +108,54 @@ myApp.controller('agregarEncuesta', ['$scope', function($scope) {
   $scope.reset();
 }]);
 
+myApp.controller('agregarEncuesta', ['$scope','$http', function($scope,$http) {
+  
+
+  $scope.update = function() {
+    $http.post("http://localhost:3000/encuesta", {
+        estado: true,
+        nombre: $scope.nombre,
+        descripcion: $scope.descripcion,
+        tipo_encuesta_id: 1
+    }).success(function(data) {
+      //console.log(data);
+      //$scope.cantidadGrupos=data.length;
+    });
+  };
+
+  $scope.reset = function(form) {
+    if (form) {
+      form.$setPristine();
+      form.$setUntouched();
+    } 
+    $scope.encuesta = angular.copy($scope.master);
+  };
+
+  $scope.reset();
+}]);
+
+
+myApp.controller('agregartEncuesta', ['$scope','$http', function($scope,$http) {
+  
+
+  $scope.agregar = function() {
+    $http.post("http://localhost:3000/tipos_encuesta", {
+        nombre: $scope.nombre,
+        descripcion: $scope.descripcion 
+      }).success(function(data) {
+      //console.log(data);
+      //$scope.cantidadGrupos=data.length;
+    });
+  };
+
+  $scope.reset = function(form) {
+    if (form) {
+      form.$setPristine();
+      form.$setUntouched();
+    } 
+    $scope.encuesta = angular.copy($scope.master);
+  };
+
+  $scope.reset();
+}]);
 

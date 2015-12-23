@@ -1,11 +1,17 @@
       <div class="container">
-      <div class="row" ng-controller="agregarTipoEncuesta">
+      <div class="row" ng-controller="agregartEncuesta">
       <form name"form" novalidate>
         <h5 class="azul-oscuro">Nuevo Tipo de Encuesta</h5>
         <div class="row" align="center">
           <div class="input-field col s12">
-            <input id="first_name" type="text" class="validate">
+            <input id="first_name" type="text" ng-model="nombre"class="validate">
             <label for="first_name">Nombre</label>
+          </div>
+        </div>
+        <div class="row" align="center">
+          <div class="input-field col s12">
+            <input id="descripcion" type="text" ng-model="descripcion"class="validate">
+            <label for="descripcion">Descripcion</label>
           </div>
         </div>
 
@@ -13,7 +19,7 @@
  
 
           <div class="input-field col s12">
-            <button class="btn waves-effect waves-light" type="submit" name="action">Aceptar
+            <button class="btn waves-effect waves-light" ng-click="agregar()" name="action">Aceptar
             </button>
             <a class="waves-effect waves-light btn grey">Cancelar</a>
           </div>
