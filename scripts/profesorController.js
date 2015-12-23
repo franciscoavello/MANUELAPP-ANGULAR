@@ -189,7 +189,9 @@ myApp.controller('VerEvaluaciones', function ($rootScope,$http, $scope, $state) 
 
 myApp.controller('AgregarAlumno', function ($rootScope,$http, $scope, $state) {
   $scope.alumnosFaltantes = [];
+  $scope.grupos = [];
   $scope.alertaAgregarAlumno=false;
+  $scope.alertaAsignarGrupo=false;
   $http.get("http://localhost:3000/buscar_por_rol?rol=2")
     .success(function(data) {
       console.log(data);
@@ -209,13 +211,33 @@ myApp.controller('AgregarAlumno', function ($rootScope,$http, $scope, $state) {
         }
       }
     });
+  $http.get("http://localhost:3000/grupos_curso?id="+$rootScope.mi_curso.id)
+    .success(function(data) {
+      console.log(data);
+      $scope.grupos=data;
+    });
+  $scope.jefe=false;
+  $scope.id_grupo_seleccionado=-1;
   $scope.agregarAlumno = function (index) {
-    var id = $scope.alumnosFaltantes[index].id;
-    var arreglo={curso_id:$rootScope.mi_curso.id,alumno_id:id}
+    $scope.nuevo_alumno_id = $scope.alumnosFaltantes[index].id;
+    var arreglo={curso_id:$rootScope.mi_curso.id,alumno_id:$scope.nuevo_alumno_id}
     $http.post("http://localhost:3000/curso_alumnos",arreglo)
       .success(function() {
         $scope.alertaAgregarAlumno=true;
       });
+  }
+  $scope.asignarGrupo = function (){
+    var arreglo = {alumno_id: $scope.nuevo_alumno_id , grupo_id: $scope.id_grupo_seleccionado, jefe: $scope.jefe }
+    $http.post("http://localhost:3000/grupo_alumnos",arreglo)
+      .success(function() {
+        $scope.alertaAsignarGrupo=true;
+      });
+  }
+  $scope.asignarValor = function (index){
+    $scope.id_grupo_seleccionado=grupos[index].id;
+  }
+  $scope.asignarJefe = function (valor){
+    $scope.jefe=valor;
   }
 });
 

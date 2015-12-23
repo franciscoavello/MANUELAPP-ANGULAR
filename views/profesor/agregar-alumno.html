@@ -3,20 +3,39 @@
   <div class="divider row"></div>
   <div ng-repeat="alumno in alumnosFaltantes">
     <div class="section row">
-        <div class="col s4"><h5 class="azul-oscuro">{{alumno.nombre}} {{alumno.apellido_paterno}}</h5></div>
-        <div class="col s4"><p class="azul-oscuro">{{alumno.correo}}</p></div> 
-        <div class="col s2">
-          <button class="btn waves-effect waves-light right" ng-click="agregarAlumno($index)" align="middle" type="button">  
-            Agregar
-          </button>
-        </div>
+      <div class="col s4"><h5 class="azul-oscuro">{{alumno.nombre}} {{alumno.apellido_paterno}}</h5></div>
+      <div class="col s4"><p class="azul-oscuro">{{alumno.correo}}</p></div> 
+      <div class="col s2">
+        <button class="btn waves-effect waves-light right" ng-click="agregarAlumno($index)" align="middle" type="button">
+          Agregar
+        </button>
+      </div>
+  </div>
+  <div class="divider row"></div>
+  <div class="col s12" ng-show="alertaAgregarAlumno">
+    <div class="section row">
+      <p>Elija un grupo donde ingresar al alumno:</p>
+      <div class="row">
+        <select class="col s6" material-select watch>
+          <option value="" disabled selected>Seleccione una opción</option>
+          <option ng-repeat="grupo in grupos" ng-click="asignarValor($index)">{{grupo.nombre}}</option>
+        </select>
+      </div>
+      <div class="row">
+        <input type="checkbox" ng-click="asignarJefe(true)" class="filled-in" id="test5" />
+        <label for="test5">Jefe</label>
+      </div>
+      <div class="row" ng-show="alertaAsignarGrupo">
+          Se ha asignado grupo con exito.
+      </div>
     </div>
-    <div class="divider row"></div>
   </div>
   <div class="row">
-    <button class="col s2 btn waves-effect waves-light left" ui-sref="detalle-curso.alumnos" align="middle" type="submit" name="action">
+    <button class="col s2 btn waves-effect waves-light left" ng-click="asignarGrupo()" ui-sref="detalle-curso.alumnos" align="middle" type="submit" name="action">
+      Aceptar
+    </button>
+    <button class="col s2 btn waves-effect waves-light left" ng-show="alertaAgregarAlumno" ng-click="" ui-sref="detalle-curso.alumnos" align="middle" type="submit" name="action">
       Volver
     </button>
-    <div class="col s4" ng-show="alertaAgregarAlumno">Alumno agregado satisfactoriamente</div>
   </div>
 </div>

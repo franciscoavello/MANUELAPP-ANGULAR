@@ -6,4 +6,11 @@
     <li><a ng-click="seleccionarTipo($index)">{{tipo.nombre}}</a></li>
     </div>
   </ul>
+	<div class="input-field col s12">
+	  <select>
+	  	<div ng-repeat="tipo in tipos">
+	    <option value="$index"><a ng-click="seleccionarTipo($index)">{{tipo.nombre}}</a></li>
+	    </div>
+	  </select>
+	</div>
 </div>
