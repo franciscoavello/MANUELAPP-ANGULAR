@@ -37,6 +37,14 @@ myApp.controller('verAlumnos', function ($http, $scope, $state) {
   
 });
 
+myApp.controller('verCursos', function ($http, $scope, $state) {
+  $http.get("http://localhost:3000/mostrar_grupos")
+    .success(function(data) {
+      $scope.cursos = data;
+    });
+  
+});
+
 
 
 myApp.controller('agregarAlumno', ['$scope', function($scope) {
