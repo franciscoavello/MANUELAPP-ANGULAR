@@ -6,15 +6,21 @@
       <table class="striped">
         <thead>
           <tr >
-              <th data-field="name">Nombre del Profesor</th>
-              <th data-field="name">Curso</th>
+              <th data-field="number">Rut</th>
+              <th data-field="name">Nombre</th>
+              <th data-field="name">Apellido Paterno</th>
+              <th data-field="name">Apellido Materno</th>
+              <th data-field="name">Correo</th>
           </tr>
         </thead>
 
         <tbody ng-repeat="profesor in profesores| limitTo:15" id="{{profesor.id}}">
 
+            <td>{{profesor.rut}}</td>
             <td>{{profesor.nombre}}</td>
-            <td>{{profesor.curso}}</td>
+            <td>{{profesor.apellido_paterno}}</td>
+            <td>{{profesor.apellido_materno}}</td>
+            <td>{{profesor.correo}}</td>
             <td>
             <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">mode_edit</i></a>
             </td>
