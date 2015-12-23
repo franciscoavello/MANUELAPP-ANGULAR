@@ -63,6 +63,16 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
       authenticate: true,
       rolVista: 2
     })
+    .state('encuestas.estadisticas', {
+      url: "/estadisticas",
+      templateUrl: "views/alumno/encuesta-estadisticas.html",
+      parent: 'encuestas',
+      controller: function($scope, $stateParams) {
+         $scope.idEncuesta = $stateParams.idEncuesta;
+      },
+      authenticate: true,
+      rolVista: 2
+    })
     .state('encuestas.responder360', {
       url: "/responder360?idEncuesta",
       templateUrl: "views/alumno/responder-encuestas-360.html",

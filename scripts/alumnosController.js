@@ -16,6 +16,22 @@ myApp.controller("VerEncuestasPendientes", function($scope,$http,$rootScope){
 
 });
 
+myApp.controller("VerEncuestasCompletadas", function($scope,$http,$rootScope){
+      $http.get("http://localhost:3000/buscar_encuestas_alumno?correo="+$scope.usuario[0].correo)
+        .success(function(data){
+          $scope.encuestas = data;
+          console.log($scope.encuestas);
+        })
+        .error(function(err){
+
+        });
+
+        $scope.ingresarNombreEncuesta = function (nomEncuesta) {
+          $rootScope.encuestaSeleccionada = nomEncuesta;
+        };
+
+});
+
 myApp.controller("ResponderEncuesta", function($scope,$http){
 
       $http.get("http://localhost:3000/buscar_por_grupo?grupo_id=1")
