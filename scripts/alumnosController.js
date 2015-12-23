@@ -44,6 +44,22 @@ myApp.controller("ResponderEncuesta", function($scope,$http){
 });
 
 myApp.controller("ObtenerPreguntas", function($scope,$http){
+  $scope.selected_ids = [];
+  $scope.submitAnswers = function() {
+    $scope.selected_ids = [];
+    angular.forEach($scope.preguntas, function(pregunta) {
+      $scope.selected_ids.push(pregunta.id);
+      $scope.selected_ids.push(pregunta.selected_id.id);
+      $scope.selected_ids.push(pregunta.selected_id.val);
+    });
+    for (var i = 0; i < ($scope.selected_ids.length); i=i+3) {
+      $http.post("http://localhost:3000/respuestum_pregunta", {
+        respuesta_id: $scope.selected_ids[i+1], 
+        pregunta_id: $scope.selected_ids[i], 
+        valor_opcion: $scope.selected_ids[i+2]
+      }); 
+    };    
+  }
   $http.get("http://localhost:3000/preguntas_encuesta?encuesta_id="+$scope.idEncuesta)
     .success(function(data){
       $scope.preguntas = data;

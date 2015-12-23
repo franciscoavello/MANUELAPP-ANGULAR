@@ -1,16 +1,20 @@
-<div class="row center" ng-controller="ObtenerPreguntas">
-  <div class="input-field col s12" ng-repeat="pregunta in preguntas" id="{{pregunta.id}}" name="{{pregunta.id}}">
-    <p class="azul-oscuro">{{pregunta.enunciado}}</p>
-    <p ng-repeat="resp in pregunta.respPreg">
-        <input name="{{pregunta.id}}" value="{{resp.valor}}" type="radio" id="t{{pregunta.id}}+{{resp.id}}" />
-        <label for="t{{pregunta.id}}+{{resp.id}}">{{resp.opcion_text}}</label>
-      </p>
-    </div>
+<div class="container">
+  <div class="row" ng-controller="ObtenerPreguntas">
+    <form name="questionsForm" ng-submit="submitAnswers()">
+    <div class="input-field col s12" ng-repeat="pregunta in preguntas" id="{{pregunta.id}}" name="{{pregunta.id}}">
+      <p class="azul-oscuro">{{pregunta.enunciado}}</p>
+      <p ng-repeat="resp in pregunta.respPreg">
+          <input name="{{pregunta.id}}"   ng-model="pregunta.selected_id" ng-value="{val:resp.valor, id:resp.id}" type="radio" id="t{{pregunta.id}}+{{resp.id}}" />
+          <label for="t{{pregunta.id}}+{{resp.id}}">{{resp.opcion_text}}</label>
+        </p>
+      </div>
 
-    <div class="row center" >
-    <div class="input-field col s12">
-      <button class="btn waves-effect waves-light" type="submit" name="action">Enviar respuestas</button>
-      <a class="waves-effect waves-light btn grey" ui-sref="encuestas.pendientes">Cancelar</a>
+      <div class="row center" >
+      <div class="input-field col s12">
+        <button class="btn waves-effect waves-light" type="submit" name="action">Enviar respuestas</button>
+        <a class="waves-effect waves-light btn grey" ui-sref="encuestas.pendientes">Cancelar</a>
+      </div>
     </div>
+    </form>
   </div>
 </div>

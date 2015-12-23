@@ -75,7 +75,7 @@ EncuestaPreguntum.create(encuesta_id: 3, pregunta_id: 2)
 EncuestaPreguntum.create(encuesta_id: 3, pregunta_id: 3)
 EncuestaPreguntum.create(encuesta_id: 4, pregunta_id: 2)
 EncuestaPreguntum.create(encuesta_id: 4, pregunta_id: 3)
-EncuestaPreguntum.create(encuesta_id: 4, pregunta_id: 4)
+EncuestaPreguntum.create(encuesta_id: 4, pregunta_id: 1)
 
 Evaluacione.create(contestada: 0, curso_id:1, encuesta_id:1)
 Evaluacione.create(contestada: 0, curso_id:1, encuesta_id:2)
