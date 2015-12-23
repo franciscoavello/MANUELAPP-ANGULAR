@@ -15,10 +15,7 @@
 
         <tbody ng-repeat="encuesta in encuestas| limitTo:15" id="{{encuesta.id}}">
           
-          <td>
-          <button class="btn waves-effect waves-light" type="submit" name="action">Estadísticas
-          </button>
-          </td>
+          
             <td>{{encuesta.nombre}}</td>
             <td>{{encuesta.descripcion}}</td>
             <td>{{encuesta.tipo}}</td>
