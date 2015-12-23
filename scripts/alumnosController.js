@@ -43,7 +43,7 @@ myApp.controller("ResponderEncuesta", function($scope,$http){
         });
 });
 
-myApp.controller("ObtenerPreguntas", function($scope,$http){
+myApp.controller("ObtenerPreguntas", function($scope,$http, $state){
   $scope.selected_ids = [];
   $scope.submitAnswers = function() {
     $scope.selected_ids = [];
@@ -58,7 +58,8 @@ myApp.controller("ObtenerPreguntas", function($scope,$http){
         pregunta_id: $scope.selected_ids[i], 
         valor_opcion: $scope.selected_ids[i+2]
       }); 
-    };    
+    };
+    $state.go('encuestas.pendientes');    
   }
   $http.get("http://localhost:3000/preguntas_encuesta?encuesta_id="+$scope.idEncuesta)
     .success(function(data){
