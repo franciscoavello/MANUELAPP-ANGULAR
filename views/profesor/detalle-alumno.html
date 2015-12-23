@@ -1,7 +1,7 @@
 <br><br><br>
 <div ng-controller="AlumnoCtrl">
 	<div class="row">
-		<div class="col s8">
+		<div class="col s12">
 			<h4 class="azul-oscuro">{{$parent.mi_alumno.nombre}} {{$parent.mi_alumno.apellido_paterno}} {{$parent.mi_alumno.apellido_materno}}</h4>
 		</div>
 	</div>
@@ -31,8 +31,12 @@
 				</div>
 		</div>
 	</div>
-  <button class="btn waves-effect waves-light" ui-sref="detalle-curso.alumnos" align="middle" type="submit" name="action">            
+	<div class="row">
+  <button class="col s2 btn waves-effect waves-light left" ui-sref="detalle-curso.alumnos" align="middle" type="submit" name="action">
 		Volver
+	</button>
+  <button class="col s4 btn waves-effect waves-light right footerColor" ng-click="eliminarAlumno()" align="middle" type="submit" name="action">
+		<span class="azul-oscuro">Eliminar alumno</span>
 	</button>
 </div>
 <br><br><br>

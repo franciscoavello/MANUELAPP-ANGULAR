@@ -1,1 +1,9 @@
-agregar-evaluacion.html
+<div ng-controller="NuevaEncuesta">
+	<h5>Seleccione un tipo de encuesta</h5>
+  <a class='dropdown-button btn' data-hover="true" data-activates='drop2' dropdown>Opciones</a>
+  <ul id='drop2' class='dropdown-content'>
+  	<div ng-repeat="tipo in tipos">
+    <li><a ng-click="seleccionarTipo($index)">{{tipo.nombre}}</a></li>
+    </div>
+  </ul>
+</div>

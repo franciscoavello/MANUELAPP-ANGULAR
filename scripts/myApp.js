@@ -171,14 +171,14 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
 
   })
   .state('detalle-curso.agregar-grupo',{
-    url:"/agregar-alumno",
+    url:"/agregar-grupo",
     templateUrl: "views/profesor/agregar-grupo.html",
     authenticate: true,
     rolVista: 1
 
   })
   .state('detalle-curso.nueva-encuesta',{
-    url:"/agregar-alumno",
+    url:"/nueva-encuesta",
     templateUrl: "views/profesor/nueva-encuesta.html",
     authenticate: true,
     rolVista: 1

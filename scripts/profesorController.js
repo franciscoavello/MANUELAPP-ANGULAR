@@ -24,6 +24,7 @@ myApp.controller('CursoCtrl',function ($http,$scope,$state,$rootScope){
 
 myApp.controller('AlumnoCtrl',function ($http,$scope,$state,$rootScope){
   $scope.grupos=[];
+  $scope.alertaEliminacionAlumno=false;
   $http.get("http://localhost:3000/grupos_alumno?correo="+$rootScope.mi_alumno.correo)
     .success(function(data) {
       console.log(data);
@@ -38,12 +39,20 @@ myApp.controller('AlumnoCtrl',function ($http,$scope,$state,$rootScope){
     }).error(function(err){
       console.log(err);
     });
-        
+  $scope.eliminarAlumno = function () {
+    $http.post("http://localhost:3000/eliminar_alumno_curso?curso_id="+$rootScope.mi_curso.id+"&alumno_id="+$rootScope.mi_alumno.id)
+      .success(function() {
+        $scope.alertaEliminacionAlumno=true;
+      });
+  };        
       
 });
 
 myApp.controller('GrupoCtrl',function ($http,$scope,$state,$rootScope){
   $scope.integrantes=[];
+  $scope.alertaEliminacionAlumno=false;
+  $scope.alertaEliminacionGrupo=false;
+  $scope.alertaAsignacionJefe=false;
   $http.get("http://localhost:3000/buscar_por_grupo?grupo_id="+$rootScope.mi_grupo.id)
   .success(function(data) {
     console.log(data);
@@ -51,6 +60,26 @@ myApp.controller('GrupoCtrl',function ($http,$scope,$state,$rootScope){
       $scope.integrantes = data;
     }
   });
+  $scope.eliminarGrupo = function () {
+    $http.post("http://localhost:3000/eliminar_grupo?grupo_id="+$rootScope.mi_grupo.id)
+      .success(function() {
+        $scope.alertaEliminacionGrupo=true;
+      });
+  };
+  $scope.eliminarAlumno = function (index) {
+    var id_alumno = $scope.integrantes[index].id;
+    $http.post("http://localhost:3000/eliminar_alumno_grupo?grupo_id="+$rootScope.mi_grupo.id+"&alumno_id="+id_alumno)
+      .success(function() {
+        $scope.alertaEliminacionAlumno=true;
+      });
+  };
+  $scope.asignarJefe = function (index) {
+    var id_alumno = $scope.integrantes[index].id;
+    $http.post("http://localhost:3000/jefe_grupo?grupo_id="+$rootScope.mi_grupo.id+"&alumno_id="+id_alumno)
+      .success(function() {
+        $scope.alertaAsignacionJefe=true;
+      });
+  };
 });
 
 myApp.controller('EvaluacionCtrl',function ($scope,$state,$rootScope){
@@ -98,6 +127,7 @@ myApp.controller('VerGrupos', function ($rootScope,$http, $scope, $state) {
 
 myApp.controller('VerAlumnos', function ($rootScope,$http, $scope, $state) {
   $scope.alumnos = [];
+  $scope.alertaEliminacionAlumno=false;
   $http.get("http://localhost:3000/buscar_alumnos_curso?curso_id="+$rootScope.mi_curso.id)
     .success(function(data) {
       if(data.length>0){
@@ -105,6 +135,9 @@ myApp.controller('VerAlumnos', function ($rootScope,$http, $scope, $state) {
         $scope.alumnos = data;
       }
     });
+  $scope.copiarAlumnos = function(){
+    $rootScope.alumnosCurso=$scope.alumnos;
+  }
   $scope.seleccionarAlumno = function (id) {
       $scope.id_alumno_seleccionado = id;
       console.log("id_alumno: "+$scope.id_alumno_seleccionado);
@@ -112,22 +145,95 @@ myApp.controller('VerAlumnos', function ($rootScope,$http, $scope, $state) {
       console.log($rootScope.mi_alumno.nombre);
       $state.go('detalle-curso.detalle-alumno');
   }
+  $scope.eliminarAlumno = function (index) {
+    var id_alumno = $scope.integrantes[index].id;
+    $http.post("http://localhost:3000/eliminar_alumno_curso?curso_id="+$rootScope.mi_curso.id+"&alumno_id="+id_alumno)
+      .success(function() {
+        $scope.alertaEliminacionAlumno=true;
+      });
+  };
 });
 
 myApp.controller('VerEvaluaciones', function ($rootScope,$http, $scope, $state) {
   $scope.evaluaciones = [];
+  $scope.encuestas = [];
+  $scope.alertaEliminacionEncuesta=false;
   $http.get("http://localhost:3000/evaluaciones_curso?curso_id="+$rootScope.mi_curso.id)
     .success(function(data) {
       console.log(data);
       if(data.length>0){
-        $scope.evaluaciones = data;
+        for(i in data){
+          if(data[i].id==null){
+            $scope.encuestas.push(data[i]);
+          }else{
+            $scope.evaluaciones.push(data[i]);
+          }
+        }
       }
     });
   $scope.seleccionarEvaluacion = function (id) {
       $scope.id_evaluacion_seleccionado = id;
       console.log("id_evaluacion: "+$scope.id_evaluacion_seleccionado);
       $rootScope.mi_evaluacion=$scope.evaluaciones[$scope.id_evaluacion_seleccionado];
-      console.log($rootScope.mi_evaluacion.nombre);
+      $rootScope.mi_encuesta=$scope.encuestas[$scope.id_evaluacion_seleccionado];
       $state.go('detalle-curso.detalle-evaluacion');
+  }
+  $scope.eliminarEncuesta = function (index) {
+    var encuesta_id = $scope.evaluaciones[index].id;
+    $http.post("http://localhost:3000/eliminar_encuesta?encuesta_id="+encuesta_id)
+      .success(function() {
+        $scope.alertaEliminacionEncuesta=true;
+      });
+  }
+});
+
+myApp.controller('AgregarAlumno', function ($rootScope,$http, $scope, $state) {
+  $scope.alumnosFaltantes = [];
+  $scope.alertaAgregarAlumno=false;
+  $http.get("http://localhost:3000/buscar_por_rol?rol=2")
+    .success(function(data) {
+      console.log(data);
+      console.log($rootScope.alumnosCurso);
+      if(data.length>0){
+        for(i in data){
+          var bandera=0;
+          for(j in $rootScope.alumnosCurso){
+            if($rootScope.alumnosCurso[j].id==data[i].id){
+              bandera=1;
+            }
+          }
+          if(bandera==0){
+            $scope.alumnosFaltantes.push(data[i]);
+            break;
+          }
+        }
+      }
+    });
+  $scope.agregarAlumno = function (index) {
+    var id = $scope.alumnosFaltantes[index].id;
+    var arreglo={curso_id:$rootScope.mi_curso.id,alumno_id:id}
+    $http.post("http://localhost:3000/curso_alumnos",arreglo)
+      .success(function() {
+        $scope.alertaAgregarAlumno=true;
+      });
+  }
+});
+
+myApp.controller('NuevaEncuesta', function ($rootScope,$http, $scope, $state) {
+  $scope.tipos = [];
+  $scope.alertaNuevaEncuesta=false;
+  $http.get("http://localhost:3000/mostrar_tipos_encuestas")
+    .success(function(data) {
+      console.log(data);
+      if(data.length>0){
+        $scope.tipos=data;
+      }
+    });
+  $scope.nuevaEncuesta = function (index) {
+    var alumno_id = $scope.alumnosFaltantes[index].id;
+    $http.post("http://localhost:3000/ingresar_alumno_curso?alumno_id="+alumno_id+"&curso_id="+$rootScope.mi_curso.id)
+      .success(function() {
+        $scope.alertaNuevaEncuesta=true;
+      });
   }
 });
