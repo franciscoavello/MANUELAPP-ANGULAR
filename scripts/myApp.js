@@ -64,7 +64,7 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
       rolVista: 2
     })
     .state('encuestas.estadisticas', {
-      url: "/estadisticas",
+      url: "/estadisticas?idEncuesta",
       templateUrl: "views/alumno/encuesta-estadisticas.html",
       parent: 'encuestas',
       controller: function($scope, $stateParams) {
