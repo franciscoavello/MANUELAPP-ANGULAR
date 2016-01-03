@@ -3,11 +3,11 @@
     <h5 class="azul-oscuro">{{$parent.encuestaSeleccionada}}</h5>
       <h5 class="azul-oscuro">Estadísticas</h5>
       <div class="container-fluid">
-    <div class="text-center aspect-ratio" id="container" ng-controller="BarCtrl">
-      <canvas id="bar" class="chart chart-bar"
+    <div class="text-center aspect-ratio" id="container" ng-controller="RadarCtrl">
+      <canvas id="bar" class="chart chart-radar"
   chart-data="data" chart-labels="labels" chart-series="series">
 </canvas>
-	</div>
+  </div>
       <div class="row center" >
       <div class="input-field col s12">
         <a class="waves-effect waves-light btn grey" ui-sref="encuestas.completadas">Cancelar</a>

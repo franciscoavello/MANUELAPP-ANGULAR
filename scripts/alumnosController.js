@@ -94,12 +94,27 @@ myApp.controller("ObtenerPreguntas", function($scope,$http, $state){
     });
 });
 
-myApp.controller("BarCtrl", function ($scope) {
-  $scope.labels = ['Pregunta 1', 'Pregunta 2', 'Pregunta 3', 'Pregunta 4'];
-  $scope.series = ['Promedio grupo', 'Promedio curso'];
-
-  $scope.data = [
-    [4, 5, 6, 5],
-    [3, 2, 4, 6]
-  ];
+myApp.controller("RadarCtrl", function ($scope,$http) {
+  $http.get("http://manuel-api.herokuapp.com/preguntas_encuesta?encuesta_id="+$scope.idEncuesta)
+    .success(function(data){
+      var label= [];
+      for(x=0; x<data.length; x++) {
+        label.push(data[x].enunciado);
+      }
+      $scope.labels = label;
+      $scope.series = ['Promedio grupo', 'Promedio curso'];
+      var datos= [];
+      var datos1= [];
+      var datos2= [];
+      for(x=0; x<data.length; x++) {
+        datos1.push(data[x].id);
+      }
+      for(x=data.length-1; x>-1; x--) {
+        datos2.push(data[x].id);
+      }
+      datos.push(datos1);
+      datos.push(datos2);
+      $scope.data = datos;
+      }).error(function(err){
+        });
 });
