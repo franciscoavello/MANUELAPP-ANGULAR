@@ -1,7 +1,7 @@
 var myApp = angular.module('myApp');
 
 myApp.controller("VerEncuestasPendientes", function($scope,$http,$rootScope){
-      $http.get("http://localhost:3000/buscar_pendientes_alumno?correo="+$scope.usuario[0].correo)
+      $http.get("http://manuel-api.herokuapp.com/buscar_pendientes_alumno?correo="+$scope.usuario[0].correo)
         .success(function(data){
           $scope.encuestas = data;
           console.log($scope.encuestas);
@@ -17,7 +17,7 @@ myApp.controller("VerEncuestasPendientes", function($scope,$http,$rootScope){
 });
 
 myApp.controller("VerEncuestasCompletadas", function($scope,$http,$rootScope){
-      $http.get("http://localhost:3000/buscar_encuestas_alumno?correo="+$scope.usuario[0].correo)
+      $http.get("http://manuel-api.herokuapp.com/buscar_encuestas_alumno?correo="+$scope.usuario[0].correo)
         .success(function(data){
           $scope.encuestas = data;
           console.log($scope.encuestas);
@@ -34,7 +34,7 @@ myApp.controller("VerEncuestasCompletadas", function($scope,$http,$rootScope){
 
 myApp.controller("ResponderEncuesta", function($scope,$http){
 
-      $http.get("http://localhost:3000/buscar_por_grupo?grupo_id=1")
+      $http.get("http://manuel-api.herokuapp.com/buscar_por_grupo?grupo_id=1")
         .success(function(data){
           $scope.datosGrupo = data;
         })
@@ -53,7 +53,7 @@ myApp.controller("ObtenerPreguntas", function($scope,$http, $state){
       $scope.selected_ids.push(pregunta.selected_id.val);
     });
     for (var i = 0; i < ($scope.selected_ids.length); i=i+3) {
-      $http.post("http://localhost:3000/respuestum_pregunta", {
+      $http.post("http://manuel-api.herokuapp.com/respuestum_pregunta", {
         respuesta_id: $scope.selected_ids[i+1], 
         pregunta_id: $scope.selected_ids[i], 
         valor_opcion: $scope.selected_ids[i+2]
@@ -61,10 +61,10 @@ myApp.controller("ObtenerPreguntas", function($scope,$http, $state){
     };
     $state.go('encuestas.pendientes');    
   }
-  $http.get("http://localhost:3000/preguntas_encuesta?encuesta_id="+$scope.idEncuesta)
+  $http.get("http://manuel-api.herokuapp.com/preguntas_encuesta?encuesta_id="+$scope.idEncuesta)
     .success(function(data){
       $scope.preguntas = data;
-      $http.get("http://localhost:3000/preguntas_encuesta_opciones?encuesta_id="+$scope.idEncuesta)
+      $http.get("http://manuel-api.herokuapp.com/preguntas_encuesta_opciones?encuesta_id="+$scope.idEncuesta)
         .success(function(data){
           $scope.respuestas = data;
           var j=0;

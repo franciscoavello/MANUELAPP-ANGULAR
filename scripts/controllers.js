@@ -32,7 +32,7 @@ myApp.controller('LoginCtrl', function (auth, $scope, $location, store, $http, $
 
   function onLoginSuccess(profile, token) {
     if (profile.email.indexOf('@usach.cl') > -1) {
-      $http.get("http://localhost:3000/buscar_por_correo?correo="+profile.email) //A la espera de la api, se revisa directamente en rails.
+      $http.get("http://manuel-api.herokuapp.com/buscar_por_correo?correo="+profile.email) //A la espera de la api, se revisa directamente en rails.
         .success(function(data){
           console.log(data);
           var rolUser = -1;
