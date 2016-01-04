@@ -31,7 +31,6 @@ myApp.controller('LoginCtrl', function (auth, $scope, $location, store, $http, $
   $scope.esAlumno=false
 
   function onLoginSuccess(profile, token) {
-    if (profile.email.indexOf('@usach.cl') > -1) {
       $http.get("http://manuel-api.herokuapp.com/buscar_por_correo?correo="+profile.email) //A la espera de la api, se revisa directamente en rails.
         .success(function(data){
           console.log(data);
@@ -80,10 +79,6 @@ myApp.controller('LoginCtrl', function (auth, $scope, $location, store, $http, $
             $scope.logueado = true;
             $scope.desloguearNoAutorizado();
         });
-    } else {
-      $scope.logueado = true;
-      $scope.desloguearNoAutorizado();
-    }
   }
 
   function onLoginFailed() {
@@ -116,8 +111,7 @@ myApp.controller('LoginCtrl', function (auth, $scope, $location, store, $http, $
     auth.signin({
       popup: true,
       connection: 'google-oauth2',
-      scope: 'openid name email',
-      hd: 'usach.cl'
+      scope: 'openid name email'
     }, onLoginSuccess, onLoginFailed);
   };
 
