@@ -40,6 +40,7 @@
   <script src="scripts/controllers.js" type="text/javascript"> </script>
   <script src="scripts/alumnosController.js" type="text/javascript"> </script>
   <script src="scripts/profesorController.js" type="text/javascript"> </script>
+  <script src="scripts/ayudanteController.js" type="text/javascript"> </script>
   <script src="./scripts/adminController.js" type="text/javascript"> </script>
   <script src="js/Chart.js" type="text/javascript"></script>
   <script src="js/angular-chart.js" type="text/javascript"></script>
@@ -48,7 +49,16 @@
       <div class="nav-wrapper container" >
         <ul id="nav-mobile" class="right hide-on-med-and-down" >
           <li ng-controller="RootCtrl" ng-show="logueado"><img class= "circle responsive-img" src="{{auth.profile.picture}}" style="width: 30px; heigth: 30px; margin-right: 10px; margin-top: 15px"></li>
-          <li><div class="azul-oscuro" class="message" ng-controller="RootCtrl" ng-show="logueado">{{auth.profile.name | capitalize}}</div></li>
+          <li class="azul-oscuro" class="message" ng-controller="RootCtrl" ng-show="logueado && respAyudante">
+          <a class='' data-hover="true" data-activates='drop2' dropdown>{{auth.profile.name | capitalize}}</a>
+          <ul id='drop2' class='dropdown-content'>
+            <div>
+            <li><a href="" ng-click="cambiarAAlumno()">Modo Alumno</a></li>
+            <li><a href="" ng-click="cambiarAAyudante()">Modo Ayudante</a></li>
+            </div>
+          </ul>
+          </li>
+          <li><div class="azul-oscuro" class="message" ng-controller="RootCtrl" ng-show="logueado && !respAyudante">{{auth.profile.name | capitalize}}</div></li>
           <li><a href="" class="azul-oscuro" ng-show="!logueado" ng-click="doGoogleAuthWithPopup()"><i class="fa fa-user fa-lg fa-pull-left"></i> Ingresar</a></li>
           <li><a href="" class="azul-oscuro" ng-show="logueado" ng-click="desloguear()"><i class="fa fa-power-off fa-2x fa-pull-left"></i> Salir</a></li>
         </ul>
@@ -61,11 +71,14 @@
           <li><a href="" ng-show="logueado && esAlumno" ui-sref="inicioAlumno">Inicio</a></li>
           <li><a href="" ng-show="logueado && esAdmin" ui-sref="inicioAdmin">Inicio</a></li>
           <li><a href="" ng-show="logueado && esProfesor" ui-sref="inicioProfesor">Inicio</a></li>
+          <li><a href="" ng-show="logueado && esAyudante" ui-sref="inicioAyudante">Inicio</a></li>
 
           <li>
           <li><a href="" ng-show="logueado && esAlumno" ui-sref="encuestas.pendientes">Encuestas</a></li>
            <li>
           <li><a href="" ng-show="logueado && esProfesor" ui-sref="cursos" >Cursos</a></li>
+          <li>
+          <li><a href="" ng-show="logueado && esAyudante" ui-sref="cursos-ayudante">Cursos</a></li>
            <li>
           <li><a href="" ng-show="logueado" ng-click="desloguear()">Salir</a></li>
         </ul>
@@ -76,8 +89,10 @@
           <li><a href="" class="azul-oscuro" ng-show="logueado && esAlumno" ui-sref="inicioAlumno">Inicio</a></li>
           <li><a href="" class="azul-oscuro" ng-show="logueado && esAdmin" ui-sref="inicioAdmin">Inicio</a></li>
           <li><a href="" class="azul-oscuro" ng-show="logueado && esProfesor" ui-sref="inicioProfesor">Inicio</a></li>
+          <li><a href="" class="azul-oscuro" ng-show="logueado && esAyudante" ui-sref="inicioAyudante">Inicio</a></li>
 
           <li><a href="" class="azul-oscuro" ng-show="logueado && esProfesor" ui-sref="cursos">Cursos</a></li>
+          <li><a href="" class="azul-oscuro" ng-show="logueado && esAyudante" ui-sref="cursos-ayudante">Cursos</a></li>
           <li><a href="" class="azul-oscuro" ng-show="logueado && esAlumno"  ui-sref="encuestas.pendientes">Encuestas</a></li>
           <li><a href="" class="azul-oscuro" ng-show="logueado && esAdmin"  ui-sref="adminprofesores">Profesores</a></li>
           <li><a href="" class="azul-oscuro" ng-show="logueado && esAdmin"  ui-sref="adminalumnos">Alumnos</a></li>
@@ -92,6 +107,7 @@
     </nav>
 </head>
 <body >
+
   <!-- Aqui empieza contenido -->
 <div ui-view></div>
   <!-- Aqui termina contenido -->

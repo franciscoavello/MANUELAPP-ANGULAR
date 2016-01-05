@@ -36,6 +36,19 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
     authenticate: true,
     rolVista: 2
   })
+  .state('inicioAyudante',   {
+    url: '/inicioAyudante',
+    templateUrl: 'views/inicioAyudante.html',
+    controller: 'LoginCtrl',
+    authenticate: true,
+    rolVista: 4
+  })
+  .state('selectorAyudante',   {
+    url: '/selectorAyudante',
+    templateUrl: 'views/seleccionAyudante.html',
+    controller: 'LoginCtrl',
+    authenticate: true
+  })
   .state('encuestas', {
       url: "/encuestas",
       templateUrl: "views/alumno/encuestas.html",
@@ -284,6 +297,85 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
     })
 
     // FIN ADMIN -------------------------------------------
+    
+    // Ayudante
+    .state('detalle-curso-ayudante', {
+      url: "/ayudante/detalle-curso",
+      templateUrl: "views/ayudante/detalle-curso.html",
+      authenticate: true,
+      rolVista: 4
+    })
+    .state('detalle-curso-ayudante.perfil', {
+      url: "/ayudante/perfil",
+      templateUrl: "views/ayudante/profesor-perfil.html",
+      authenticate: true,
+      rolVista: 4
+    })
+    .state('detalle-curso-ayudante.grupos', {
+      url: "/ayudante/grupos",
+      templateUrl: "views/ayudante/profesor-grupos.html",
+      authenticate: true,
+      rolVista: 4
+    })
+    .state('detalle-curso-ayudante.agregar-grupo',{
+      url:"/ayudante/agregar-grupo",
+      templateUrl: "views/ayudante/agregar-grupo.html",
+      authenticate: true,
+      rolVista: 4,
+      funcionalidad: 5
+    })
+    .state('detalle-curso-ayudante.detalle-grupo',{
+      url:"/ayudante/detalle-grupo",
+      templateUrl: "views/ayudante/detalle-grupo.html",
+      authenticate: true,
+      rolVista: 4,
+      funcionalidad: 8
+    })
+    .state('detalle-curso-ayudante.alumnos', {
+      url: "/ayudante/alumnos",
+      templateUrl: "views/ayudante/profesor-alumnos.html",
+      authenticate: true,
+      rolVista: 4
+    })
+    .state('detalle-curso-ayudante.agregar-alumno',{
+      url:"/ayudante/agregar-alumno",
+      templateUrl: "views/ayudante/agregar-alumno.html",
+      authenticate: true,
+      rolVista: 4,
+      funcionalidad: 1
+    })
+    .state('detalle-curso-ayudante.detalle-alumno',{
+      url:"/ayudante/detalle-alumno",
+      templateUrl: "views/ayudante/detalle-alumno.html",
+      authenticate: true,
+      rolVista: 4
+    })
+    .state('detalle-curso-ayudante.evaluaciones', {
+      url: "/ayudante/evaluaciones",
+      templateUrl: "views/ayudante/profesor-evaluaciones.html",
+      authenticate: true,
+      rolVista: 4,
+      funcionalidad: 2
+    })
+    .state('detalle-curso-ayudante.nueva-encuesta',{
+      url:"/ayudante/nueva-encuesta",
+      templateUrl: "views/ayudante/nueva-encuesta.html",
+      authenticate: true,
+      rolVista: 4,
+      funcionalidad: 4
+    })
+    .state('detalle-curso-ayudante.detalle-evaluacion',{
+      url:"/ayudante/detalle-evaluacion",
+      templateUrl: "views/ayudante/detalle-evaluacion.html",
+      authenticate: true,
+      rolVista: 4
+    })  
+    .state('cursos-ayudante', {
+      url: "/ayudante/cursos",
+      templateUrl: "views/ayudante/cursos.html",
+      authenticate: true,
+      rolVista: 4
+    })  
   .state('404',   {
     url: '/404',
     templateUrl: 'views/404.html'

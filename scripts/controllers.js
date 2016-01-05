@@ -1,9 +1,26 @@
 var myApp = angular.module('myApp');
 
-myApp.controller('MenuCtrl', function ($scope, $location) {
+myApp.controller('MenuCtrl', function ($scope, $location,$rootScope,$timeout) {
   $scope.go = function (target) {
     $location.path(target);
   };
+  $scope.cambiarAAyudante = function () {
+      $rootScope.rolUserGlobal = 4;
+      $rootScope.esAyudante=true;
+      console.log($rootScope.esAyudante);
+      $rootScope.esAlumno=false;
+      $location.path('/inicioAyudante');
+      //$state.go('inicioAyudante');
+  }
+
+  $scope.cambiarAAlumno = function () {
+      $rootScope.rolUserGlobal = 2;
+      $rootScope.esAyudante=false;
+      $rootScope.esAlumno=true;  
+      console.log($scope.esAlumno);
+      $location.path('/inicioAlumno');
+      //$state.go('inicioAlumno');
+  }
 });
 
 myApp.controller('RootCtrl', function (auth, $scope) {
@@ -26,9 +43,7 @@ myApp.controller('LoginCtrl', function (auth, $scope, $location, store, $http, $
   $scope.pass = '';
   $scope.message = '';
   $scope.usuario = [];
-  $scope.esAdmin=false
-  $scope.esProfesor=false
-  $scope.esAlumno=false
+
 
   function onLoginSuccess(profile, token) {
       $http.get("http://manuel-api.herokuapp.com/buscar_por_correo?correo="+profile.email) //A la espera de la api, se revisa directamente en rails.
@@ -62,12 +77,42 @@ myApp.controller('LoginCtrl', function (auth, $scope, $location, store, $http, $
               $scope.loading = false;
             }
             if(rolUser==2){
-              $scope.esAlumno=true
-              store.set('profile', profile);
-              store.set('token', token);
-              $location.path('/inicioAlumno');
-              $scope.logueado = !$scope.logueado;
-              $scope.loading = false;
+              $http.get("http://manuel-api.herokuapp.com/ayudante_curso?correo="+$scope.usuario[0].correo)
+              .success(function(data){
+                $scope.datosAyudante = data;
+                if($scope.datosAyudante.length > 0){  
+                  $rootScope.respAyudante=true
+                }
+                if($rootScope.respAyudante){
+                  $rootScope.permisosAyudante=[
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7
+                  ];
+                  store.set('profile', profile);
+                  store.set('token', token);
+                  $location.path('/selectorAyudante');
+                  $scope.logueado = !$scope.logueado;
+                  $scope.loading = false;
+                }
+                else{
+                  $scope.permisosAyudante=[];
+                  $rootScope.esAlumno=true;
+                  store.set('profile', profile);
+                  store.set('token', token);
+                  $location.path('/inicioAlumno');
+                  $scope.logueado = !$scope.logueado;
+                  $scope.loading = false;
+                }   
+                console.log($scope.datosAyudante);
+              })
+              .error(function(err){
+
+              });           
             }
           }
           else{
@@ -123,7 +168,9 @@ myApp.controller('LoginCtrl', function (auth, $scope, $location, store, $http, $
     $scope.logueado = !$scope.logueado;
     $scope.esAdmin=false
     $scope.esProfesor=false
-    $scope.esAlumno=false
+    $rootScope.esAlumno=false
+    $rootScope.esAyudante=false
+    $rootScope.respAyudante=false
     $state.go('root2');
   };
 
@@ -135,7 +182,9 @@ myApp.controller('LoginCtrl', function (auth, $scope, $location, store, $http, $
     $scope.logueado = !$scope.logueado;
     $scope.esAdmin=false
     $scope.esProfesor=false
-    $scope.esAlumno=false
+    $rootScope.esAlumno=false
+    $rootScope.esAyudante=false
+    $rootScope.respAyudante=false
     $state.go('noAutorizado');
   };
 

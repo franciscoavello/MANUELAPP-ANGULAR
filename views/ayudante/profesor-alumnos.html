@@ -1,0 +1,38 @@
+<div ng-controller="VerAlumnosAyudante">
+  <br></br>
+  <br></br>
+  <div class="row">
+    <div class="col s6 center"></div>
+    <!--<div class="input-field col s8">
+      <input id="search" type="search" placeholder="Encontrar alumno" required>
+      <label for="search"><i class="material-icons prefix">search</i></label>
+      <i class="material-icons">close</i>
+      
+    </div>-->
+    <div class="col s4 right">
+      <p></p>
+      <button class="btn waves-effect waves-light" ng-click="copiarAlumnos()" ui-sref="detalle-curso-ayudante.agregar-alumno" align="middle" type="submit" name="action">            
+      Agregar alumno
+      </button>
+    </div>
+  </div>
+
+  <div class="divider row"></div>
+  <div ng-repeat="alumno in alumnos">
+    <div class="section row">
+        <div class="col s4"><h5 class="azul-oscuro">{{alumno.nombre}} {{alumno.apellido_paterno}}</h5></div>
+        <div class="col s4"><p class="azul-oscuro">{{alumno.correo}}</p></div> 
+        <div class="col s2">
+          <button class="btn waves-effect waves-light right" ng-click="seleccionarAlumno($index)" align="middle" type="button">  
+            Detalle
+          </button>
+        </div>
+        <div class="col s2">
+          <button class="btn waves-effect waves-light right footerColor" ng-click="eliminarAlumnoCurso($index)" align="middle" type="button">  
+            <span class="azul-oscuro">Eliminar</span>
+          </button>
+        </div> 
+    </div>
+    <div class="divider row"></div>
+  </div>
+</div>
