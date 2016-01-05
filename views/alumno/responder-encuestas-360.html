@@ -3,7 +3,7 @@
   <div class="row" ng-controller="ResponderEncuesta">
     <h5 class="azul-oscuro">{{$parent.encuestaSeleccionada}}</h5>
     <div class="row"><div class="collection col s4" >
-      <a ng-repeat="grupo in datosGrupo" class="collection-item" id="{{grupo.id}}" ui-sref="encuestas.responder360.preguntas({idEncuesta: {{idEncuesta}} , idAlumno: {{grupo.id}} })">{{grupo.nombre}}  {{grupo.apellido_paterno}} {{grupo.apellido_materno}} </a>
+      <a ng-click="ingresarNombreAlumno(grupo.nombre,grupo.apellido_paterno,grupo.apellido_materno)" ng-repeat="grupo in datosGrupo" class="collection-item" id="{{grupo.id}}" ui-sref="encuestas.responder360.preguntas({idEncuesta: {{idEncuesta}} , idAlumno: {{grupo.id}}, })">{{grupo.nombre}}  {{grupo.apellido_paterno}} {{grupo.apellido_materno}} </a>
     </div>
     <div class="col s8">
       <div ui-view></div>

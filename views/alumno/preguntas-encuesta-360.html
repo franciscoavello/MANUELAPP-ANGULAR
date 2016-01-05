@@ -1,6 +1,7 @@
 <div class="container">
   <div class="row" ng-controller="ObtenerPreguntas">
     <form name="questionsForm" ng-submit="submitAnswers()">
+      <h5 class="azul-oscuro">{{$parent.alumnoSeleccionado}}</h5>
     <div class="input-field col s12" ng-repeat="pregunta in preguntas" id="{{pregunta.id}}" name="{{pregunta.id}}">
       <p class="azul-oscuro">{{pregunta.enunciado}}</p>
       <p ng-repeat="resp in pregunta.respPreg">
