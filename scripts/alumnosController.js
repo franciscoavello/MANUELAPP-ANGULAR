@@ -47,12 +47,13 @@ myApp.controller("ResponderEncuesta", function($scope,$http,$rootScope){
         .error(function(err){
 
         });
-        $scope.ingresarNombreAlumno = function (nomAlumno,apAlumno,amAlumno) {
+        $scope.ingresarNombreAlumno = function (idAlumno, nomAlumno,apAlumno,amAlumno) {
           $rootScope.alumnoSeleccionado = nomAlumno+" "+apAlumno+" "+amAlumno;
+          $rootScope.idAlumnoSeleccionado = idAlumno;
         };
 });
 
-myApp.controller("ObtenerPreguntas", function($scope,$http, $state){
+myApp.controller("ObtenerPreguntas", function($scope,$http, $state,$rootScope){
   $scope.selected_ids = [];
   $scope.submitAnswers = function() {
     $scope.selected_ids = [];
@@ -70,6 +71,35 @@ myApp.controller("ObtenerPreguntas", function($scope,$http, $state){
     };
     $state.go('encuestas.pendientes');    
   }
+  $scope.registrarEvaluacion = function (idAlumnoSeleccionado, alumnoSeleccionado) {
+    $http.get("http://manuel-api.herokuapp.com/grupo_encuesta_pendiente?correo="+$rootScope.correoUsuarioLogueado+"&encuesta_id="+$scope.idEncuesta)
+        .success(function(data1){
+          $http.get("http://manuel-api.herokuapp.com/buscar_por_correo?correo="+$rootScope.correoUsuarioLogueado)
+            .success(function(data2){
+              $http.get("http://manuel-api.herokuapp.com/evaluaciones_curso_encuesta?curso_id="+data1[0].curso_id+"&encuesta_id="+$scope.idEncuesta)
+            .success(function(data3){
+              $http.get("http://manuel-api.herokuapp.com/datos_alumno?correo="+$rootScope.correoUsuarioLogueado)
+            .success(function(data4){
+              $http.post("http://manuel-api.herokuapp.com/guardar_respuesta",{
+                   encuestado_id: idAlumnoSeleccionado,
+                   encuestador_id: data4[0].id,
+                   evaluacion_id: data3[0].id
+              });
+          }).error(function(err){
+
+            });
+          }).error(function(err){
+
+            });
+          }).error(function(err){
+
+            });
+        })
+        .error(function(err){
+
+        });
+  };
+
   $http.get("http://manuel-api.herokuapp.com/preguntas_encuesta?encuesta_id="+$scope.idEncuesta)
     .success(function(data){
       $scope.preguntas = data;
