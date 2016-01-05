@@ -55,6 +55,7 @@ myApp.controller('LoginCtrl', function (auth, $scope, $location, store, $http, $
             if(data[prop].correo == profile.email){
               rolUser=data[prop].rol;
               $rootScope.rolUserGlobal = rolUser;
+              $rootScope.correoUsuarioLogueado = data[prop].correo;
               indexUser=true;
             }
           };

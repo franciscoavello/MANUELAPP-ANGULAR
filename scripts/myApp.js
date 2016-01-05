@@ -55,13 +55,6 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
       authenticate: true,
       rolVista: 2
     })
-  .state('encuestas.recordatorios', {
-      url: "/recordatorios",
-      templateUrl: "views/alumno/alumnos-recordatorios.html",
-      parent: 'encuestas',
-      authenticate: true,
-      rolVista: 2
-    })
     .state('encuestas.pendientes', {
       url: "/pendientes",
       templateUrl: "views/alumno/alumnos-pendientes.html",
