@@ -1,6 +1,7 @@
 <div class="container">
   <div class="row " ng-controller="ObtenerPreguntas">
     <h5 class="azul-oscuro">{{$parent.encuestaSeleccionada}}</h5>
+    <h8 class="azul-oscuro">Jefe de grupo a evaluar: {{jefegrupo}}</h8>
     <form name="questionsForm" ng-submit="submitAnswers()">
     <div class="input-field col s12" ng-repeat="pregunta in preguntas" id="{{pregunta.id}}" name="{{pregunta.id}}">
       <p class="azul-oscuro">{{pregunta.enunciado}}</p>

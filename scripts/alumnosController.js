@@ -70,6 +70,18 @@ myApp.controller("ResponderEncuesta", function($scope,$http,$rootScope){
 
 myApp.controller("ObtenerPreguntas", function($scope,$http, $state,$rootScope){
   $scope.selected_ids = [];
+  $scope.jefegrupo="";
+  $http.get("http://manuel-api.herokuapp.com/grupo_encuesta_pendiente?correo="+$rootScope.correoUsuarioLogueado+"&encuesta_id="+$scope.idEncuesta)
+        .success(function(data1){     
+          $http.get("http://manuel-api.herokuapp.com/datos_jefe?grupo_id="+data1[0].id)
+        .success(function(data2){
+          $scope.jefegrupo=(data2[0].nombre+" "+data2[0].apellido_paterno+" "+data2[0].apellido_materno);
+          }).error(function(err){
+
+            });
+          }).error(function(err){
+
+            });
   $scope.submitAnswers = function() {
     $scope.selected_ids = [];
     $scope.contador = 0;
