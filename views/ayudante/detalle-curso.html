@@ -9,7 +9,7 @@
             <li class="tab col s3"><a class="active" ui-sref="detalle-curso-ayudante.perfil">Perfil</a></li>
             <li class="tab col s3"><a ui-sref="detalle-curso-ayudante.grupos">Grupos</a></li>
             <li class="tab col s3"><a ui-sref="detalle-curso-ayudante.alumnos">Alumnos</a></li>
-            <li class="tab col s3"><a ui-sref="detalle-curso-ayudante.evaluaciones">Encuestas</a></li>
+            <li class="tab col s3" ng-hide="!revisarFuncionalidad(2)"><a ui-sref="detalle-curso-ayudante.evaluaciones">Encuestas</a></li>
           </ul>
           <div ui-view></div>
         </div>

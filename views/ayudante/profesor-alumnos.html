@@ -11,7 +11,7 @@
     </div>-->
     <div class="col s4 right">
       <p></p>
-      <button class="btn waves-effect waves-light" ng-click="copiarAlumnos()" ui-sref="detalle-curso-ayudante.agregar-alumno" align="middle" type="submit" name="action">            
+      <button ng-hide="!revisarFuncionalidad(1) || !revisarFuncionalidad(11)" class="btn waves-effect waves-light" ng-click="copiarAlumnos()" ui-sref="detalle-curso-ayudante.agregar-alumno" align="middle" type="submit" name="action">            
       Agregar alumno
       </button>
     </div>
@@ -33,7 +33,7 @@
           </button>
         </div>
         <div class="col s2">
-          <button class="btn waves-effect waves-light right footerColor" ng-click="eliminarAlumnoCurso($index)" align="middle" type="button">  
+          <button ng-hide="!revisarFuncionalidad(7)" class="btn waves-effect waves-light right footerColor" ng-click="eliminarAlumnoCurso($index)" align="middle" type="button">  
             <span class="azul-oscuro">Eliminar</span>
           </button>
         </div> 

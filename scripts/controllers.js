@@ -92,7 +92,8 @@ myApp.controller('LoginCtrl', function (auth, $scope, $location, store, $http, $
                     4,
                     5,
                     6,
-                    7
+                    7,
+                    8
                   ];
                   store.set('profile', profile);
                   store.set('token', token);
@@ -130,6 +131,15 @@ myApp.controller('LoginCtrl', function (auth, $scope, $location, store, $http, $
   function onLoginFailed() {
       $scope.loading = false;
   }
+
+  $scope.revisarFuncionalidad = function(funcionalidad) {
+    for (var i = 0; i < ($rootScope.permisosAyudante.length); i++) {
+        if($rootScope.permisosAyudante[i]==funcionalidad){
+          return true;
+        };
+    };
+    return false;
+  };
 
   $scope.reset = function() {
     auth.reset({
