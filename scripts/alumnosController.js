@@ -51,6 +51,21 @@ myApp.controller("ResponderEncuesta", function($scope,$http,$rootScope){
           $rootScope.alumnoSeleccionado = nomAlumno+" "+apAlumno+" "+amAlumno;
           $rootScope.idAlumnoSeleccionado = idAlumno;
         };
+        $scope.completarEncuesta = function (){
+             $http.get("http://manuel-api.herokuapp.com/datos_alumno?correo="+$rootScope.correoUsuarioLogueado)
+                  .success(function(data){
+                    console.log(data[0].id);
+                    console.log($scope.idEncuesta);
+                    $http.put("http://manuel-api.herokuapp.com/actualizar_encuesta", {
+                      estado: true,
+                      alumno_id: data[0].id,
+                      encuesta_id: $scope.idEncuesta
+                   }).success(function() {
+                    
+                  });
+                  }).error(function(err){
+                  });
+        };
 });
 
 myApp.controller("ObtenerPreguntas", function($scope,$http, $state,$rootScope){
@@ -59,6 +74,7 @@ myApp.controller("ObtenerPreguntas", function($scope,$http, $state,$rootScope){
     $scope.selected_ids = [];
     angular.forEach($scope.preguntas, function(pregunta) {
       $scope.selected_ids.push(pregunta.id);
+      console.log(pregunta);
       $scope.selected_ids.push(pregunta.selected_id.id);
       $scope.selected_ids.push(pregunta.selected_id.val);
     });
@@ -70,7 +86,8 @@ myApp.controller("ObtenerPreguntas", function($scope,$http, $state,$rootScope){
       }); 
     };
     $state.go('encuestas.pendientes');    
-  }
+  }  
+
   $scope.registrarEvaluacion = function (idAlumnoSeleccionado, alumnoSeleccionado) {
     $http.get("http://manuel-api.herokuapp.com/grupo_encuesta_pendiente?correo="+$rootScope.correoUsuarioLogueado+"&encuesta_id="+$scope.idEncuesta)
         .success(function(data1){
@@ -98,6 +115,21 @@ myApp.controller("ObtenerPreguntas", function($scope,$http, $state,$rootScope){
         .error(function(err){
 
         });
+  };
+  $scope.completarEncuesta = function (){
+             $http.get("http://manuel-api.herokuapp.com/datos_alumno?correo="+$rootScope.correoUsuarioLogueado)
+                  .success(function(data){
+                    console.log(data[0].id);
+                    console.log($scope.idEncuesta);
+                    $http.put("http://manuel-api.herokuapp.com/actualizar_encuesta", {
+                      estado: true,
+                      alumno_id: data[0].id,
+                      encuesta_id: $scope.idEncuesta
+                   }).success(function() {
+                    
+                  });
+                  }).error(function(err){
+                  });
   };
 
   $http.get("http://manuel-api.herokuapp.com/preguntas_encuesta?encuesta_id="+$scope.idEncuesta)
