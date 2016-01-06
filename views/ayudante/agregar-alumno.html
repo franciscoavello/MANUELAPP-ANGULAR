@@ -13,7 +13,7 @@
   </div>
   <div class="divider row"></div>
   <div class="col s12" ng-show="alertaAgregarAlumno">
-    <div class="section row">
+    <div class="section">
       <p>Elija un grupo donde ingresar al alumno:</p>
       <div class="row">
         <select class="col s6" material-select watch>
@@ -23,7 +23,7 @@
       </div>
       <div class="row">
         <input type="checkbox" ng-click="asignarJefe(true)" class="filled-in" id="test5" />
-        <label for="test5">Jefe</label>
+        <label for="test5">Jefe de grupo</label>
       </div>
       <div class="row" ng-show="alertaAsignarGrupo">
           Se ha asignado grupo con exito.
@@ -31,7 +31,7 @@
     </div>
   </div>
   <div class="row">
-    <button class="col s2 btn waves-effect waves-light left" ng-click="asignarGrupo()" ui-sref="detalle-curso-ayudante.alumno" align="middle" type="submit" name="action">
+    <button class="col s2 btn waves-effect waves-light left" ng-click="asignarGrupo()" ui-sref="detalle-curso-ayudante.alumnos" align="middle" type="submit" name="action">
       Aceptar
     </button>
     <button class="col s2 btn waves-effect waves-light left" ng-show="alertaAgregarAlumno" ng-click="" ui-sref="detalle-curso-ayudante.alumnos" align="middle" type="submit" name="action">

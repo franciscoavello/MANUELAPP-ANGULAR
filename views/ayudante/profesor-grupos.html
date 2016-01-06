@@ -9,6 +9,15 @@
       </button>
     </div>
   </div>
+  <div class="row" ng-show="alertaAgregarGrupo">
+    <div class="col s6 offset-s2 alert-box success"><span>correcto: </span>El grupo se ha agregado con éxito.</div> 
+  </div>
+  <div class="row" ng-show="alertaEliminacionGrupo">
+    <div class="col s6 offset-s2 alert-box success"><span>correcto: </span>El grupo se ha eliminado con éxito.</div> 
+  </div>
+  <div class="row" ng-show="alertaEliminacionAlumno">
+    <div class="col s6 offset-s2 alert-box success"><span>correcto: </span>El alumno se eliminado con éxito del grupo.</div> 
+  </div>
   <div ng-repeat="grupo in grupos">
     <div class="col s12 m6">
       <div class="card-panel footerColor">
