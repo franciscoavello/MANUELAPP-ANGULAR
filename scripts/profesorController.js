@@ -282,20 +282,6 @@ myApp.controller('AgregarAlumno', function ($rootScope,$http, $scope, $state) {
         },2000);
       });
   }
-  /*
-  $scope.asignarGrupo = function (){
-    var arreglo = {alumno_id: $scope.nuevo_alumno_id , grupo_id: $scope.id_grupo_seleccionado, jefe: $scope.jefe }
-    $http.post("http://manuel-api.herokuapp.com/grupo_alumnos",arreglo)
-      .success(function() {
-        $scope.alertaAsignarGrupo=true;
-      });
-  }
-  $scope.asignarValor = function (index){
-    $scope.id_grupo_seleccionado=grupos[index].id;
-  }
-  $scope.asignarJefe = function (valor){
-    $scope.jefe=valor;
-  }*/
 });
 
 myApp.controller('NuevaEncuesta', function ($rootScope,$http, $scope, $state) {
@@ -311,12 +297,17 @@ myApp.controller('NuevaEncuesta', function ($rootScope,$http, $scope, $state) {
   $scope.nuevaEncuesta = function (){
     console.log($scope.encuesta_id);
     //hace un post y publica encuesta
-    $rootScope.alertaNuevaEncuesta=true;
-    $state.go("detalle-curso.evaluaciones");
-    setTimeout(function(){
-      $rootScope.alertaNuevaEncuesta=false;
-      console.log("holi");
-    },2000);
+    var arreglo={contestada:0,curso_id:$rootScope.mi_curso.id,encuesta_id:$scope.encuesta_id};
+    $http.post("http://manuel-api.herokuapp.com/evaluaciones",arreglo)
+   	.success(function() {
+   		$rootScope.alertaNuevaEncuesta=true;
+  	  $state.go("detalle-curso.evaluaciones");
+      setTimeout(function(){
+        $rootScope.alertaNuevaEncuesta=false;
+        console.log("holi");
+      },2000);
+   	});
+
   }
 });
 
