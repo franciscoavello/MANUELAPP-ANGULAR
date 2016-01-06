@@ -1,4 +1,4 @@
- <div ng-controller="VerEvaluaciones">
+<div ng-controller="VerEvaluaciones">
   <br></br>
   <br></br>       
   <div class="row">
@@ -9,20 +9,18 @@
       </button>
     </div>
   </div>
+  <div class="row" ng-show="alertaNuevaEncuesta">
+    <div class="col s6 offset-s2 alert-box success"><span>correcto: </span>La encuesta se ha publicada con éxito.</div> 
+  </div>
   <div class="divider s10 row"></div>
   <div ng-repeat="encuesta in encuestas">
     <div class="section s10 row">
         <div class="col s4"><h5 class="azul-oscuro">{{encuesta.nombre}}</h5></div>
-        <div class="col s2"><p class="azul-oscuro">{{encuesta.descripcion}}</p></div>
+        <div class="col s4"><p class="azul-oscuro">{{encuesta.descripcion}}</p></div>
         <div class="col s2"><p class="azul-oscuro">{{evaluaciones[$index].contestada}} encuesta(s) respondida(s)</p></div>
         <div class="col s2">
           <button class="btn waves-effect waves-light right"  ng-click="seleccionarEvaluacion($index)" align="middle" type="button">  
             Detalle
-          </button>
-        </div>
-        <div class="col s2">
-          <button class="btn waves-effect waves-light right footerColor" ng-click="eliminarEncuesta($index)" align="middle" type="button">  
-            <span class="azul-oscuro">Eliminar</span>
           </button>
         </div>
     </div>

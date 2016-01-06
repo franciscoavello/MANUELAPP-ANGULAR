@@ -1,1 +1,26 @@
-agregar-grupo.html
+<br><br>
+<div ng-controller="AgregarGrupo">
+	<h3 class="row azul-oscuro">Agregar Grupo</h3>
+	<br><br>
+  <form ng-submit="agregarGrupo()">
+  	<h5 class="row">Nombre</h5>
+  	<div input-field>
+		  <input type="text" required ng-model="entrada.nombreGrupo" length="250">
+		  <label>Ingrese el nombre del grupo</label>
+		</div>
+  	<h5 class="row s6">Descripción</h5>
+		<div input-field>
+		  <textarea ng-model="entrada.descripcionGrupo" required class="materialize-textarea"></textarea>
+		  <label>Ingrese una descripcion</label>
+		</div>
+	  <div class="row s2 offset-s2">
+		  <button class="btn waves-effect waves-light right" align="middle" type="submit">  
+	      Agregar Grupo
+	    </button>
+	  </div>
+  </form>
+  <br><br>
+    <button class="col s2 btn waves-effect waves-light left footerColor" ui-sref="detalle-curso.grupos" align="middle" type="submit" name="action">
+		<span class="azul-oscuro">Volver</span>
+	</button>
+</div>
