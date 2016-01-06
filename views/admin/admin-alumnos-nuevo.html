@@ -4,14 +4,14 @@
         <h5 class="azul-oscuro">Nuevo Alumno</h5>
         <div class="row" align="center">
           <div class="input-field col s12">
-            <input id="nombre" ng-model= "nombre" type="text" class="validate">
+            <input id="nombre" ng-model= "nombre" type="text" class="validate" required="" aria-required="true">
             <label for="nombre">Primer nombre</label>
           </div>
         </div>
 
         <div class="row" align="center">
           <div class="input-field col s6">
-            <input id="lastname" type="text" ng-model= "apellido_paterno" class="validate">
+            <input id="lastname" type="text" ng-model= "apellido_paterno" class="validate" required="" aria-required="true">
             <label for="lastname">Apellido Paterno</label>
           </div>
 
@@ -23,14 +23,14 @@
 
         <div class="row">
           <div class="input-field col s12">
-            <input id="rut" type="text" ng-model= "rut" class="validate">
+            <input id="rut" type="text" ng-model= "rut" class="validate" required="" aria-required="true">
             <label for="rut">Rut</label>
           </div>
         </div>
 
         <div class="row">
               <div class="input-field col s12">
-                <input id="email" type="email" ng-model= "correo" class="validate">
+                <input id="email" type="email" ng-model= "correo" class="validate" required="" aria-required="true">
                 <label for="email" data-error="Correo inválido" data-success="Correcto">Correo</label>
               </div>
         </div>

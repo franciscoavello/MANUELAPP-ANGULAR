@@ -3,17 +3,24 @@
       <form name"form" novalidate>
         <h5 class="azul-oscuro">Nueva Encuesta</h5>
         <div class="row" align="center">
-          <div class="input-field col s12">
-            <input id="first_name" type="text" ng-model="nombre" class="validate">
+          <div class="input-field col s6">
+            <input id="first_name" type="text" ng-model="nombre" class="validate" required aria-required="true">
             <label for="first_name">Nombre</label>
           </div>
+        
+          <div class="input-field col s6">
+            <input id="descripcion" type="text" ng-model="tipo" class="validate" required aria-required="true">
+            <label for="descripcion">Tipo</label>
+          </div>
+        
         </div>
         <div class="row" align="center">
           <div class="input-field col s12">
-            <input id="descripcion" type="text" ng-model="descripcion" class="validate">
+            <input id="descripcion" type="text" ng-model="descripcion" class="validate" required aria-required="true">
             <label for="descripcion">Descripción</label>
           </div>
         </div>
+        
 
          <div class="row">
  
