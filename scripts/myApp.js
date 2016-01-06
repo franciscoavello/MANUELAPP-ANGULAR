@@ -191,6 +191,14 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
 
   })
 
+  .state('detalle-curso.ayudante',{
+    url:"/ayudante",
+    templateUrl: "views/profesor/profesor-ayudante.html",
+    authenticate: true,
+    rolVista: 1
+
+  })
+
     //  ADMIN ----------------------------------------------
 
     .state('adminalumnos', {

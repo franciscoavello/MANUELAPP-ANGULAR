@@ -1,9 +1,30 @@
 var myApp = angular.module('myApp');
 
+myApp.controller('AyudanteCtrl',function ($http,$scope,$state,$rootScope){
+  $scope.ayudante=[];
+  $http.get("http://manuel-api.herokuapp.com/datos_ayudante?curso_id="+$rootScope.mi_curso.id)
+    .success(function(data) {
+      console.log(data);
+      $scope.ayudante=data;
+    });
+
+});
+
+myApp.controller('ListarFuncionalidades',function ($http,$scope,$state,$rootScope){
+  $scope.ayudante=[];
+  $http.get("http://manuel-api.herokuapp.com/funcionalidads.json")
+    .success(function(data) {
+      console.log(data);
+      $scope.funcionalidades=data;
+    });
+
+});
+
 myApp.controller('CursoCtrl',function ($http,$scope,$state,$rootScope){
   $scope.cantidadAlumnos=0;
   $scope.cantidadGrupos=0;
   $scope.cantidadEvaluaciones=0;
+  $scope.ayudante=[];
   $http.get("http://manuel-api.herokuapp.com/buscar_alumnos_curso?curso_id="+$rootScope.mi_curso.id)
     .success(function(data) {
       console.log(data);
@@ -20,6 +41,12 @@ myApp.controller('CursoCtrl',function ($http,$scope,$state,$rootScope){
       console.log(data);
       $scope.cantidadGrupos=data.length;
     });
+  $http.get("http://manuel-api.herokuapp.com/datos_ayudante?curso_id="+$rootScope.mi_curso.id)
+    .success(function(data) {
+      console.log(data);
+      $scope.ayudante=data;
+    });
+
 });
 
 myApp.controller('AlumnoCtrl',function ($http,$scope,$state,$rootScope){

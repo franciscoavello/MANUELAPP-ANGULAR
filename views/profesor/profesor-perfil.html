@@ -1,9 +1,18 @@
 <div class="row" ng-controller="CursoCtrl">
-  <div class="col s12 m8">
+  <div class="col s12 m4">
     <div class="icon-block">
       <h2 class="turquesa"><i class="large material-icons">assignment</i></h2>
       <h5 class="azul-oscuro" align="left">Descripción</h5>
-      <p class="azul-oscuro" align="justify">{{$parent.mi_curso.descripcion}}.</p>
+      <p class="azul-oscuro" align="justify">{{$parent.mi_curso.descripcion}}</p>
+    </div>
+  </div>
+
+  <div class="col s12 m4">
+    <div class="icon-block">
+      <h2 class="turquesa"><i class="large material-icons">assignment_ind</i></h2>
+      <h5 class="azul-oscuro" align="left">Ayudante</h5>
+      <p class="azul-oscuro" align="justify">{{ayudante[0].nombre}} {{ayudante[0].apellido_paterno}} {{ayudante[0].apellido_materno}} </p>
+      <p class="azul-oscuro" align="justify">Correo: {{ayudante[0].correo}}</p>
     </div>
   </div>
 
@@ -15,6 +24,7 @@
       <p class="azul-oscuro" align="justify">{{cantidadAlumnos}} alumnos</p>
       <p class="azul-oscuro" align="justify">{{cantidadGrupos}} grupos</p>
       <p class="azul-oscuro" align="justify">{{cantidadEvaluaciones/2}} encuestas</p>
+      <a href=""></a>
     </div>
   </div>
 </div>
