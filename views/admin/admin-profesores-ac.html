@@ -2,8 +2,8 @@
   <div class="container" ng-controller="verProfesores">
   <div class="row">
   <h5 class="azul-oscuro">Profesores Actuales</h5>
-
-      <table class="striped">
+      <img ng-show="loading" src="imagenes/Cargando.gif">
+      <table ng-hide="loading" class="striped">
         <thead>
           <tr >
               <th data-field="number">Rut</th>
@@ -15,7 +15,6 @@
         </thead>
 
         <tbody ng-repeat="profesor in profesores| limitTo:15" id="{{profesor.id}}">
-
             <td>{{profesor.rut}}</td>
             <td>{{profesor.nombre}}</td>
             <td>{{profesor.apellido_paterno}}</td>

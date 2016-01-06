@@ -1,11 +1,10 @@
   <div class="container" ng-controller="verEncuestas">
   <div class="row">
   <h5 class="azul-oscuro">Encuestas Actuales en MANUEL</h5>
-
-      <table class="striped">
+      <img ng-show="loading" src="imagenes/Cargando.gif">
+      <table ng-hide="loading" class="striped">
         <thead>
           <tr >
-              <th data-field="id"></th>
               <th data-field="name">Nombre de la encuesta</th>
               <th data-field="curso">Descripcion</th>
               <th data-field="tipo">Tipo</th>
@@ -14,8 +13,6 @@
         </thead>
 
         <tbody ng-repeat="encuesta in encuestas| limitTo:15" id="{{encuesta.id}}">
-          
-          
             <td>{{encuesta.nombre}}</td>
             <td>{{encuesta.descripcion}}</td>
             <td>{{encuesta.tipo}}</td>

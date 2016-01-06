@@ -2,45 +2,55 @@
 var myApp = angular.module('myApp');
 
 myApp.controller("verEncuestas", function($scope,$http,$rootScope){
+      $scope.loading = true;
       $http.get("http://manuel-api.herokuapp.com/mostrar_encuestas")
         .success(function(data){
           $scope.encuestas = data;          
+          $scope.loading = false;
         })
         .error(function(err){
         });
+
+        
 });
 
 myApp.controller("verTiposEncuestas", function($scope,$http,$rootScope){
+  $scope.loading = true;
       $http.get("http://manuel-api.herokuapp.com/mostrar_tipos_encuestas")
         .success(function(data){
-          $scope.tipos = data;          
+          $scope.tipos = data;    
+          $scope.loading = false;      
         })
         .error(function(err){
         });
 });
 
 myApp.controller("verProfesores", function($scope,$http){
+  $scope.loading = true;
  $http.get("http://manuel-api.herokuapp.com/buscar_por_rol?rol=1")
     .success(function(data) {
       $scope.profesores = data;
+      $scope.loading = false;
     });
 
 });
 
-
-
 myApp.controller('verAlumnos', function ($http, $scope, $state) {
+  $scope.loading = true;
   $http.get("http://manuel-api.herokuapp.com/buscar_por_rol?rol=2")
     .success(function(data) {
       $scope.alumnos = data;
+      $scope.loading = false;
     });
   
 });
 
 myApp.controller('verCursos', function ($http, $scope, $state) {
+  $scope.loading = true;
   $http.get("http://manuel-api.herokuapp.com/mostrar_cursos")
     .success(function(data) {
       $scope.cursos = data;
+      $scope.loading = false;
     });
   
 });
@@ -77,7 +87,7 @@ myApp.controller('agregarProfesor', ['$scope','$http', function($scope,$http) {
         correo: $scope.correo,
         rol: 1
     }).success(function() {
-        
+        $scope.agregado = true;
       });
   }
 }]);

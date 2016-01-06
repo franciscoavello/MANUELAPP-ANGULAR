@@ -1,8 +1,8 @@
   <div class="container" ng-controller="verCursos">
   <div class="row">
   <h5 class="azul-oscuro">Cursos Actuales</h5>
-
-      <table class="striped">
+      <img ng-show="loading" src="imagenes/Cargando.gif">
+      <table ng-hide="loading" class="striped">
         <thead>
           <tr >
               <th data-field="name">Nombre</th>
@@ -11,6 +11,7 @@
         </thead>
 
         <tbody ng-repeat="curso in cursos| limitTo:15" id="{{curso.id}}">
+
             <td>{{curso.nombre}}</td>
             <td>{{curso.descripcion}}</td>
           
