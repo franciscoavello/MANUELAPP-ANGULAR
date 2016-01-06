@@ -193,6 +193,8 @@ myApp.controller("RadarCtrl", function ($scope,$http) {
       for(x=data.length-1; x>-1; x--) {
         datos2.push(data[x].id);
       }
+      datos1[0]=5;
+      datos2[0]=2;
       datos.push(datos1);
       datos.push(datos2);
       var totalSuma=0;
