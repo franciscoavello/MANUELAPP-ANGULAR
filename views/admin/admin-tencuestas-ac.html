@@ -3,6 +3,7 @@
   <h5 class="azul-oscuro">Tipos de Encuestas Actuales en MANUEL</h5>
       <img ng-show="loading" src="imagenes/Cargando.gif">
       <table ng-hide="loading" class="striped">
+        <label class="azul-oscuro">Buscador: <input ng-model="searchText"></label>
         <thead>
           <tr >
               <th data-field="id">Nombre</th>
@@ -11,7 +12,7 @@
           </tr>
         </thead>
 
-        <tbody ng-repeat="tipo in tipos| limitTo:15" id="{{tipo.id}}">
+        <tbody ng-repeat="tipo in tipos| limitTo:15 | filter:searchText" id="{{tipo.id}}">
             <td>{{tipo.nombre}}</td>
           <!--  <td>{{tipo.descripcion}}</td> 
             <td>{{tipo.created_at}}</td>-->

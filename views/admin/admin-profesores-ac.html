@@ -4,6 +4,7 @@
   <h5 class="azul-oscuro">Profesores Actuales</h5>
       <img ng-show="loading" src="imagenes/Cargando.gif">
       <table ng-hide="loading" class="striped">
+        <label class="azul-oscuro">Buscador: <input ng-model="searchText"></label>
         <thead>
           <tr >
               <th data-field="number">Rut</th>
@@ -14,7 +15,7 @@
           </tr>
         </thead>
 
-        <tbody ng-repeat="profesor in profesores| limitTo:15" id="{{profesor.id}}">
+        <tbody ng-repeat="profesor in profesores| limitTo:15 | filter:searchText" id="{{profesor.id}}">
             <td>{{profesor.rut}}</td>
             <td>{{profesor.nombre}}</td>
             <td>{{profesor.apellido_paterno}}</td>
