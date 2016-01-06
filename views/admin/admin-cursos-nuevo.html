@@ -1,6 +1,6 @@
       <div class="container">
       <div class="row" ng-controller="agregarCurso">
-      <form name"form" novalidate>
+      <form name="cursosForm" novalidate>
         <h5 class="azul-oscuro">Nuevo Curso</h5>
         <div class="row" align="center">
           <div class="input-field col s12">
@@ -30,9 +30,9 @@
  
 
           <div class="input-field col s12">
-            <button class="btn waves-effect waves-light" ng-click="agregar()" type="submit" name="action">Aceptar
+            <button class="btn waves-effect waves-light" ng-click="agregar()" type="submit" name="action" onclick="Materialize.toast('Curso Agregado',3000)" type="reset">Aceptar
             </button>
-            <a class="waves-effect waves-light btn grey">Cancelar</a>
+            <button class="waves-effect waves-light btn grey" type="reset">Cancelar</button>
           </div>
         </div>
       </div>

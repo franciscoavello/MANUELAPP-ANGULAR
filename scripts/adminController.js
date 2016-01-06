@@ -169,7 +169,12 @@ myApp.controller('agregarProfesor', ['$scope','$http', function($scope,$http) {
         rol: 1
     }).success(function() {
         $scope.agregado = true;
+        $scope.agregaProfesor.$setPristine();
       });
+
+    $scope.cancelar = function(){
+      $scope.agregaProfesor.$setPristine();
+    }
   }
 }]);
 
@@ -185,6 +190,7 @@ myApp.controller('agregarCurso', ['$scope','$http', function($scope,$http) {
 }).success(function(data) {
       //console.log(data);
       //$scope.cantidadGrupos=data.length;
+      
     });
   };
 
