@@ -36,7 +36,7 @@ myApp.controller("ResponderEncuesta", function($scope,$http,$rootScope){
 
   $http.get("http://manuel-api.herokuapp.com/grupo_encuesta_pendiente?correo="+$rootScope.correoUsuarioLogueado+"&encuesta_id="+$scope.idEncuesta)
         .success(function(data1){
-          $http.get("http://manuel-api.herokuapp.com/buscar_por_grupo?grupo_id="+data1[0].id)
+        $http.get("http://manuel-api.herokuapp.com/buscar_por_grupo?grupo_id="+data1[0].id)
         .success(function(data2){
           $scope.datosGrupo = data2;
         })
@@ -72,9 +72,9 @@ myApp.controller("ObtenerPreguntas", function($scope,$http, $state,$rootScope){
   $scope.selected_ids = [];
   $scope.submitAnswers = function() {
     $scope.selected_ids = [];
+    $scope.contador = 0;
     angular.forEach($scope.preguntas, function(pregunta) {
       $scope.selected_ids.push(pregunta.id);
-      console.log(pregunta);
       $scope.selected_ids.push(pregunta.selected_id.id);
       $scope.selected_ids.push(pregunta.selected_id.val);
     });
@@ -85,7 +85,7 @@ myApp.controller("ObtenerPreguntas", function($scope,$http, $state,$rootScope){
         valor_opcion: $scope.selected_ids[i+2]
       }); 
     };
-    $state.go('encuestas.pendientes');    
+    $state.go('encuestas.pendientes');  
   }  
 
   $scope.registrarEvaluacion = function (idAlumnoSeleccionado, alumnoSeleccionado) {
@@ -119,8 +119,6 @@ myApp.controller("ObtenerPreguntas", function($scope,$http, $state,$rootScope){
   $scope.completarEncuesta = function (){
              $http.get("http://manuel-api.herokuapp.com/datos_alumno?correo="+$rootScope.correoUsuarioLogueado)
                   .success(function(data){
-                    console.log(data[0].id);
-                    console.log($scope.idEncuesta);
                     $http.put("http://manuel-api.herokuapp.com/actualizar_encuesta", {
                       estado: true,
                       alumno_id: data[0].id,
@@ -185,6 +183,11 @@ myApp.controller("RadarCtrl", function ($scope,$http) {
       }
       datos.push(datos1);
       datos.push(datos2);
+      var totalSuma=0;
+      for(i=0;i<datos1.length;i++){
+        totalSuma = totalSuma + (datos1[i]-datos2[i]);
+      }
+      $scope.modulo=totalSuma/datos1.length;
       $scope.data = datos;
       }).error(function(err){
         });

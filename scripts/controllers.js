@@ -1,5 +1,9 @@
 var myApp = angular.module('myApp');
 
+myApp.controller('MsgCtrl', function ($scope, auth) {
+  $scope.message = {text: ''};
+});
+
 myApp.controller('MenuCtrl', function ($scope, $location,$rootScope,$timeout) {
   $scope.go = function (target) {
     $location.path(target);
@@ -90,10 +94,7 @@ myApp.controller('LoginCtrl', function (auth, $scope, $location, store, $http, $
                     2,
                     3,
                     4,
-                    5,
-                    6,
-                    7,
-                    8
+                    6
                   ];
                   store.set('profile', profile);
                   store.set('token', token);
