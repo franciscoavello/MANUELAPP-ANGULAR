@@ -2,6 +2,8 @@
 var myApp = angular.module('myApp');
 
 myApp.controller("verEncuestas", function($scope,$http,$rootScope){
+    $scope.newField = [];
+  $scope.editado = false;
       $scope.loading = true;
       $http.get("http://manuel-api.herokuapp.com/mostrar_encuestas")
         .success(function(data){
@@ -10,11 +12,26 @@ myApp.controller("verEncuestas", function($scope,$http,$rootScope){
         })
         .error(function(err){
         });
+        $scope.editarDato = function(field){
+    $scope.editado= $scope.encuestas.indexOf(field);
+    $scope.newField[$scope.editado] = angular.copy(field);
+  }
 
+  $scope.guardar = function(index){
+    $scope.encuestas[$scope.editado]= $scope.newField;
+   
+  }
+
+  $scope.editarCancelar = function(index){
+    //$scope.alumnos[index]= $scope.newField[index];
+    $scope.editado = false;
+  }
         
 });
 
 myApp.controller("verTiposEncuestas", function($scope,$http,$rootScope){
+    $scope.newField = [];
+  $scope.editado = false;
   $scope.loading = true;
       $http.get("http://manuel-api.herokuapp.com/mostrar_tipos_encuestas")
         .success(function(data){
@@ -23,36 +40,100 @@ myApp.controller("verTiposEncuestas", function($scope,$http,$rootScope){
         })
         .error(function(err){
         });
+
+        $scope.editarDato = function(field){
+    $scope.editado= $scope.tipos.indexOf(field);
+    $scope.newField[$scope.editado] = angular.copy(field);
+  }
+
+  $scope.guardar = function(index){
+    $scope.tipos[$scope.editado]= $scope.newField;
+   
+  }
+
+  $scope.editarCancelar = function(index){
+    //$scope.alumnos[index]= $scope.newField[index];
+    $scope.editado = false;
+  }
 });
 
 myApp.controller("verProfesores", function($scope,$http){
+    $scope.newField = [];
+  $scope.editado = false;
   $scope.loading = true;
  $http.get("http://manuel-api.herokuapp.com/buscar_por_rol?rol=1")
     .success(function(data) {
       $scope.profesores = data;
       $scope.loading = false;
     });
+    $scope.editarDato = function(field){
+    $scope.editado= $scope.tipos.indexOf(field);
+    $scope.newField[$scope.editado] = angular.copy(field);
+  }
+
+  $scope.guardar = function(index){
+    $scope.tipos[$scope.editado]= $scope.newField;
+   
+  }
+
+  $scope.editarCancelar = function(index){
+    //$scope.alumnos[index]= $scope.newField[index];
+    $scope.editado = false;
+  }
 
 });
 
 myApp.controller('verAlumnos', function ($http, $scope, $state) {
   $scope.loading = true;
+  $scope.newField = [];
+  $scope.editado = false;
   $http.get("http://manuel-api.herokuapp.com/buscar_por_rol?rol=2")
     .success(function(data) {
       $scope.alumnos = data;
       $scope.loading = false;
     });
+
+  $scope.editarDato = function(field){
+    $scope.editado= $scope.alumnos.indexOf(field);
+    $scope.newField[$scope.editado] = angular.copy(field);
+  }
+
+  $scope.guardar = function(index){
+    $scope.alumnos[$scope.editado]= $scope.newField;
+   
+  }
+
+  $scope.editarCancelar = function(index){
+    //$scope.alumnos[index]= $scope.newField[index];
+    $scope.editado = false;
+  }
   
 });
 
 myApp.controller('verCursos', function ($http, $scope, $state) {
   $scope.loading = true;
+    $scope.newField = [];
+    $scope.editado = false;
   $http.get("http://manuel-api.herokuapp.com/mostrar_cursos")
     .success(function(data) {
       $scope.cursos = data;
       $scope.loading = false;
     });
   
+    $scope.editarDato = function(field){
+    $scope.editado= $scope.cursos.indexOf(field);
+    $scope.newField[$scope.editado] = angular.copy(field);
+  }
+
+  $scope.guardar = function(index){
+    $scope.cursos[$scope.editado]= $scope.newField;
+   
+  }
+
+  $scope.editarCancelar = function(index){
+    //$scope.alumnos[index]= $scope.newField[index];
+    $scope.editado = false;
+  }
 });
 
 

@@ -2,7 +2,7 @@
   <div class="row">
   <h5 class="azul-oscuro">Tipos de Encuestas Actuales en MANUEL</h5>
     <div align="right"><input ng-hide="loading" ng-model="searchText"><i class="fa fa-search"></i></div>
-      <img ng-show="loading" src="imagenes/Cargando.gif">
+    <div class="progress" ng-show="loading"><div class="indeterminate"></div></div>
       <table ng-hide="loading" class="striped">
         <thead>
           <tr >
@@ -13,7 +13,16 @@
         </thead>
 
         <tbody ng-repeat="tipo in tipos| limitTo:15 | filter:searchText" id="{{tipo.id}}">
-            <td>{{tipo.nombre}}</td>
+            <td>
+              <span data-ng-hide="editar">{{tipo.nombre}}</span>
+              <input type="text" data-ng-show="editar" data-ng-model="tipo.nombre" data-ng-required>
+            </td>
+            <td>
+              <button type="submit" data-ng-hide="editar" data-ng-click="editar=true; editarDato(tipo)" class="btn btn-default">Editar</button>
+              <button type="submit" data-ng-show="editar" data-ng-click="editar=false" class="btn btn-default">Guardar</button>
+              <button type="submit" data-ng-show="editar" data-ng-click="editar=false; editarCancelar($index)" class="btn btn-default">Cancelar</button>
+            </td>
+            
           <!--  <td>{{tipo.descripcion}}</td> 
             <td>{{tipo.created_at}}</td>-->
        

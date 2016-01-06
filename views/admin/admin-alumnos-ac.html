@@ -4,9 +4,8 @@
   <h5 class="azul-oscuro">Alumnos Actuales</h5>
 
   <div align="right"><input ng-hide="loading" ng-model="searchText"><i class="fa fa-search"></i></div>
-  
-      <img ng-show="loading" src="imagenes/Cargando.gif">
-
+      
+      <div class="progress" ng-show="loading"><div class="indeterminate"></div></div>
 
       <table ng-hide="loading" class="striped">
         <thead>
@@ -21,12 +20,28 @@
 
         <tbody ng-repeat="alumno in alumnos| limitTo:15 | filter:searchText" id="{{alumno.id}}">
             <td>{{alumno.rut}}</td>
-            <td>{{alumno.nombre}}</td>
-            <td>{{alumno.apellido_paterno}}</td>
-            <td>{{alumno.apellido_materno}}</td>
-            <td>{{alumno.correo}}</td>
-
-              
+            <!--<td>{{alumno.nombre}}</td>-->
+            <td>
+              <span data-ng-hide="editar">{{alumno.nombre}}</span>
+              <input type="text" data-ng-show="editar" data-ng-model="alumno.nombre" data-ng-required>
+            </td>
+            <td>
+              <span data-ng-hide="editar">{{alumno.apellido_paterno}}</span>
+              <input type="text" data-ng-show="editar" data-ng-model="alumno.apellido_paterno" data-ng-required>
+            </td>
+            <td>
+              <span data-ng-hide="editar">{{alumno.apellido_materno}}</span>
+              <input type="text" data-ng-show="editar" data-ng-model="alumno.apellido_materno">
+            </td>
+            <td>
+              <span data-ng-hide="editar">{{alumno.correo}}</span>
+              <input type="text" data-ng-show="editar" data-ng-model="alumno.correo" data-ng-required>
+            </td>
+            <td>
+              <button type="submit" data-ng-hide="editar" data-ng-click="editar=true; editarDato(alumno)" class="btn btn-default">Editar</button>
+              <button type="submit" data-ng-show="editar" data-ng-click="editar=false" class="btn btn-default">Guardar</button>
+              <button type="submit" data-ng-show="editar" data-ng-click="editar=false; editarCancelar($index)" class="btn btn-default">Cancelar</button>
+            </td>
         </tbody>
       </table>
   </div>

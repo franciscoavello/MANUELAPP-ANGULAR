@@ -2,8 +2,7 @@
   <div class="row">
   <h5 class="azul-oscuro">Encuestas Actuales en MANUEL</h5>
     <div align="right"><input ng-hide="loading" ng-model="searchText"><i class="fa fa-search"></i></div>
-
-      <img ng-show="loading" src="imagenes/Cargando.gif">
+<div class="progress" ng-show="loading"><div class="indeterminate"></div></div>
       <table ng-hide="loading" class="striped">
         <thead>
           <tr >
@@ -15,9 +14,23 @@
         </thead>
 
         <tbody ng-repeat="encuesta in encuestas| limitTo:15 | filter:searchText" id="{{encuesta.id}}">
-            <td>{{encuesta.nombre}}</td>
-            <td>{{encuesta.descripcion}}</td>
-            <td>{{encuesta.tipo}}</td>
+            <td>
+              <span data-ng-hide="editar">{{encuesta.nombre}}</span>
+              <input type="text" data-ng-show="editar" data-ng-model="encuesta.nombre" data-ng-required>
+            </td>
+            <td>
+              <span data-ng-hide="editar">{{encuesta.descripcion}}</span>
+              <input type="text" data-ng-show="editar" data-ng-model="encuesta.descripcion" data-ng-required>
+            </td>
+            <td>
+              <span data-ng-hide="editar">{{encuesta.tipo}}</span>
+              <input type="text" data-ng-show="editar" data-ng-model="encuesta.tipo" data-ng-required>
+            </td>
+            <td>
+              <button type="submit" data-ng-hide="editar" data-ng-click="editar=true; editarDato(encuesta)" class="btn btn-default">Editar</button>
+              <button type="submit" data-ng-show="editar" data-ng-click="editar=false" class="btn btn-default">Guardar</button>
+              <button type="submit" data-ng-show="editar" data-ng-click="editar=false; editarCancelar($index)" class="btn btn-default">Cancelar</button>
+            </td>
             
         </tbody>
       </table>
