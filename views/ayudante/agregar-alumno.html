@@ -1,5 +1,20 @@
 <div ng-controller="AgregarAlumnoAyudante">
   <br><br><br>
+  <form ng-submit="agregarAlumno()">
+    <div class="input-field col s6">
+      <select material-select watch ng-model="respuesta.alumno_id">
+        <option ng-repeat="alumno in alumnosFaltantes" value={{alumno.id}}>{{alumno.nombre}} {{alumno.apellido_paterno}}</option>
+      </select>
+      <label>Seleccione un alumno</label>
+    </div>
+    <button class="col s2 btn waves-effect waves-light" align="middle" type="submit">  
+      Agregar
+    </button>
+  </form>
+    <button class="col s2 btn waves-effect waves-light footerColor" ui-sref="detalle-curso-ayudante.alumnos" align="middle" name="action">
+      <span class="azul-oscuro">Volver</span>
+    </button>
+  <!--
   <div class="divider row"></div>
   <div ng-repeat="alumno in alumnosFaltantes">
     <div class="section row">
@@ -10,9 +25,9 @@
           Agregar
         </button>
       </div>
+    </div>
   </div>
   <div class="divider row"></div>
-  <div class="col s12" ng-show="alertaAgregarAlumno">
     <div class="section">
       <p>Elija un grupo donde ingresar al alumno:</p>
       <div class="row">
@@ -29,13 +44,7 @@
           Se ha asignado grupo con exito.
       </div>
     </div>
-  </div>
-  <div class="row">
-    <button class="col s2 btn waves-effect waves-light left" ng-click="asignarGrupo()" ui-sref="detalle-curso-ayudante.alumnos" align="middle" type="submit" name="action">
-      Aceptar
-    </button>
-    <button class="col s2 btn waves-effect waves-light left" ng-show="alertaAgregarAlumno" ng-click="" ui-sref="detalle-curso-ayudante.alumnos" align="middle" type="submit" name="action">
-      Volver
-    </button>
-  </div>
+  <button class="col s2 btn waves-effect waves-light left" ng-click="asignarGrupo()" ui-sref="detalle-curso.alumnos" align="middle" name="action">
+    Aceptar
+  </button> -->
 </div>

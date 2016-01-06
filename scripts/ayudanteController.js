@@ -21,6 +21,11 @@ myApp.controller('CursoCtrlAyudante',function ($http,$scope,$state,$rootScope){
       console.log(data);
       $scope.cantidadGrupos=data.length;
     });
+  $http.get("http://manuel-api.herokuapp.com/datos_ayudante?curso_id="+$rootScope.mi_curso.id)
+    .success(function(data) {
+      console.log(data);
+      $scope.ayudante=data;
+    });
 });
 
 myApp.controller('AlumnoCtrlAyudante',function ($http,$scope,$state,$rootScope){
@@ -162,7 +167,7 @@ myApp.controller('VerAlumnosAyudante', function ($rootScope,$http, $scope, $stat
       $state.go('detalle-curso-ayudante.detalle-alumno');
   }
   $scope.eliminarAlumnoCurso = function (index) {
-    var id_alumno = $scope.integrantes[index].id;
+    var id_alumno = $scope.alumnos[index].id;
     $http.delete("http://manuel-api.herokuapp.com/borrar_alumno_curso?alumno_id="+id_alumno+"&curso_id="+$rootScope.mi_curso.id)
       .success(function() {
         $scope.alertaEliminacionAlumno=true;
@@ -228,11 +233,11 @@ myApp.controller('AgregarAlumnoAyudante', function ($rootScope,$http, $scope, $s
           for(j in $rootScope.alumnosCurso){
             if($rootScope.alumnosCurso[j].id==data[i].id){
               bandera=1;
+              break;
             }
           }
           if(bandera==0){
             $scope.alumnosFaltantes.push(data[i]);
-            break;
           }
         }
       }
@@ -244,14 +249,20 @@ myApp.controller('AgregarAlumnoAyudante', function ($rootScope,$http, $scope, $s
     });
   $scope.jefe=false;
   $scope.id_grupo_seleccionado=-1;
-  $scope.agregarAlumno = function (index) {
-    $scope.nuevo_alumno_id = $scope.alumnosFaltantes[index].id;
-    var arreglo={curso_id:$rootScope.mi_curso.id,alumno_id:$scope.nuevo_alumno_id}
+  $scope.agregarAlumno = function () {
+    var arreglo={curso_id:$rootScope.mi_curso.id,alumno_id:parseInt($scope.respuesta.alumno_id)};
+    console.log(arreglo);
     $http.post("http://manuel-api.herokuapp.com/curso_alumnos",arreglo)
       .success(function() {
         $scope.alertaAgregarAlumno=true;
+        $state.go("detalle-curso-ayudante.alumnos");
+        setTimeout(function(){
+          $rootScope.alertaAgregarAlumno=false;
+          console.log("desactiva alarma");
+        },2000);
       });
   }
+  /*
   $scope.asignarGrupo = function (){
     var arreglo = {alumno_id: $scope.nuevo_alumno_id , grupo_id: $scope.id_grupo_seleccionado, jefe: $scope.jefe }
     $http.post("http://manuel-api.herokuapp.com/grupo_alumnos",arreglo)
@@ -264,7 +275,7 @@ myApp.controller('AgregarAlumnoAyudante', function ($rootScope,$http, $scope, $s
   }
   $scope.asignarJefe = function (valor){
     $scope.jefe=valor;
-  }
+  }*/
 });
 
 myApp.controller('NuevaEncuestaAyudante', function ($rootScope,$http, $scope, $state) {
