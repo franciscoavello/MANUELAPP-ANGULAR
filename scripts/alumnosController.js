@@ -36,7 +36,7 @@ myApp.controller("ResponderEncuesta", function($scope,$http,$rootScope){
 
   $http.get("http://manuel-api.herokuapp.com/grupo_encuesta_pendiente?correo="+$rootScope.correoUsuarioLogueado+"&encuesta_id="+$scope.idEncuesta)
         .success(function(data1){
-        $http.get("http://manuel-api.herokuapp.com/buscar_por_grupo?grupo_id="+data1[0].id)
+          $http.get("http://manuel-api.herokuapp.com/buscar_por_grupo?grupo_id="+data1[0].id)
         .success(function(data2){
           $scope.datosGrupo = data2;
         })
