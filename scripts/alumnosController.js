@@ -173,7 +173,7 @@ myApp.controller("RadarCtrl", function ($scope,$http) {
         label.push(data[x].enunciado);
       }
       $scope.labels = label;
-      $scope.series = ['Mi promedio', 'Promedio curso'];
+      $scope.series = ['Mi promedio', 'Promedio grupo'];
       var datos= [];
       var datos1= [];
       var datos2= [];
