@@ -33,6 +33,7 @@ myApp.controller("verTiposEncuestas", function($scope,$http,$rootScope){
     $scope.newField = [];
   $scope.editado = false;
   $scope.loading = true;
+  $scope.alertaEliminacionTipo = false;
       $http.get("http://manuel-api.herokuapp.com/mostrar_tipos_encuestas")
         .success(function(data){
           $scope.tipos = data;    
@@ -44,6 +45,18 @@ myApp.controller("verTiposEncuestas", function($scope,$http,$rootScope){
         $scope.editarDato = function(field){
     $scope.editado= $scope.tipos.indexOf(field);
     $scope.newField[$scope.editado] = angular.copy(field);
+  }
+
+  $scope.eliminarTipoDeEncuesta = function(index){
+    var tipo = $scope.tipos[index];
+    $http.delete("http://manuel-api.herokuapp.com/tipos_encuesta/"+tipo.id)
+      .success(function(){
+        $scope.alertaEliminacionTipo=true;
+        $state.go('admintencuestas.ver');
+        })
+        .error(function(err){
+        });
+
   }
 
   $scope.guardar = function(index){

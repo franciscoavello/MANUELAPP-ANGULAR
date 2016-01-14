@@ -34,9 +34,15 @@
               <input type="text" data-ng-show="editar" data-ng-model="curso.ano" data-ng-required>
             </td>
             <td>
-              <button type="submit" data-ng-hide="editar" data-ng-click="editar=true; editarDato(curso)" class="btn btn-default">Editar</button>
-              <button type="submit" data-ng-show="editar" data-ng-click="editar=false" class="btn btn-default">Guardar</button>
-              <button type="submit" data-ng-show="editar" data-ng-click="editar=false; editarCancelar($index)" class="btn btn-default">Cancelar</button>
+              <button type="submit" data-ng-hide="editar" data-ng-click="ver(curso)" class="btn waves-effect waves-light blue"><i class="material-icons">visibility</i></button>
+            </td>
+            <td>
+              <button type="submit" data-ng-hide="editar" data-ng-click="editar=true; editarDato(curso)" class="btn waves-effect waves-light green"><i class="material-icons">create</i></button>
+              <button type="submit" data-ng-show="editar" data-ng-click="editar=false" class="btn waves-effect waves-light green"><i class="material-icons">done</i></button>
+              <button type="submit" data-ng-show="editar" data-ng-click="editar=false; editarCancelar($index)" class="btn waves-effect waves-light red"><i class="material-icons">clear</i></button>
+            </td>
+            <td>
+              <button type="submit" data-ng-hide="editar" data-ng-click="editarCurso(curso)" class="btn waves-effect waves-light red"><i class="material-icons">clear</i></button>
             </td>
         </tbody>
       </table>
