@@ -8,6 +8,7 @@
           <tr >
               <th data-field="name">Nombre de la encuesta</th>
               <th data-field="curso">Descripción</th>
+              <th data-field="tipo">Tipo</th>
                 
           </tr>
         </thead>
@@ -27,6 +28,9 @@
             <td>
               <span data-ng-hide="editar">{{encuesta.descripcion}}</span>
               <input type="text" data-ng-show="editar" data-ng-model="encuesta.descripcion" data-ng-required>
+            </td>
+            <td>
+              <td>{{encuesta.tipo_encuesta_id}}</td>
             </td>
           
             <td>

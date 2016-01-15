@@ -12,12 +12,14 @@
             <input id="first_name" type="text" ng-model="nombre" class="validate" required aria-required="true">
             <label for="first_name">Nombre</label>
           </div>
-        
+   
           <div class="input-field col s6">
-            <input id="descripcion" type="text" ng-model="tipo" class="validate" required aria-required="true">
-            <label for="descripcion">Tipo</label>
+            <select material-select watch ng-model="tipo">
+              <option ng-repeat="tipo in tipos" value="{{tipo.id}}">{{tipo.nombre}}</option>
+            </select>
+            <label>Seleccione un tipo de Encuesta</label>
           </div>
-        
+
         </div>
         <div class="row" align="center">
           <div class="input-field col s12">
@@ -25,7 +27,7 @@
             <label for="descripcion">Descripción</label>
           </div>
         </div>
-        
+          
 
          <div class="row">
  

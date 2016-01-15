@@ -68,7 +68,7 @@ myApp.controller("verTiposEncuestas", function($scope,$http,$rootScope){
 
   $http.get("http://manuel-api.herokuapp.com/mostrar_tipos_encuestas")
     .success(function(data){
-        $scope.tipos = data;    
+        $scope.tipos = data;   
         $scope.loading = false;      
      })
      .error(function(err){
@@ -368,6 +368,15 @@ $scope.avisoCrearCurso = false;
 myApp.controller('agregarEncuesta', ['$scope','$http', function($scope,$http) {
   
 $scope.avisoCrearEncuesta = false;
+$scope.loading = true;
+$http.get("http://manuel-api.herokuapp.com/mostrar_tipos_encuestas")
+    .success(function(data){
+        $scope.tipos = data;    
+        $scope.loading = false;      
+     })
+     .error(function(err){
+     });
+
   $scope.update = function() {
     $scope.avisoCrearEncuesta = false;
     $http.post("http://manuel-api.herokuapp.com/encuesta", {
@@ -375,7 +384,7 @@ $scope.avisoCrearEncuesta = false;
         estado: true,
         nombre: $scope.nombre,
         descripcion: $scope.descripcion,
-        tipo_encuesta_id: 1
+        tipo_encuesta_id: $scope.tipo 
     }).success(function(data) {
       $scope.avisoCrearEncuesta = true;
       //console.log(data);
