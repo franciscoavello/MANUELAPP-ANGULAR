@@ -1,7 +1,7 @@
 var myApp = angular.module('myApp');
 
-myApp.controller('MsgCtrl', function ($scope, auth) {
-  $scope.message = {text: ''};
+myApp.controller('MsgCtrl', function ($rootScope, auth) {
+  $rootScope.message = {text: ''};
 });
 
 myApp.controller('MenuCtrl', function ($scope, $location,$rootScope,$timeout) {
@@ -12,17 +12,24 @@ myApp.controller('MenuCtrl', function ($scope, $location,$rootScope,$timeout) {
       $rootScope.rolUserGlobal = 4;
       $rootScope.esAyudante=true;
       console.log($rootScope.esAyudante);
-      $rootScope.esAlumno=false;
+      $rootScope.esAlumno=false;      
       $location.path('/inicioAyudante');
+      $rootScope.message.text = 'Sesión de ayudante cargada correctamente';
+      $rootScope.mostrarAvisoExito = true;
+      console.log($rootScope.mostrarAvisoExito);
+      $timeout($scope.desaparecer, 2000); 
       //$state.go('inicioAyudante');
   }
 
   $scope.cambiarAAlumno = function () {
       $rootScope.rolUserGlobal = 2;
       $rootScope.esAyudante=false;
-      $rootScope.esAlumno=true;  
-      console.log($scope.esAlumno);
+      $rootScope.esAlumno=true;        
       $location.path('/inicioAlumno');
+      $rootScope.message.text = 'Sesión de alumno cargada correctamente';
+      $rootScope.mostrarAvisoExito = true;
+      console.log($rootScope.mostrarAvisoExito);
+      $timeout($scope.desaparecer, 2000);
       //$state.go('inicioAlumno');
   }
 });
@@ -42,12 +49,27 @@ myApp.controller('RootCtrl', function (auth, $scope) {
   });
 });
 
-myApp.controller('LoginCtrl', function (auth, $scope, $location, store, $http, $state, $rootScope) {
+myApp.controller('LoginCtrl', function (auth, $scope, $location, store, $http, $state, $rootScope, $timeout) {
   $scope.user = '';
   $scope.pass = '';
-  $scope.message = '';
   $scope.usuario = [];
+  
+  if($rootScope.message==undefined){
+      $rootScope.message = {text: ''};
+  }
+  if($rootScope.mostrarAvisoExito==undefined){
+      $rootScope.mostrarAvisoExito=false;
+  }
+  if($rootScope.mostrarAvisoError==undefined){
+      $rootScope.mostrarAvisoError=false;
+  }
+  
 
+  $scope.desaparecer = function(){     
+        $rootScope.mostrarAvisoExito = false;
+        $rootScope.mostrarAvisoError = false;
+        $rootScope.message.text = '';                 
+  };
 
   function onLoginSuccess(profile, token) {
       $http.get("http://manuel-api.herokuapp.com/buscar_por_correo?correo="+profile.email) //A la espera de la api, se revisa directamente en rails.
@@ -80,6 +102,7 @@ myApp.controller('LoginCtrl', function (auth, $scope, $location, store, $http, $
               $location.path('/inicioProfesor');
               $scope.logueado = !$scope.logueado;
               $scope.loading = false;
+
             }
             if(rolUser==2){
               $http.get("http://manuel-api.herokuapp.com/ayudante_curso?correo="+$scope.usuario[0].correo)
@@ -101,6 +124,9 @@ myApp.controller('LoginCtrl', function (auth, $scope, $location, store, $http, $
                   $location.path('/selectorAyudante');
                   $scope.logueado = !$scope.logueado;
                   $scope.loading = false;
+                  $rootScope.message.text = 'Sesión iniciada correctamente';
+                  $rootScope.mostrarAvisoExito = true;
+                  $timeout($scope.desaparecer, 2000);
                 }
                 else{
                   $scope.permisosAyudante=[];
@@ -201,3 +227,4 @@ myApp.controller('LoginCtrl', function (auth, $scope, $location, store, $http, $
   };
 
 });
+

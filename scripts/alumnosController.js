@@ -68,7 +68,7 @@ myApp.controller("ResponderEncuesta", function($scope,$http,$rootScope){
         };
 });
 
-myApp.controller("ObtenerPreguntas", function($scope,$http, $state,$rootScope){
+myApp.controller("ObtenerPreguntas", function($scope,$http, $state,$rootScope, $timeout){
   $scope.selected_ids = [];
   $scope.jefegrupo="";
   $http.get("http://manuel-api.herokuapp.com/grupo_encuesta_pendiente?correo="+$rootScope.correoUsuarioLogueado+"&encuesta_id="+$scope.idEncuesta)
@@ -98,6 +98,9 @@ myApp.controller("ObtenerPreguntas", function($scope,$http, $state,$rootScope){
       }); 
     };
     $state.go('encuestas.pendientes');  
+    $rootScope.message.text = 'Encuesta enviada correctamente';
+    $rootScope.mostrarAvisoExito = true;
+    $timeout($scope.desaparecer, 2000);
   }  
 
   $scope.registrarEvaluacion = function (idAlumnoSeleccionado, alumnoSeleccionado) {

@@ -18,3 +18,11 @@ height: 100%;
 margin: 0 auto -4em;
 }
 
+.sample-show-hide {
+  -webkit-transition:all linear 0.1s;
+  transition:all linear 0.1s;
+}
+
+.sample-show-hide.ng-hide {
+  opacity:0;
+}
