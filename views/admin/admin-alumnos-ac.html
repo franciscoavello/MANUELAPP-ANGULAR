@@ -18,7 +18,14 @@
           </tr>
         </thead>
 
-        <tbody ng-repeat="alumno in alumnos| limitTo:15 | filter:searchText" id="{{alumno.id}}">
+        <div class="row" ng-show="avisoEliminarAlumno">
+          <div class="col s6 offset-s2 alert-box success"><span>correcto: </span>El Alumno se ha Deshabilitado con éxito.</div> 
+        </div>
+        <div class="row" ng-show="avisoEditarAlumno">
+          <div class="col s6 offset-s2 alert-box success"><span>correcto: </span>El Alumno se ha Modificado con éxito.</div> 
+        </div>
+
+        <tbody ng-repeat="alumno in alumnos| limitTo:30 | filter:searchText" id="{{alumno.id}}">
             <td>{{alumno.rut}}</td>
             <!--<td>{{alumno.nombre}}</td>-->
             <td>
@@ -41,12 +48,12 @@
               <button type="submit" data-ng-hide="editar" data-ng-click="ver(alumno)" class="btn waves-effect waves-light blue"><i class="material-icons">visibility</i></button>
             </td>
             <td>
-              <button type="submit" data-ng-hide="editar" data-ng-click="editar=true; editarDato(alumno)" class="btn waves-effect waves-light green"><i class="material-icons">create</i></button>
-              <button type="submit" data-ng-show="editar" data-ng-click="editar=false" class="btn waves-effect waves-light green"><i class="material-icons">done</i></button>
-              <button type="submit" data-ng-show="editar" data-ng-click="editar=false; editarCancelar($index)" class="btn waves-effect waves-light red"><i class="material-icons">clear</i></button>
+              <button type="submit" data-ng-hide="editar" data-ng-click="editar=true; editarAlumno(alumno)" class="btn waves-effect waves-light green"><i class="material-icons">create</i></button>
+              <button type="submit" data-ng-show="editar" data-ng-click="editar=false;guardarCampo($index);" class="btn waves-effect waves-light green"><i class="material-icons">done</i></button>
+              <button type="submit" data-ng-show="editar" data-ng-click="editar=false; cancelar($index)" class="btn waves-effect waves-light red"><i class="material-icons">clear</i></button>
             </td>
             <td>
-              <button type="submit" data-ng-hide="editar" data-ng-click="eliminarAlumno(alumno)" class="btn waves-effect waves-light red"><i class="material-icons">clear</i></button>
+              <button type="submit" data-ng-hide="editar" data-ng-click="eliminarAlumno($index);avisoEliminarAlumno=true" class="btn waves-effect waves-light red"><i class="material-icons">block</i></button>
             </td>
         </tbody>
       </table>

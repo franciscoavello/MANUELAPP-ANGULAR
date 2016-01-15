@@ -2,6 +2,11 @@
       <div class="row" ng-controller="agregarCurso">
       <form name="cursosForm" novalidate>
         <h5 class="azul-oscuro">Nuevo Curso</h5>
+
+        <div class="row" ng-show="avisoCrearCurso">
+          <div class="col s6 offset-s2 alert-box success"><span>correcto: </span>El nuevo Curso se ha creado con éxito.</div> 
+        </div>
+
         <div class="row" align="center">
           <div class="input-field col s12">
             <input id="first_name" type="text" ng-model="nombre"class="validate" required="" aria-required="true">
@@ -30,7 +35,7 @@
  
 
           <div class="input-field col s12">
-            <button class="btn waves-effect waves-light" ng-click="agregar()" type="submit" name="action" onclick="Materialize.toast('Curso Agregado',3000)" type="reset">Aceptar
+            <button class="btn waves-effect waves-light" ng-click="agregar();avisoCrearCurso=true" type="reset" name="action">Aceptar
             </button>
             <button class="waves-effect waves-light btn grey" type="reset" ui-sref="admincursos" >Cancelar</button>
           </div>

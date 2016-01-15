@@ -2,6 +2,12 @@
       <div class="row" ng-controller="agregartEncuesta">
       <form name"form" novalidate>
         <h5 class="azul-oscuro">Nuevo Tipo de Encuesta</h5>
+
+        <div class="row" ng-show="alertaCreacionTipo">
+          <div class="col s6 offset-s2 alert-box success"><span>correcto: </span>El Nuevo Tipo de Encuesta se ha creado con éxito.</div> 
+        </div>
+
+
         <div class="row" align="center">
           <div class="input-field col s12">
             <input id="first_name" type="text" ng-model="nombre"class="validate" required="" aria-required="true">
@@ -19,7 +25,7 @@
  
 
           <div class="input-field col s12">
-            <button class="btn waves-effect waves-light" ng-click="agregar()" name="action" onclick="Materialize.toast('Tipo de Encuesta Agregado',3000)" type="reset">Aceptar
+            <button class="btn waves-effect waves-light" ng-click="agregar();alertaCreacionTipo=true" name="action" type="reset">Aceptar
             </button>
             <button class="waves-effect waves-light btn grey" type="reset" ui-sref="admintencuestas">Cancelar</button>
           </div>

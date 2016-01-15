@@ -15,7 +15,14 @@
           </tr>
         </thead>
 
-        <tbody ng-repeat="profesor in profesores| limitTo:15 | filter:searchText" id="{{profesor.id}}">
+        <div class="row" ng-show="avisoEditarProfesor">
+          <div class="col s6 offset-s2 alert-box success"><span>correcto: </span>El Profesor se ha Modificado con éxito.</div> 
+        </div>
+        <div class="row" ng-show="avisoDeshabilitarProfesor">
+          <div class="col s6 offset-s2 alert-box success"><span>correcto: </span>El Profesor se ha Deshabilitado con éxito.</div> 
+        </div>
+
+        <tbody ng-repeat="profesor in profesores| limitTo:30 | filter:searchText" id="{{profesor.id}}">
             <td>{{profesor.rut}}</td>
             <td>
               <span data-ng-hide="editar">{{profesor.nombre}}</span>
@@ -37,12 +44,12 @@
               <button type="submit" data-ng-hide="editar" data-ng-click="ver(profesor)" class="btn waves-effect waves-light blue"><i class="material-icons">visibility</i></button>
             </td>
             <td>
-              <button type="submit" data-ng-hide="editar" data-ng-click="editar=true; editarDato(profesor)" class="btn waves-effect waves-light green"><i class="material-icons">create</i></button>
-              <button type="submit" data-ng-show="editar" data-ng-click="editar=false" class="btn waves-effect waves-light green"><i class="material-icons">done</i></button>
-              <button type="submit" data-ng-show="editar" data-ng-click="editar=false; editarCancelar($index)" class="btn waves-effect waves-light red"><i class="material-icons">clear</i></button>
+              <button type="submit" data-ng-hide="editar" data-ng-click="editar=true; editarProfesor(profesor)" class="btn waves-effect waves-light green"><i class="material-icons">create</i></button>
+              <button type="submit" data-ng-show="editar" data-ng-click="editar=false; guardarCampo($index)" class="btn waves-effect waves-light green"><i class="material-icons">done</i></button>
+              <button type="submit" data-ng-show="editar" data-ng-click="editar=false; cancelar($index)" class="btn waves-effect waves-light red"><i class="material-icons">clear</i></button>
             </td>
             <td>
-              <button type="submit" data-ng-hide="editar" data-ng-click="editarProfesor(profesor)" class="btn waves-effect waves-light red"><i class="material-icons">clear</i></button>
+              <button type="submit" data-ng-hide="editar" data-ng-click="editarProfesor(profesor)" class="btn waves-effect waves-light red"><i class="material-icons">block</i></button>
             </td>
      
               
