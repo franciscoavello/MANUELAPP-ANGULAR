@@ -31,6 +31,17 @@ myApp.controller('AsignarAyudante',function ($http,$scope,$state,$rootScope){
         $scope.alumnos = data;
       }
     });
+  $scope.asignarAyudante = function () {
+    $http.delete("http://manuel-api.herokuapp.com/borrar_alumno_curso?alumno_id="+$rootScope.mi_alumno.id+"&curso_id="+$rootScope.mi_curso.id)
+      .success(function() {
+        $scope.alertaEliminacionAlumno=true;
+        go('detalle-curso.alumnos');
+        setTimeout(function(){
+          $rootScope.alertaEliminacionAlumno=false;
+          console.log("alertaEliminacionAlumno=false");
+        },2000);
+      });
+  };
 });
 
 myApp.controller('CursoCtrl',function ($http,$scope,$state,$rootScope){
@@ -148,12 +159,11 @@ myApp.controller('GrupoCtrl',function ($http,$scope,$state,$rootScope){
   $scope.asignarJefe = function (index) {
     $scope.id_alumno=$scope.integrantes[index].id;
     console.log("se va a asignar como jefe al id_alumno "+$scope.id_alumno+" del grupo "+$rootScope.mi_grupo.id);
-    $http.delete("http://manuel-api.herokuapp.com/borrar_alumno?alumno_id="+$scope.id_alumno+"&grupo_id="+$rootScope.mi_grupo.id)
-    $http.post("http://manuel-api.herokuapp.com/grupo_alumnos", { 
-      alumno_id: $scope.id_alumno, 
+    $http.put("http://localhost:3000/es_jefe", {
+      alumno_id: $scope.id_alumno,
       grupo_id: $rootScope.mi_grupo.id,
       jefe: true
-    })
+    }
       .success(function() {
         $rootScope.alertaAsignacionJefe=true;
         setTimeout(function(){
@@ -165,7 +175,7 @@ myApp.controller('GrupoCtrl',function ($http,$scope,$state,$rootScope){
         $rootScope.alertaErrorAsignacionJefe=true;
         setTimeout(function(){
           $rootScope.alertaErrorAsignacionJefe=false;
-          console.log("alertaErrorEliminacionAlumno=false");
+          console.log("alertaErrorAsignacionJefe=false");
         },2000);
       });
   };
