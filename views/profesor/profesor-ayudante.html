@@ -1,43 +1,55 @@
-<div ng-controller="ListarFuncionalidades">
-  <br></br>
+<div ng-controller="AsignarAyudante">
   <br></br>
   <div class="row">
-    <div class="col s6 center"></div>
-    <!--<div class="input-field col s8">
-      <input id="search" type="search" placeholder="Encontrar alumno" required>
-      <label for="search"><i class="material-icons prefix">search</i></label>
-      <i class="material-icons">close</i>
-      
-    </div>-->
-    <div class="col s4 right">
-      <p></p>
-      <button class="btn waves-effect waves-light" ng-click="copiarAlumnos()" ui-sref="detalle-curso.agregar-alumno" align="middle" type="submit" name="action">            
-      Agregar Ayudante
-      </button>
-    </div>
-     <div flex="50" ng-repeat="funcionalidad in funcionalidades">
-        <input type="checkbox" id="{{funcionalidad.id}}" />
-        <label for="{{funcionalidad.id}}">{{funcionalidad.descripcion}}</label>
+    <div class="col s6">
+      <div class="icon-block">
+        <h2 class="turquesa"><i class="large material-icons">info_outline</i></h2>
+        <h5 class="azul-oscuro">Datos Ayudante</h5>
+        <br><br>
+        <div class="row">
+          <p class="azul-oscuro col s6">Nombre</p>
+          <p class="azul-oscuro col s6" align="justify">{{ayudante[0].nombre}} {{ayudante[0].apellido_paterno}} {{ayudante[0].apellido_materno}}</p>
+        </div>
+        <div class="row">
+          <p class="azul-oscuro col s6"  align="justify">Correo</p>
+          <p class="azul-oscuro col s6" align="justify">{{ayudante[0].correo}}</p>
+        </div>
+        <div class="row">
+          <p class="azul-oscuro col s6"  align="justify">RUT</p>
+          <p class="azul-oscuro col s6" align="justify">{{ayudante[0].rut}}</p>
+        </div>
+        <a href=""></a>
       </div>
+    </div>
+    <form ng-submit="asignarAyudante()">
+      <div class="icon-block col s6">
+        <h2 class="turquesa"><i class="large material-icons">new_releases</i></h2>
+        <h5>Cambiar Ayudante</h5>
+        <br><br>
+        <div class="input-field col s7">
+          <select material-select watch ng-model="respuesta.alumno_id">
+            <option ng-repeat="alumno in alumnos" value={{alumno.id}}>{{alumno.nombre}} {{alumno.apellido_paterno}}</option>
+          </select>
+          <label>Seleccione un alumno</label>
+        </div>
+      <button class="col s5 btn waves-effect waves-light" align="middle" type="submit" style="padding:0px;">  
+        Asignar Ayudante
+      </button>
+      </div>
+    </form>
   </div>
 
-  <div class="divider row"></div>
-  <div ng-repeat="alumno in alumnos">
-    <div class="section row">
-        <div class="col s4"><h5 class="azul-oscuro">{{ayudante[0].nombre}} {{ayudante[0].apellido_paterno}}</h5></div>
-        <div class="col s4"><p class="azul-oscuro">{{ayudante[0].correo}}</p></div> 
-        <div class="col s2">
-          <button class="btn waves-effect waves-light right" ng-click="seleccionarAlumno($index)" align="middle" type="button">  
-            Detalle
-          </button>
-        </div>
-        <div class="col s2">
-          <button class="btn waves-effect waves-light right footerColor" ng-click="eliminarAlumnoCurso($index)" align="middle" type="button">  
-            <span class="azul-oscuro">Eliminar</span>
-          </button>
-        </div> 
+  <div class="row icon-block">
+    <h2 class="turquesa"><i class="large material-icons">vpn_key</i></h2>
+    <h5>Asignar Funcionalidades</h5>
+    <br><br>
+    <div class="col s6" flex="50" ng-repeat="funcionalidad in funcionalidades">
+        <input type="checkbox" id="{{funcionalidad.id}}" />
+        <label for="{{funcionalidad.id}}">{{funcionalidad.descripcion}}</label>
     </div>
-    <div class="divider row"></div>
   </div>
+  <button class="col s4 btn waves-effect waves-light" align="middle" type="submit" style="padding:0px;">  
+    Asignar Funcionalidades
+  </button>
 </div>
 

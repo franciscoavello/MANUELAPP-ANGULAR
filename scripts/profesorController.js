@@ -10,14 +10,27 @@ myApp.controller('AyudanteCtrl',function ($http,$scope,$state,$rootScope){
 
 });
 
-myApp.controller('ListarFuncionalidades',function ($http,$scope,$state,$rootScope){
+myApp.controller('AsignarAyudante',function ($http,$scope,$state,$rootScope){
+  $scope.alumnos=[];
+  //revisa si ya está asignado un ayudante
   $scope.ayudante=[];
+  $http.get("http://manuel-api.herokuapp.com/datos_ayudante?curso_id="+$rootScope.mi_curso.id)
+    .success(function(data) {
+      console.log(data);
+      $scope.ayudante=data;
+    });
   $http.get("http://manuel-api.herokuapp.com/funcionalidads.json")
     .success(function(data) {
       console.log(data);
       $scope.funcionalidades=data;
     });
-
+  $http.get("http://manuel-api.herokuapp.com/buscar_alumnos_curso?curso_id="+$rootScope.mi_curso.id)
+    .success(function(data) {
+      if(data.length>0){
+        console.log(data);
+        $scope.alumnos = data;
+      }
+    });
 });
 
 myApp.controller('CursoCtrl',function ($http,$scope,$state,$rootScope){
@@ -34,7 +47,7 @@ myApp.controller('CursoCtrl',function ($http,$scope,$state,$rootScope){
   $http.get("http://manuel-api.herokuapp.com/evaluaciones_curso?curso_id="+$rootScope.mi_curso.id)
     .success(function(data) {
       console.log(data);
-      $scope.cantidadEvaluaciones=data.length;
+      $scope.cantidadEvaluaciones=data.length/2+1;
     });
   $http.get("http://manuel-api.herokuapp.com/grupos_curso?id="+$rootScope.mi_curso.id)
     .success(function(data) {
@@ -81,9 +94,10 @@ myApp.controller('AlumnoCtrl',function ($http,$scope,$state,$rootScope){
 
 myApp.controller('GrupoCtrl',function ($http,$scope,$state,$rootScope){
   $scope.integrantes=[];
-  $scope.alertaEliminacionAlumno=false;
-  $scope.alertaEliminacionGrupo=false;
-  $scope.alertaAsignacionJefe=false;
+  $rootScope.alertaErrorEliminacionGrupo=false;
+  $rootScope.alertaEliminacionAlumno=false;
+  $rootScope.alertaEliminacionGrupo=false;
+  $rootScope.alertaAsignacionJefe=false;
   $http.get("http://manuel-api.herokuapp.com/buscar_por_grupo?grupo_id="+$rootScope.mi_grupo.id)
   .success(function(data) {
     console.log(data);
@@ -92,33 +106,67 @@ myApp.controller('GrupoCtrl',function ($http,$scope,$state,$rootScope){
     }
   });
   $scope.eliminarGrupo = function () {
+
     $http.delete("http://manuel-api.herokuapp.com/grupos/"+$rootScope.mi_grupo.id)
       .success(function() {
-        $scope.alertaEliminacionGrupo=true;
+        $rootScope.alertaEliminacionGrupo=true;
         $state.go("detalle-curso.grupos");
         setTimeout(function(){
           $rootScope.alertaEliminacionGrupo=false;
           console.log("alertaEliminacionGrupo=false");
         },2000);
+      })
+      .error(function(err){
+        $rootScope.alertaErrorEliminacionGrupo=true;
+        $state.go("detalle-curso.grupos");
+        setTimeout(function(){
+          $rootScope.alertaErrorEliminacionGrupo=false;
+          console.log("alertaErrorEliminacionGrupo=false");
+        },2000);
       });
   };
   $scope.eliminarAlumnoGrupo = function (index) {
-    var id_alumno = $scope.integrantes[index].id;
-    $http.delete("http://manuel-api.herokuapp.com/borrar_alumno?alumno_id="+id_alumno+"&grupo_id="+$rootScope.mi_grupo.id)
+    $scope.id_alumno=$scope.integrantes[index].id;
+    console.log("se va a borrar el id_alumno "+$scope.id_alumno+" del grupo "+$rootScope.mi_grupo.id);
+    $http.delete("http://manuel-api.herokuapp.com/borrar_alumno?alumno_id="+$scope.id_alumno+"&grupo_id="+$rootScope.mi_grupo.id)
       .success(function() {
-        $scope.alertaEliminacionAlumno=true;
+        $rootScope.alertaEliminacionAlumno=true;
         $state.go('detalle-curso.grupos');
         setTimeout(function(){
           $rootScope.alertaEliminacionAlumno=false;
           console.log("alertaEliminacionAlumno=false");
         },2000);
+      })
+      .error(function(err){
+        $rootScope.alertaErrorEliminacionAlumno=true;
+        setTimeout(function(){
+          $rootScope.alertaErrorEliminacionAlumno=false;
+          console.log("alertaErrorEliminacionAlumno=false");
+        },2000);
       });
   };
   $scope.asignarJefe = function (index) {
-    var id_alumno = $scope.integrantes[index].id;
-    $http.post("http://manuel-api.herokuapp.com/jefe_grupo?grupo_id="+$rootScope.mi_grupo.id+"&alumno_id="+id_alumno)
+    $scope.id_alumno=$scope.integrantes[index].id;
+    console.log("se va a asignar como jefe al id_alumno "+$scope.id_alumno+" del grupo "+$rootScope.mi_grupo.id);
+    $http.delete("http://manuel-api.herokuapp.com/borrar_alumno?alumno_id="+$scope.id_alumno+"&grupo_id="+$rootScope.mi_grupo.id)
+    $http.post("http://manuel-api.herokuapp.com/grupo_alumnos", { 
+      alumno_id: $scope.id_alumno, 
+      grupo_id: $rootScope.mi_grupo.id,
+      jefe: true
+    })
       .success(function() {
-        $scope.alertaAsignacionJefe=true;
+        $rootScope.alertaAsignacionJefe=true;
+        setTimeout(function(){
+          $rootScope.alertaAsignacionJefe=false;
+          console.log("alertaAsignacionJefe=false");
+        },2000);
+      })
+      .error(function(err){
+        $rootScope.alertaErrorAsignacionJefe=true;
+        setTimeout(function(){
+          $rootScope.alertaErrorAsignacionJefe=false;
+          console.log("alertaErrorEliminacionAlumno=false");
+        },2000);
       });
   };
 });
@@ -190,7 +238,7 @@ myApp.controller('VerAlumnos', function ($rootScope,$http, $scope, $state) {
     var id_alumno = $scope.alumnos[index].id;
     $http.delete("http://manuel-api.herokuapp.com/borrar_alumno_curso?alumno_id="+id_alumno+"&curso_id="+$rootScope.mi_curso.id)
       .success(function() {
-        $scope.alertaEliminacionAlumno=true;
+        $rootScope.alertaEliminacionAlumno=true;
         $state.go('detalle-curso.alumnos');
         setTimeout(function(){
           $rootScope.alertaEliminacionAlumno=false;
@@ -203,7 +251,7 @@ myApp.controller('VerAlumnos', function ($rootScope,$http, $scope, $state) {
 myApp.controller('VerEvaluaciones', function ($rootScope,$http, $scope, $state) {
   $scope.evaluaciones = [];
   $scope.encuestas = [];
-  $scope.alertaEliminacionEncuesta=false;
+  $rootScope.alertaEliminacionEncuesta=false;
   $http.get("http://manuel-api.herokuapp.com/evaluaciones_curso?curso_id="+$rootScope.mi_curso.id)
     .success(function(data) {
       console.log(data);
@@ -241,8 +289,8 @@ myApp.controller('VerEvaluaciones', function ($rootScope,$http, $scope, $state) 
 myApp.controller('AgregarAlumno', function ($rootScope,$http, $scope, $state) {
   $scope.alumnosFaltantes = [];
   $scope.grupos = [];
-  $scope.alertaAgregarAlumno=false;
-  $scope.alertaAsignarGrupo=false;
+  $rootScope.alertaAgregarAlumno=false;
+  $rootScope.alertaAsignarGrupo=false;
   $http.get("http://manuel-api.herokuapp.com/buscar_por_rol?rol=2")
     .success(function(data) {
       console.log(data);
@@ -274,7 +322,7 @@ myApp.controller('AgregarAlumno', function ($rootScope,$http, $scope, $state) {
     console.log(arreglo);
     $http.post("http://manuel-api.herokuapp.com/curso_alumnos",arreglo)
       .success(function() {
-        $scope.alertaAgregarAlumno=true;
+        $rootScope.alertaAgregarAlumno=true;
         $state.go("detalle-curso.alumnos");
         setTimeout(function(){
           $rootScope.alertaAgregarAlumno=false;
