@@ -163,7 +163,7 @@ myApp.controller('GrupoCtrl',function ($http,$scope,$state,$rootScope){
       alumno_id: $scope.id_alumno,
       grupo_id: $rootScope.mi_grupo.id,
       jefe: true
-    }
+    })
       .success(function() {
         $rootScope.alertaAsignacionJefe=true;
         setTimeout(function(){

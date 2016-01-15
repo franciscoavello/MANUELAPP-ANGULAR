@@ -1,5 +1,22 @@
 <div ng-controller="AgregarAlumno">
-  <br><br><br>
+
+    <div class="row icon-block">
+    <h2 class="turquesa"><i class="large material-icons">perm_identity</i></h2>
+    <h5>Agregar Alumnos</h5>
+    <br><br>
+    <div class="col s6" flex="50" ng-repeat="alumno in alumnosFaltantes">
+        <input type="checkbox" id="{{alumno.id}}" />
+        <label for="{{alumno.id}}">{{alumno.nombre}} {{alumno.apellido_paterno}} {{alumno.apellido_materno}}</label>
+    </div>
+  </div>
+  <br><br>
+  <button class="col s2 btn waves-effect waves-light" align="middle" type="submit" style="padding:0px;">  
+    Agregar
+  </button>
+
+
+
+<!--
   <form ng-submit="agregarAlumno()">
     <div class="input-field col s6">
       <select material-select watch ng-model="respuesta.alumno_id">
@@ -11,9 +28,14 @@
       Agregar
     </button>
   </form>
+-->
+
     <button class="col s2 btn waves-effect waves-light footerColor" ui-sref="detalle-curso.alumnos" align="middle" name="action">
       <span class="azul-oscuro">Volver</span>
     </button>
+
+
+    <!-- Agregar alumno al grupo -->
   <!--
   <div class="divider row"></div>
   <div ng-repeat="alumno in alumnosFaltantes">
