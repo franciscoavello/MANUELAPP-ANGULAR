@@ -270,7 +270,7 @@ myApp.controller("RadarCtrl", function ($scope,$http) {
           "pointHighlightStroke": "rgba(151,187,205,0.8)"
         }];
         $scope.enunciados = enunciados;
-        $scope.series = ['Mi promedio', 'Promedio grupo'];
+        $scope.series = ['Mi promedio', 'Promedio curso'];
         var datos= [];
         var datos1= [];
         var datos2= [];
