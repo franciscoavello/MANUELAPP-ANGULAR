@@ -153,11 +153,7 @@ myApp.controller("ObtenerPreguntas", function($scope,$http, $state,$rootScope, $
         })
         .error(function(err){
         });
-        $scope.completarEncuesta();
-        $state.go('encuestas.pendientes');  
-        $rootScope.message.text = 'Encuesta enviada correctamente';
-        $rootScope.mostrarAvisoExito = true;
-        $timeout($scope.desaparecer, 2000);
+        $scope.completarEncuesta();        
     }  
 
     $scope.submitAnswers360 = function(idAlumnoSeleccionado, alumnoSeleccionado) {
@@ -220,6 +216,10 @@ myApp.controller("ObtenerPreguntas", function($scope,$http, $state,$rootScope, $
                 encuesta_id: $scope.idEncuesta
             })
             .success(function() {
+              $state.go('encuestas.pendientes');  
+              $rootScope.message.text = 'Encuesta enviada correctamente';
+              $rootScope.mostrarAvisoExito = true;
+              $timeout($scope.desaparecer, 2000);
             });
         })
         .error(function(err){
