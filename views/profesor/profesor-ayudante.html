@@ -38,18 +38,20 @@
       </div>
     </form>
   </div>
-
-  <div class="row icon-block">
-    <h2 class="turquesa"><i class="large material-icons">vpn_key</i></h2>
-    <h5>Asignar Funcionalidades</h5>
-    <br><br>
-    <div class="col s6" flex="50" ng-repeat="funcionalidad in funcionalidades">
-        <input type="checkbox" id="{{funcionalidad.id}}" />
-        <label for="{{funcionalidad.id}}">{{funcionalidad.descripcion}}</label>
+  <form ng-submit="asignarFuncionalidades()">
+    <div class="row icon-block">
+      <h2 class="turquesa"><i class="large material-icons">vpn_key</i></h2>
+      <h5>Asignar Funcionalidades</h5>
+      <br><br>
+      <div class="col s6" flex="50" ng-repeat="funcionalidad in funcionalidades">
+          <input type="checkbox"/ ng-checked="exists(funcionalidad,selected)" ng-click="toggle(funcionalidad,selected)" id="{{funcionalidad.id}}">
+          <label for="{{funcionalidad.id}}">{{funcionalidad.descripcion}}</label>
+      </div>
     </div>
-  </div>
-  <button class="col s4 btn waves-effect waves-light" align="middle" type="submit" style="padding:0px;">  
-    Asignar Funcionalidades
-  </button>
+    <button class="col s4 btn waves-effect waves-light" align="middle" type="submit" style="padding:0px;">  
+      Asignar Funcionalidades
+    </button>
+  </form>
+  <!--<code style="display: block; padding: 8 px;">{{selected | json}}</code>-->
 </div>
 
