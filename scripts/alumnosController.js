@@ -249,7 +249,7 @@ myApp.controller("RadarCtrl", function ($scope,$http) {
 
         var enunciados= [];
         for(x=0; x<data.length; x++){
-            label.push(data[x].id)
+            label.push(x+1);
             enunciados.push(data[x]);
         }
         $scope.labels = label;
@@ -282,6 +282,8 @@ myApp.controller("RadarCtrl", function ($scope,$http) {
         }
         datos1[0]=5;
         datos2[0]=2;
+        $scope.valoresAlumno=datos1;
+        $scope.valoresCurso=datos2;
         datos.push(datos1);
         datos.push(datos2);
         var totalSuma=0;
