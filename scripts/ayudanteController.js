@@ -109,15 +109,19 @@ myApp.controller('EvaluacionCtrlAyudante',function ($scope,$state,$rootScope){
 
 myApp.controller('VerCursosAyudante', function ($rootScope,$http, $scope, $state) {
   $scope.cursos = [];
-  $http.get("http://manuel-api.herokuapp.com/cursos_profesor?profesor_id="+$scope.usuario[0].id)
-    .success(function(data) {
-      console.log(data);
-      if(data.length>0){
-        $scope.cursos=data;   
+  $scope.funcionalidades=[];
+  $http.get("http://manuel-api.herokuapp.com/ayudante_curso?correo=francisco.avello@usach.cl")
+  .success(function(data) {
+      if(data.length>0){    
+          for(i=0;i<data.length;i++){
+            if((data[i]["descripcion"] !== undefined)){
+              $scope.cursos.push(data[i]);
+            }
+          }   
       }
-    });
-  $scope.id_curso_seleccionado =-1;
-  $scope.nombreCurso="curso";
+      $scope.id_curso_seleccionado =-1;
+      $scope.nombreCurso="curso";
+  });
   $scope.seleccionarCurso = function (id) {
       $scope.id_curso_seleccionado = id;
       console.log("id_curso: "+$scope.id_curso_seleccionado);
