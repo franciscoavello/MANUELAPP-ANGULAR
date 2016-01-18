@@ -10,7 +10,6 @@
           <thead>
             <tr >                
                 <th data-field="name">Nombre de la encuesta</th>
-                <th data-field="curso">Curso</th>
                 <th data-field="tipo">Tipo</th>
                 <th data-field="id"></th>
             </tr>
@@ -19,8 +18,7 @@
           <tbody ng-repeat="encuesta in encuestas">
             <tr >            
               <td>{{encuesta.nombre}}</td>
-              <td>{{encuesta.curso}}</td>
-              <td>{{encuesta.tipo_encuesta_id}}</td>
+              <td>{{tipoencuesta[encuesta.tipo_encuesta_id-1]}}</td>
               <td>
                 <button ng-click="ingresarNombreEncuesta(encuesta.nombre)" ng-if="encuesta.tipo_encuesta_id==1" id="{{encuesta.id}}" class="btn waves-effect waves-light center" type="submit" name="action" ui-sref="encuestas.responder360({idEncuesta: {{encuesta.id}} })">Responder
                 </button>
