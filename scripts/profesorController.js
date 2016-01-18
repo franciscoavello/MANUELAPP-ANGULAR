@@ -21,22 +21,24 @@ myApp.controller('AsignarAyudante',function ($http,$scope,$state,$rootScope){
   $http.get("http://manuel-api.herokuapp.com/datos_ayudante?curso_id="+$rootScope.mi_curso.id)
     .success(function(data) {
       console.log(data);
-      $scope.ayudante=data;
-      $http.get("http://manuel-api.herokuapp.com/listar_func_ayu?alumno_id="+$scope.ayudante[0].id+"&curso_id="+$rootScope.mi_curso.id)
-        .success(function(data) {
-          $rootScope.sinAyudante=false;
-          console.log(data);
-          $scope.funcionalidadesAyudante=data;
-          for(i in data){
-            for(j in $scope.funcionalidades){
-              if($scope.funcionalidades[j].id==data[i].funcionalidad_id){
-                $scope.selected.push($scope.funcionalidades[j]);
-                $scope.funcionalidadesAntiguas.push($scope.funcionalidades[j]);
-                break;
+      if(data.length>0){
+        $scope.ayudante=data;
+        $http.get("http://manuel-api.herokuapp.com/listar_func_ayu?alumno_id="+$scope.ayudante[0].id+"&curso_id="+$rootScope.mi_curso.id)
+          .success(function(data) {
+            $rootScope.sinAyudante=false;
+            console.log(data);
+            $scope.funcionalidadesAyudante=data;
+            for(i in data){
+              for(j in $scope.funcionalidades){
+                if($scope.funcionalidades[j].id==data[i].funcionalidad_id){
+                  $scope.selected.push($scope.funcionalidades[j]);
+                  $scope.funcionalidadesAntiguas.push($scope.funcionalidades[j]);
+                  break;
+                }
               }
             }
-          }
-        });
+          });
+      }
     }).error(function(err){
       console.log(err);
       $rootScope.sinAyudante=true;
@@ -65,7 +67,14 @@ myApp.controller('AsignarAyudante',function ($http,$scope,$state,$rootScope){
   }
   $scope.asignarAyudante = function () {
     //se debe quitar el ayudante anterior
-
+    if($scope.ayudante.length>0){
+      $http.put("http://manuel-api.herokuapp.com/es_ayudante", {
+          alumno_id: $scope.ayudante[0].id,
+          curso_id: $rootScope.mi_curso.id,
+          ayudante: "false"
+       })
+    }
+    
     $http.put("http://manuel-api.herokuapp.com/es_ayudante", {
           alumno_id: $scope.respuesta.alumno_id,
           curso_id: $rootScope.mi_curso.id,
@@ -106,6 +115,7 @@ myApp.controller('AsignarAyudante',function ($http,$scope,$state,$rootScope){
 });
 
 myApp.controller('CursoCtrl',function ($http,$scope,$state,$rootScope){
+  $scope.hayAyudante=false;
   $scope.cantidadAlumnos=0;
   $scope.cantidadGrupos=0;
   $scope.cantidadEvaluaciones=0;
@@ -135,7 +145,12 @@ myApp.controller('CursoCtrl',function ($http,$scope,$state,$rootScope){
   $http.get("http://manuel-api.herokuapp.com/datos_ayudante?curso_id="+$rootScope.mi_curso.id)
     .success(function(data) {
       console.log(data);
-      $scope.ayudante=data;
+      if(data.length>0){
+        $scope.hayAyudante=true;
+        $scope.ayudante=data;
+      }else {
+        $scope.hayAyudante=false;
+      }
     });
 });
 

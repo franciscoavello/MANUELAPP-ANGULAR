@@ -1,25 +1,26 @@
 <div class="row" ng-controller="CursoCtrl">
   <br></br>
   <h5 class="azul-oscuro" style="font-weight: bold;">Perfil del curso</h5>
+  <br><br>
   <div class="col s12 m4">
-    <div class="icon-block">
+    <div class="icon-block center">
       <h2 class="turquesa"><i class="large material-icons">assignment</i></h2>
-      <h5 class="azul-oscuro" align="left">Descripción</h5>
+      <h5 class="azul-oscuro" >Descripción</h5>
       <p class="azul-oscuro" align="justify">{{$parent.mi_curso.descripcion}}</p>
     </div>
   </div>
 
   <div class="col s12 m4">
-    <div class="icon-block">
+    <div class="icon-block center" ng-show="hayAyudante">
       <h2 class="turquesa"><i class="large material-icons">assignment_ind</i></h2>
-      <h5 class="azul-oscuro" align="left">Ayudante</h5>
+      <h5 class="azul-oscuro" >Ayudante</h5>
       <p class="azul-oscuro" align="justify">{{ayudante[0].nombre}} {{ayudante[0].apellido_paterno}} {{ayudante[0].apellido_materno}} </p>
       <p class="azul-oscuro" align="justify">Correo: {{ayudante[0].correo}}</p>
     </div>
   </div>
 
-  <div class="col s12 m4">
-    <div class="icon-block">
+  <div class="col s12 m4" >
+    <div class="icon-block center">
       <h2 class="turquesa"><i class="large material-icons">info_outline</i></h2>
       <h5 class="azul-oscuro">Datos generales</h5>
       <p></p>
