@@ -3,20 +3,32 @@
     <h5 class="azul-oscuro">{{$parent.encuestaSeleccionada}}</h5>
       <h5 class="azul-oscuro">Estadísticas</h5>
       <div class="container-fluid">
-    <div class="text-center aspect-ratio" id="container" ng-controller="RadarCtrl">
-      <canvas id="bar" class="chart chart-radar"
-  chart-data="data" chart-labels="labels" chart-series="series">
-</canvas>
-      <div class="row center">
-        <div class="col s12">
-          <h5 class="azul-oscuro">Módulo de la encuesta: {{modulo | number:2}}</h5>
-        </div>
+        <div class="text-center aspect-ratio" id="container" ng-controller="RadarCtrl">
+          <canvas id="bar" class="chart chart-radar" chart-data="data" chart-labels="labels" chart-series="series" chart-colours="colores" chart-legend="true">
+          </canvas>
+          <div class="row center">
+            <div class="col s12">
+              <h5 class="azul-oscuro">Módulo de la encuesta: {{modulo | number:2}}</h5>
+            </div>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                  <th data-field="id">Pregunta</th>
+                  <th data-field="name">Promedio grupo</th>
+                  <th data-field="price">Promedio alumno</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr ng-repeat="enunciado in enunciados" id="{{enunciado.id}}" name="{{enunciado.id}}">
+                <td >{{$index + 1}}.- {{enunciado.enunciado}}</td>
+                <td>{{valoresCurso[$index]}}</td>
+                <td>{{valoresAlumno[$index]}}</td>
+              </tr>
+            </tbody>
+          </table>            
       </div>
-      <div class="input-field col s12" ng-repeat="enunciado in enunciados" id="{{enunciado.id}}" name="{{enunciado.id}}">
-      <p class="azul-oscuro">{{enunciado.id}}.- {{enunciado.enunciado}}</p>
-      </p>
-      </div>
-  </div>
 
       <div class="row center" >
       <div class="input-field col s12">
