@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp');
+    var myApp = angular.module('myApp');
 
 myApp.controller("VerEncuestasPendientes", function($scope,$http,$rootScope){
     $http.get("http://manuel-api.herokuapp.com/buscar_pendientes_alumno?correo="+$scope.usuario[0].correo)
@@ -254,20 +254,12 @@ myApp.controller("RadarCtrl", function ($scope,$http) {
         }
         $scope.labels = label;
         $scope.colores = [{ 
-          "fillColor": "rgba(167, 208, 167  , 0.5)",
-          "strokeColor": "rgba(0,128,0,0.8)",
-          "pointColor": "rgba(220,220,220,1)",
-          "pointStrokeColor": "#fff",
-          "pointHighlightFill": "#fff",
-          "pointHighlightStroke": "rgba(151,187,205,0.8)"
+          "fillColor": "rgba(167, 208, 167, 0.5)",
+          "strokeColor": "rgba(0,128,0,0.8)"
         },
         { 
-          "fillColor": "rgba(255, 115, 53  , 0.4)",
-          "strokeColor": "rgba(255,115,53,0.8 )",
-          "pointColor": "rgba(220,220,220,1)",
-          "pointStrokeColor": "#fff",
-          "pointHighlightFill": "#fff",
-          "pointHighlightStroke": "rgba(151,187,205,0.8)"
+          "fillColor": "rgba(255, 115, 53, 0.4)",
+          "strokeColor": "rgba(255,115,53,0.8 )"
         }];
         $scope.enunciados = enunciados;
         $scope.series = ['Mi promedio', 'Promedio grupo'];
