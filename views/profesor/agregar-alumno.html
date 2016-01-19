@@ -1,23 +1,27 @@
 <div ng-controller="AgregarAlumno">
   <form ng-submit="agregarAlumno()">
     <div class="row icon-block">
-    <h2 class="turquesa"><i class="large material-icons">perm_identity</i></h2>
-    <h5>Agregar Alumnos</h5>
-    <br><br>
-    <div class="col s6" flex="50" ng-repeat="alumno in alumnosFaltantes">
-        <input type="checkbox" id="{{alumno.id}}"  ng-checked="exists(alumno,selected)" ng-click="toggle(alumno,selected)" />
-        <label for="{{alumno.id}}" >{{alumno.nombre}} {{alumno.apellido_paterno}} {{alumno.apellido_materno}}</label>
+      <h2 class="turquesa"><i class="large material-icons">perm_identity</i></h2>
+      <h5 class="azul-oscuro" style="font-weight:bold;">Agregar Alumnos</h5>
+      <br><br>
+      <div class="col s6" flex="50" ng-repeat="alumno in alumnosFaltantes">
+          <input required type="checkbox" id="{{alumno.id}}"  ng-checked="exists(alumno,selected)" ng-click="toggle(alumno,selected)" />
+          <label for="{{alumno.id}}" >{{alumno.nombre}} {{alumno.apellido_paterno}} {{alumno.apellido_materno}}</label>
+      </div>
     </div>
-  </div>
   <br><br>
-  <button class="col s2 btn waves-effect waves-light" align="middle" type="submit" style="padding:0px;">  
-    Agregar
-  </button>
-</form>
-
+  <div class="row">
+    <button class="col s2 btn waves-effect waves-light" align="middle" type="submit" style="padding:0px;">  
+      Agregar
+    </button>
     <button class="col s2 btn waves-effect waves-light grey right" ui-sref="detalle-curso.alumnos" align="middle" name="action">
       <span class="azul-oscuro">Volver</span>
     </button>
+  </div>
+
+</form>
+
+
 
 
     <!-- Agregar alumno al grupo -->

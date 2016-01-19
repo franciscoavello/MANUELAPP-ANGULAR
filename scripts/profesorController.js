@@ -191,6 +191,7 @@ myApp.controller('GrupoCtrl',function ($http,$scope,$state,$rootScope){
   $rootScope.alertaEliminacionAlumno=false;
   $rootScope.alertaEliminacionGrupo=false;
   $rootScope.alertaAsignacionJefe=false;
+
   $http.get("http://manuel-api.herokuapp.com/buscar_por_grupo?grupo_id="+$rootScope.mi_grupo.id)
   .success(function(data) {
     console.log(data);
@@ -198,6 +199,7 @@ myApp.controller('GrupoCtrl',function ($http,$scope,$state,$rootScope){
       $scope.integrantes = data;
     }
   });
+
   $scope.eliminarGrupo = function () {
 
     $http.delete("http://manuel-api.herokuapp.com/grupos/"+$rootScope.mi_grupo.id)
@@ -470,17 +472,42 @@ myApp.controller('NuevaEncuesta', function ($rootScope,$http, $scope, $state) {
 myApp.controller('AgregarGrupo', function ($rootScope,$http, $scope, $state) {
   $rootScope.alertaAgregarGrupo=false;
   $scope.entrada={};
+  $scope.selected=[];
+  $scope.alumnos=[];
+  $http.get("http://manuel-api.herokuapp.com/buscar_alumnos_curso?curso_id="+$rootScope.mi_curso.id)
+    .success(function(data) {
+      if(data.length>0){
+        console.log(data);
+        $scope.alumnos = data;
+      }
+    });
+  $scope.toggle=function(item, list){
+    var id = list.indexOf(item);
+    if (id>-1) list.splice(id,1);
+    else list.push(item);
+  };
+  $scope.exists = function (item, list){
+    return list.indexOf(item) > -1;
+  }
   $scope.agregarGrupo = function (){
     console.log($scope.entrada.nombreGrupo+" "+$scope.entrada.descripcionGrupo);
     var arreglo={nombre:$scope.entrada.nombreGrupo,curso_id:$rootScope.mi_curso.id,descripcion:$scope.entrada.descripcionGrupo}
     $http.post("http://manuel-api.herokuapp.com/grupos",arreglo)
       .success(function() {
         $rootScope.alertaAgregarGrupo=true;
+        for(i in selected){
+          $http.post("http://manuel-api.herokuapp.com/grupo_alumnos", { 
+            alumno_id: $scope.selected[i].id, 
+            grupo_id: ,
+            jefe: false
+          });
+        }
+        $state.go("detalle-curso.grupos");
+        setTimeout(function(){
+          $rootScope.alertaAgregarGrupo=false;
+          console.log("AlertaAgregarGrupo=false");
+        },2000);
       });
-    $state.go("detalle-curso.grupos");
-    setTimeout(function(){
-      $rootScope.alertaAgregarGrupo=false;
-      console.log("AlertaAgregarGrupo=false");
-    },2000);
+
   }
 });
