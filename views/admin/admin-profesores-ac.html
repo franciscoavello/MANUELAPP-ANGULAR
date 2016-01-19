@@ -7,11 +7,8 @@
       <table ng-hide="loading" class="striped">
         <thead>
           <tr >
-              <th data-field="number">Rut</th>
               <th data-field="name">Nombre</th>
-              <th data-field="name">Apellido Paterno</th>
-              <th data-field="name">Apellido Materno</th>
-              <th data-field="name">Correo</th>
+              <th data-field="name">Apellido</th>
           </tr>
         </thead>
 
@@ -23,7 +20,7 @@
         </div>
 
         <tbody ng-repeat="profesor in profesores| limitTo:30 | filter:searchText" id="{{profesor.id}}">
-            <td>{{profesor.rut}}</td>
+            
             <td>
               <span data-ng-hide="editar">{{profesor.nombre}}</span>
               <input type="text" data-ng-show="editar" data-ng-model="profesor.nombre" data-ng-required>
@@ -32,6 +29,7 @@
               <span data-ng-hide="editar">{{profesor.apellido_paterno}}</span>
               <input type="text" data-ng-show="editar" data-ng-model="profesor.apellido_paterno" data-ng-required>
             </td>
+            <!--
             <td>
               <span data-ng-hide="editar">{{profesor.apellido_materno}}</span>
               <input type="text" data-ng-show="editar" data-ng-model="profesor.apellido_materno">
@@ -40,8 +38,33 @@
               <span data-ng-hide="editar">{{profesor.correo}}</span>
               <input type="text" data-ng-show="editar" data-ng-model="profesor.correo" data-ng-required>
             </td>
+          -->
             <td>
+              <!--
               <button type="submit" data-ng-hide="editar" data-ng-click="ver(profesor)" class="btn waves-effect waves-light blue"><i class="material-icons">visibility</i></button>
+            -->
+
+                <div class="col">
+                    <a class='btn' href='#demoModal' data-ng-click="obtenerProfesor($index)" modal><i class="material-icons">visibility</i></a>
+                </div>
+                <!-- Modal Structure -->
+                <div id="demoModal" class="modal">
+                    <div class="modal-content">
+                        <h4>Detalle Profesor</h4>
+                        <p>Id: {{detalle.id}}</p>
+                        <p>Nombre: {{detalle.nombre}}</p>
+                        <p>Apellido Paterno: {{detalle.apellido_paterno}}</p>
+                        <p>Apellido Materno: {{detalle.apellido_materno}}</p>
+                        <p>Rut: {{detalle.rut}}</p>
+                        <p>Correo: {{detalle.correo}}</p>
+                        
+
+                    </div>
+                    <div class="modal-footer">
+                        <a  class=" modal-action modal-close waves-effect waves-green btn-flat">Salir</a>
+                    </div>
+                </div>
+
             </td>
             <td>
               <button type="submit" data-ng-hide="editar" data-ng-click="editar=true; editarProfesor(profesor)" class="btn waves-effect waves-light green"><i class="material-icons">create</i></button>
@@ -49,7 +72,7 @@
               <button type="submit" data-ng-show="editar" data-ng-click="editar=false; cancelar($index)" class="btn waves-effect waves-light red"><i class="material-icons">clear</i></button>
             </td>
             <td>
-              <button type="submit" data-ng-hide="editar" data-ng-click="editarProfesor(profesor)" class="btn waves-effect waves-light red"><i class="material-icons">block</i></button>
+              <button type="submit" data-ng-hide="editar" data-ng-click="deshabilitarProfesor(profesor)" class="btn waves-effect waves-light red"><i class="material-icons">block</i></button>
             </td>
      
               

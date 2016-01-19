@@ -8,8 +8,6 @@
         <thead>
           <tr >
               <th data-field="name">Nombre</th>
-              <th data-field="description">Descripción</th>
-              <th data-field="description">Semestre</th>
               <th data-field="description">Año</th>
           </tr>
 
@@ -25,6 +23,7 @@
               <span data-ng-hide="editar">{{curso.nombre}}</span>
               <input type="text" data-ng-show="editar" data-ng-model="curso.nombre" data-ng-required>
             </td>
+            <!--
             <td>
               <span data-ng-hide="editar">{{curso.descripcion}}</span>
               <input type="text" data-ng-show="editar" data-ng-model="curso.descripcion" data-ng-required>
@@ -33,20 +32,45 @@
               <span data-ng-hide="editar">{{curso.semestre}}</span>
               <input type="text" data-ng-show="editar" data-ng-model="curso.semestre" data-ng-required>
             </td>
+          -->
             <td>
-              <span data-ng-hide="editar">{{curso.ano}}</span>
+              <span data-ng-hide="editar">{{curso.ano}}</span>  
               <input type="text" data-ng-show="editar" data-ng-model="curso.ano" data-ng-required>
             </td>
             <td>
+          <!--
               <button type="submit" data-ng-hide="editar" data-ng-click="ver(curso)" class="btn waves-effect waves-light blue"><i class="material-icons">visibility</i></button>
+            -->
+             <div class="col">
+                    <a class='btn' href='#demoModal' data-ng-click="obtenerCurso($index)" modal><i class="material-icons">visibility</i></a>
+                </div>
+                <!-- Modal Structure -->
+                <div id="demoModal" class="modal">
+                    <div class="modal-content">
+                        <h4>Detalle Curso</h4>
+                        <p>Nombre: {{detalle.nombre}}</p>
+                        <p>Descripcion: {{detalle.descripcion}}</p>
+                        <p>Semestre: {{detalle.semestre}}</p>
+                        <p>Año: {{detalle.ano}}</p>
+                        <p>Profesor: {{detalle.profesor_id}}</p>
+                        
+
+                    </div>
+                    <div class="modal-footer">
+                        <a  class=" modal-action modal-close waves-effect waves-green btn-flat">Salir</a>
+                    </div>
+                </div>
+
             </td>
+
+
             <td>
               <button type="submit" data-ng-hide="editar" data-ng-click="editar=true; editarCurso(curso)" class="btn waves-effect waves-light green"><i class="material-icons">create</i></button>
               <button type="submit" data-ng-show="editar" data-ng-click="editar=false;guardarCampo($index)" class="btn waves-effect waves-light green"><i class="material-icons">done</i></button>
               <button type="submit" data-ng-show="editar" data-ng-click="editar=false; cancelar($index)" class="btn waves-effect waves-light red"><i class="material-icons">clear</i></button>
             </td>
             <td>
-              <button type="submit" data-ng-hide="editar" data-ng-click="eliminarCurso($index);avisoEliminarCurso=true" class="btn waves-effect waves-light red"><i class="material-icons">block</i></button>
+              <button type="submit" data-ng-hide="editar" data-ng-click="deshabilitarCurso($index);avisoDeshabilitarCurso=true" class="btn waves-effect waves-light red"><i class="material-icons">block</i></button>
             </td>
         </tbody>
       </table>

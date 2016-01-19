@@ -7,6 +7,7 @@
           <div class="col s6 offset-s2 alert-box success"><span>correcto: </span>La nueva Encuesta se ha creado con éxito.</div> 
         </div>
 
+<!--
         <div class="row" align="center">
           <div class="input-field col s6">
             <input id="first_name" type="text" ng-model="nombre" class="validate" required aria-required="true">
@@ -28,6 +29,22 @@
           </div>
         </div>
           
+-->
+
+<div class="row col s4">
+  <p>Preguntas</p>
+  <div class="btn btn-primary" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" ng-model="list1" jqyoui-draggable="{animate:true}" ng-hide="!list1.title">{{list1.title}}</div>
+</div>
+<div class="row col s4">
+  <p>Arrastra hacia aca:   </p>
+  <div class="thumbnail" data-drop="true" data-jqyoui-options ng-model="list2" jqyoui-droppable style='height:50px;'>
+  <div class="btn btn-success" data-drag="false" data-jqyoui-options ng-model="list2" jqyoui-draggable ng-hide="!list2.title">{{list2.title}}</div>
+  </div>
+
+</div>
+<div class="row col s4">
+<p>Encuesta Resultante: </p>
+</div>
 
          <div class="row">
  

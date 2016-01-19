@@ -7,7 +7,6 @@
         <thead>
           <tr >
               <th data-field="id">Nombre</th>
-              <th data-field="descripcion">Descripción</th>
               <!-- <th data-field="name">Descripcion</th> 
               <th data-field="name">Fecha de Creacion</th>-->
           </tr>
@@ -24,12 +23,30 @@
               <span data-ng-hide="editar">{{tipo.nombre}}</span>
               <input type="text" data-ng-show="editar" data-ng-model="tipo.nombre" data-ng-required>
             </td>
-            <td>
+          <!--  <td>
               <span data-ng-hide="editar">{{tipo.descripcion}}</span>
               <input type="text" data-ng-show="editar" data-ng-model="tipo.descripcion" data-ng-required>
-            </td>
+            </td>-->
             <td>
+
+            <!--
               <button type="submit" data-ng-hide="editar" data-ng-click="ver(tipo)" class="btn waves-effect waves-light blue"><i class="material-icons">visibility</i></button>
+            -->
+              <div class="col">
+                    <a class='btn' href='#demoModal' data-ng-click="obtenerTEncuesta($index)" modal><i class="material-icons">visibility</i></a>
+                </div>
+                <!-- Modal Structure -->
+                <div id="demoModal" class="modal">
+                    <div class="modal-content">
+                        <h4>Detalle Tipo de Encuesta</h4>
+                        <p>Id: {{detalle.id}}</p>
+                        <p>Nombre: {{detalle.nombre}}</p>
+                        <p>Descripcion: {{detalle.descripcion}}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a  class=" modal-action modal-close waves-effect waves-green btn-flat">Salir</a>
+                    </div>
+                </div>
             </td>
             <td>
               <button type="submit" data-ng-hide="editar" data-ng-click="editar=true; editarTipoEncuesta(tipo)" class="btn waves-effect waves-light green"><i class="material-icons">create</i></button>
@@ -37,7 +54,7 @@
               <button type="submit" data-ng-show="editar" data-ng-click="editar=false; cancelar($index)" class="btn waves-effect waves-light red"><i class="material-icons">clear</i></button>
             </td>
             <td>
-              <button type="submit" data-ng-hide="editar" ng-click="eliminarTipoDeEncuesta($index)" class="btn waves-effect waves-light red"><i class="material-icons">block</i></button>
+              <button type="submit" data-ng-hide="editar" ng-click="deshabilitarTipoEncuesta($index)" class="btn waves-effect waves-light red"><i class="material-icons">block</i></button>
               
             </td>
 
