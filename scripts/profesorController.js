@@ -491,8 +491,8 @@ myApp.controller('AgregarGrupo', function ($rootScope,$http, $scope, $state) {
   }
   $scope.agregarGrupo = function (){
     console.log($scope.entrada.nombreGrupo+" "+$scope.entrada.descripcionGrupo);
-    var arreglo={nombre:$scope.entrada.nombreGrupo,curso_id:$rootScope.mi_curso.id,descripcion:$scope.entrada.descripcionGrupo}
-    $http.post("http://manuel-api.herokuapp.com/grupos",arreglo)
+    var arreglo={nombre:$scope.entrada.nombreGrupo,curso_id:$rootScope.mi_curso.id,descripcion:$scope.entrada.descripcionGrupo};
+    /*$http.post("http://manuel-api.herokuapp.com/grupos",arreglo)
       .success(function() {
         $rootScope.alertaAgregarGrupo=true;
         for(i in selected){
@@ -508,6 +508,6 @@ myApp.controller('AgregarGrupo', function ($rootScope,$http, $scope, $state) {
           console.log("AlertaAgregarGrupo=false");
         },2000);
       });
-
+		*/
   }
 });
