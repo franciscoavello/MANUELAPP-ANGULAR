@@ -9,7 +9,10 @@
     <div ng-if="soyjefe" class="collection col s4" >
       <a ng-click="ingresarNombreAlumno(grupo.id)" ng-repeat="grupo in datosGrupo" class="collection-item" id="{{grupo.id}}" ui-sref="encuestas.estadisticasJefe.graficoJefe({idAlumno: {{grupo.id}}})">{{grupo.nombre}}  {{grupo.apellido_paterno}} {{grupo.apellido_materno}} </a>
     </div>
-          <div ui-view></div>
+    <div ng-if="soyjefe" class="collection col s8" >
+      <div ui-view></div>
+    </div>
+          
       </div>
     </div>
   </div>
