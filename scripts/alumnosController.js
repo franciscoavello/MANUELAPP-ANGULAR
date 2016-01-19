@@ -45,6 +45,10 @@ myApp.controller("VerEncuestasCompletadas", function($scope,$http,$rootScope, $s
         $rootScope.encuestaSeleccionada  = nomEncuesta;
         $scope.idEncuesta = idEncuesta;
         $scope.soyjefe=false;
+        $scope.soyjefeProyecto=false;
+        $scope.ingresarNombre = function (idGrupo) {
+            $rootScope.idGrupoSeleccionado = idGrupo;
+        };
         $scope.ingresarNombreAlumno = function (idAlumno) {
             $rootScope.idAlumnoSeleccionado = idAlumno;
         };
@@ -58,6 +62,9 @@ myApp.controller("VerEncuestasCompletadas", function($scope,$http,$rootScope, $s
                 console.log($scope.soyjefe);
                 if($scope.soyjefe){
                     $state.go('encuestas.estadisticasJefe',{idEncuesta: $scope.idEncuesta});
+                }
+                else if($scope.soyjefeProyecto){
+                    $state.go('encuestas.estadisticasJefeProyecto',{idEncuesta: $scope.idEncuesta});
                 }
                 else{
                     $state.go('encuestas.estadisticas',{idEncuesta: $scope.idEncuesta});
@@ -277,6 +284,7 @@ myApp.controller("ObtenerPreguntas", function($scope,$http, $state,$rootScope, $
 });
 
 myApp.controller("RadarCtrl", function ($scope,$http,$rootScope) {
+    $scope.soyjefeProyecto=false;
     $http.get("http://manuel-api.herokuapp.com/encuestas_jefe?correo="+$rootScope.correoUsuarioLogueado)
     .success(function(data){
         for(i=0;i<data.length;i++){
@@ -298,6 +306,13 @@ myApp.controller("RadarCtrl", function ($scope,$http,$rootScope) {
         });
     })
     .error(function(err){
+    });
+    $http.get("http://manuel-api.herokuapp.com/grupos_curso?id=1")
+    .success(function(data){
+        $scope.datosCurso = data;
+    })
+    .error(function(err){
+
     });
     $http.get("http://manuel-api.herokuapp.com/preguntas_encuesta?encuesta_id="+$scope.idEncuesta)
     .success(function(data){
@@ -322,23 +337,42 @@ myApp.controller("RadarCtrl", function ($scope,$http,$rootScope) {
         var datos= [];
         var datos1= [];
         var datos2= [];
+        var datos3= [];
         for(x=0; x<data.length; x++) {
             datos1.push(Math.floor((Math.random() * 5) + 1));
+        }
+        for(x=0; x<data.length; x++) {
+            datos3.push(Math.floor((Math.random() * 5) + 1));
         }
         for(x=data.length-1; x>-1; x--) {
             datos2.push(data[x].id);
         }
         datos1[0]=5;
         datos2[0]=2;
+        datos3[0]=4;
         $scope.valoresAlumno=datos1;
         $scope.valoresCurso=datos2;
-        datos.push(datos1);
+        $scope.valoresGrupo=datos3;
+        if($scope.soyjefeProyecto){
+            datos.push(datos3);
+        }
+        else{
+            datos.push(datos1);
+        }
         datos.push(datos2);
         var totalSuma=0;
-        for(i=0;i<datos1.length;i++){
-            totalSuma = totalSuma + (datos1[i]-datos2[i]);
+        if($scope.soyjefeProyecto){
+            for(i=0;i<datos3.length;i++){
+                totalSuma = totalSuma + (datos3[i]-datos2[i]);
+            }
+            $scope.modulo=totalSuma/datos3.length;
+            }
+        else{
+            for(i=0;i<datos1.length;i++){
+                totalSuma = totalSuma + (datos1[i]-datos2[i]);
+            }
+            $scope.modulo=totalSuma/datos1.length;
         }
-        $scope.modulo=totalSuma/datos1.length;
         $scope.data = datos;
     })
     .error(function(err){
