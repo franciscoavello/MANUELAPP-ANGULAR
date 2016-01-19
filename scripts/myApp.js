@@ -79,6 +79,26 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
       authenticate: true,
       rolVista: 2
     })
+    .state('encuestas.estadisticasJefe', {
+      url: "/estadisticasJefe?idEncuesta",
+      templateUrl: "views/alumno/encuesta-estadisticasJefe.html",
+      parent: 'encuestas',
+      controller: function($scope, $stateParams) {
+         $scope.idEncuesta = $stateParams.idEncuesta;
+      },
+      authenticate: true,
+      rolVista: 2
+    })
+    .state('encuestas.estadisticasJefe.graficoJefe', {
+      url: "/graficoJefe?idAlumno",
+      templateUrl: "views/alumno/encuesta-graficoJefe.html",
+      parent: 'encuestas.estadisticasJefe',
+      controller: function($scope, $stateParams) {
+         $scope.idAlumno = $stateParams.idAlumno;
+      },
+      authenticate: true,
+      rolVista: 2
+    })
     .state('encuestas.responder360', {
       url: "/responder360?idEncuesta",
       templateUrl: "views/alumno/responder-encuestas-360.html",

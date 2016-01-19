@@ -200,7 +200,7 @@ myApp.controller('LoginCtrl', function (auth, $scope, $location, store, $http, $
 
   $scope.desloguear = function (profile, token) {
     auth.signout();
-    $scope.$parent.message = '';
+    $rootScope.message.text = '';
     store.remove('profile');
     store.remove('token');
     $scope.logueado = !$scope.logueado;
@@ -214,7 +214,7 @@ myApp.controller('LoginCtrl', function (auth, $scope, $location, store, $http, $
 
   $scope.desloguearNoAutorizado = function (profile, token) {
     auth.signout();
-    $scope.$parent.message = '';
+    $rootScope.message.text = '';
     store.remove('profile');
     store.remove('token');
     $scope.logueado = !$scope.logueado;

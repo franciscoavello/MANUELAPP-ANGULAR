@@ -20,7 +20,7 @@
             <td>{{encuesta.nombre}}</td>
             <td>{{tipoencuesta[encuesta.tipo_encuesta_id-1]}}</td>
             <td>
-              <button ng-click="ingresarNombreEncuesta(encuesta.nombre)" id="{{encuesta.id}}" class="btn waves-effect waves-light center" type="submit" name="action" ui-sref="encuestas.estadisticas({idEncuesta: {{encuesta.id}} })">Estadísticas
+              <button ng-click="ingresarNombreEncuesta(encuesta.nombre,encuesta.id)" id="{{encuesta.id}}" class="btn waves-effect waves-light center" type="submit" name="action" >Estadísticas
               </button>
             </td>
           </tr>

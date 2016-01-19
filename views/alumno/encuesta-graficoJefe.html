@@ -1,10 +1,6 @@
-<div class="container">
-  <div class="row ">
-    <h5 class="azul-oscuro">{{$parent.encuestaSeleccionada}}</h5>
-      <h5 class="azul-oscuro">Estadísticas</h5>
-      <div class="container-fluid">
         <div class="text-center aspect-ratio" id="container" ng-controller="RadarCtrl">
-    <div class="row">
+
+<div class="row">
           <canvas id="bar" class="chart chart-radar" chart-data="data" chart-labels="labels" chart-series="series" chart-colours="colores" chart-legend="true">
           </canvas>
           <div class="row center">
@@ -30,11 +26,4 @@
             </tbody>
           </table>            
       </div>
-
-      <div class="row left" >
-      <div class="input-field col s12">
-        <a class="waves-effect waves-light btn grey" ui-sref="encuestas.completadas">Cancelar</a>
       </div>
-    </div>
-  </div>
-</div>

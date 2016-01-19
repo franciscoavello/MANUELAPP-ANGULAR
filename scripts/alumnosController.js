@@ -23,7 +23,7 @@ myApp.controller("VerEncuestasPendientes", function($scope,$http,$rootScope){
 
 });
 
-myApp.controller("VerEncuestasCompletadas", function($scope,$http,$rootScope){
+myApp.controller("VerEncuestasCompletadas", function($scope,$http,$rootScope, $state){
     $scope.tipoencuesta=[];
     $http.get("http://manuel-api.herokuapp.com/tipos_encuesta.json")
     .success(function(data){
@@ -41,8 +41,31 @@ myApp.controller("VerEncuestasCompletadas", function($scope,$http,$rootScope){
     .error(function(err){
     });
 
-    $scope.ingresarNombreEncuesta = function (nomEncuesta) {
+    $scope.ingresarNombreEncuesta = function (nomEncuesta, idEncuesta) {
         $rootScope.encuestaSeleccionada  = nomEncuesta;
+        $scope.idEncuesta = idEncuesta;
+        $scope.soyjefe=false;
+        $scope.ingresarNombreAlumno = function (idAlumno) {
+            $rootScope.idAlumnoSeleccionado = idAlumno;
+        };
+        $http.get("http://manuel-api.herokuapp.com/encuestas_jefe?correo="+$rootScope.correoUsuarioLogueado)
+        .success(function(data){
+                for(i=0;i<data.length;i++){
+                    if(data[i].id==$scope.idEncuesta){
+                        $scope.soyjefe=true;
+                    }
+                }
+                console.log($scope.soyjefe);
+                if($scope.soyjefe){
+                    $state.go('encuestas.estadisticasJefe',{idEncuesta: $scope.idEncuesta});
+                }
+                else{
+                    $state.go('encuestas.estadisticas',{idEncuesta: $scope.idEncuesta});
+                }
+
+            })
+        .error(function(err){
+        });
     };
 
 });
@@ -218,10 +241,6 @@ myApp.controller("ObtenerPreguntas", function($scope,$http, $state,$rootScope, $
     }  
 
 
-    $scope.registrarEvaluacion = function (idAlumnoSeleccionado, alumnoSeleccionado) {
-        
-    };
-
     $scope.completarEncuesta = function (){
         $http.get("http://manuel-api.herokuapp.com/datos_alumno?correo="+$rootScope.correoUsuarioLogueado)
         .success(function(data){
@@ -258,23 +277,19 @@ myApp.controller("ObtenerPreguntas", function($scope,$http, $state,$rootScope, $
 });
 
 myApp.controller("RadarCtrl", function ($scope,$http,$rootScope) {
-    $scope.soyjefe=false;
-    $scope.ingresarNombreAlumno = function (idAlumno) {
-        $rootScope.idAlumnoSeleccionado = idAlumno;
-    };
     $http.get("http://manuel-api.herokuapp.com/encuestas_jefe?correo="+$rootScope.correoUsuarioLogueado)
     .success(function(data){
-            for(i=0;i<data.length;i++){
-                if(data[i].id==$scope.idEncuesta){
-                    $scope.soyjefe=true;
-                }
+        for(i=0;i<data.length;i++){
+            if(data[i].id==$scope.idEncuesta){
+                $scope.soyjefe=true;
             }
-        })
+        }
+    })
     .error(function(err){
     });
     $http.get("http://manuel-api.herokuapp.com/grupo_encuesta_pendiente?correo="+$rootScope.correoUsuarioLogueado+"&encuesta_id="+$scope.idEncuesta)
     .success(function(data1){
-        $http.get("http://manuel-api.herokuapp.com/buscar_por_grupo?grupo_id="+data1[0].id)
+        $http.get("http://manuel-api.herokuapp.com/buscar_por_grupo?grupo_id=23")
         .success(function(data2){
             $scope.datosGrupo = data2;
         })
@@ -308,7 +323,7 @@ myApp.controller("RadarCtrl", function ($scope,$http,$rootScope) {
         var datos1= [];
         var datos2= [];
         for(x=0; x<data.length; x++) {
-            datos1.push(data[x].id);
+            datos1.push(Math.floor((Math.random() * 5) + 1));
         }
         for(x=data.length-1; x>-1; x--) {
             datos2.push(data[x].id);
