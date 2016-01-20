@@ -1,58 +1,71 @@
       <div class="container">
       <div class="row" ng-controller="agregarEncuesta">
-      <form name"form" novalidate>
+      <form name"form" novalidate ng-init="avisoCrearEncuesta=false">
         <h5 class="azul-oscuro">Nueva Encuesta</h5>
 
         <div class="row" ng-show="avisoCrearEncuesta">
           <div class="col s6 offset-s2 alert-box success"><span>correcto: </span>La nueva Encuesta se ha creado con éxito.</div> 
         </div>
 
-<!--
-        <div class="row" align="center">
-          <div class="input-field col s6">
-            <input id="first_name" type="text" ng-model="nombre" class="validate" required aria-required="true">
-            <label for="first_name">Nombre</label>
-          </div>
-   
-          <div class="input-field col s6">
-            <select material-select watch ng-model="tipo">
-              <option ng-repeat="tipo in tipos" value="{{tipo.id}}">{{tipo.nombre}}</option>
-            </select>
-            <label>Seleccione un tipo de Encuesta</label>
-          </div>
+        <!--
 
-        </div>
-        <div class="row" align="center">
-          <div class="input-field col s12">
-            <input id="descripcion" type="text" ng-model="descripcion" class="validate" required aria-required="true">
-            <label for="descripcion">Descripción</label>
+        <div class="card">
+            <div class="row  offset-s2" align="center">
+              <div class="input-field col s5">
+                <input id="first_name" type="text" ng-model="nombre" class="validate" required aria-required="true">
+                <label for="first_name">Nombre</label>
+              </div>
+       
+              <div class="input-field col s5">
+                <select material-select watch ng-model="tipo">
+                  <option ng-repeat="tipo in tipos" value="{{tipo.id}}">{{tipo.nombre}}</option>
+                </select>
+                <label>Seleccione un tipo de Encuesta</label>
+              </div>
+
+            </div>
+            <div class="row offset-s2" align="center">
+              <div class="input-field col s11 offset-s1">
+                <input id="descripcion" type="text" ng-model="descripcion" class="validate" required aria-required="true">
+                <label for="descripcion">Descripción</label>
+              </div>
+            </div>
           </div>
-        </div>
-          
 -->
-
-<div class="row col s4">
-  <p>Preguntas</p>
-  <div class="btn btn-primary" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" ng-model="list1" jqyoui-draggable="{animate:true}" ng-hide="!list1.title">{{list1.title}}</div>
-</div>
-<div class="row col s4">
-  <p>Arrastra hacia aca:   </p>
-  <div class="thumbnail" data-drop="true" data-jqyoui-options ng-model="list2" jqyoui-droppable style='height:50px;'>
-  <div class="btn btn-success" data-drag="false" data-jqyoui-options ng-model="list2" jqyoui-draggable ng-hide="!list2.title">{{list2.title}}</div>
+<div class="col s6 card teal offset-s1">
+  <div class="card-content white-text">
+    <h5>Encuesta a Generar</h5>
+    <p>Nombre: <input id="first_name" type="text" ng-model="nombre" class="validate" required="" aria-required="true">
+                <label for="first_name"></label></p>
+    <p>Tipo: <select material-select watch required="" aria-required="true" ng-model="tipo">
+                  <option ng-repeat="tipo in tipos" value="{{tipo.id}}">{{tipo.nombre}}</option>
+                </select></p>
+    <p>Descripcion: <input id="descripcion" type="text" ng-model="descripcion" class="validate" required="" aria-required="true"></p>
   </div>
-
-</div>
-<div class="row col s4">
-<p>Encuesta Resultante: </p>
 </div>
 
-         <div class="row">
+<div class="col s6 card">
+  <h5 class="azul-oscuro">Preguntas    <input ng-hide="loading" ng-model="searchText"><i class="fa fa-search"></i></h5>
+
+  <div class="container1">
+  <span ng-repeat="pregunta in preguntas | filter:searchText">
+      <p>
+      <input type="checkbox" id="{{pregunta.id}}" />
+      <label for="{{pregunta.id}}">{{pregunta.enunciado}}</label>
+    </p>
+    </span>
+  </div>  
+</div>
+
+
+<div class="row">
  
 
-          <div class="input-field col s12">
-            <button class="btn waves-effect waves-light" ng-click="update();avisoCrearEncuesta=true" name="action"  type="reset">Aceptar
-            </button>
-            <button class="waves-effect waves-light btn grey" type="reset" ui-sref="adminencuestas.ver">Cancelar</button>
-          </div>
-        </div>
+    <div class="input-field col s12" >
+        <button class="btn waves-effect waves-light" ng-click="update();avisoCrearEncuesta=true" name="action"  type="reset">Aceptar
+        </button>
+       <button class="waves-effect waves-light btn grey" type="reset" ui-sref="adminencuestas.ver">Cancelar</button>
+     </div>
+  </div>
+
       </div>

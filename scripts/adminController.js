@@ -23,7 +23,7 @@ myApp.controller("verEncuestas", function($scope,$http,$rootScope){
     $scope.obtenerEncuesta= function(index){
       $scope.detalle = $scope.encuestas[index];
       $scope.preguntas = [];
-      $http.get("http://manuel-api.herokuapp.com/preguntas_encuesta_opciones?encuesta_id="+index)
+      $http.get("http://manuel-api.herokuapp.com/preguntas_encuesta?encuesta_id="+index)
         .success(function(data){
           $scope.preguntas = data;          
           $scope.loadingDetalle = false;
@@ -481,15 +481,16 @@ $scope.avisoCrearCurso = false;
   $scope.reset();
 }]);
 
-myApp.controller('agregarEncuesta', function($scope) {
-  $scope.list1 = {title: 'Pregunta - Drag Me'};
-  $scope.list2 = {};
-});
 
-/*
+
 myApp.controller('agregarEncuesta', ['$scope','$http', function($scope,$http) {
-  $scope.list1 = {title: 'Pregunta Tipo Prueba'};
-  $scope.list2 = {};
+ $scope.preguntas= [];
+  $http.get("http://manuel-api.herokuapp.com/pregunta.json")
+        .success(function(data){
+          $scope.preguntas = data;
+        })
+        .error(function(err){
+        });
 $scope.avisoCrearEncuesta = false;
 $scope.loading = true;
 $http.get("http://manuel-api.herokuapp.com/mostrar_tipos_encuestas")
@@ -524,7 +525,7 @@ $http.get("http://manuel-api.herokuapp.com/mostrar_tipos_encuestas")
   };
 
   $scope.reset();
-}]);*/
+}]);
 
 
 myApp.controller('agregartEncuesta', ['$scope','$http', function($scope,$http) {
