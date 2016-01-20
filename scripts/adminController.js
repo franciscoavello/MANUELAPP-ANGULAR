@@ -206,6 +206,7 @@ myApp.controller("verProfesores", function($scope,$http){
     };
 
     $scope.habilitarProfesor = function(index){
+      
       $http.put("http://"+direccion+"/actualizar_profesor/", {
       id: index,
       estado: true
@@ -273,7 +274,6 @@ myApp.controller('verAlumnos', function ($http, $scope, $state) {
           $scope.avisoDeshabilitarAlumno = true;
           
         });
-        $scope.deshabilitado=true;
   };
 
   $scope.habilitarAlumno = function (index){
@@ -283,7 +283,6 @@ myApp.controller('verAlumnos', function ($http, $scope, $state) {
         }).success(function() {
           $scope.avisoHabilitarAlumno = true;
         });
-        $scope.deshabilitado=false;
   };
 
 

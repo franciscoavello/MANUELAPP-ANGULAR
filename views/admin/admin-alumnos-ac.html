@@ -18,6 +18,9 @@
         <div class="row" ng-show="avisoDeshabilitarAlumno">
           <div class="col s6 offset-s2 alert-box success"><span>correcto: </span>El Alumno se ha Deshabilitado con éxito.</div> 
         </div>
+        <div class="row"  ng-show="avisoHabilitarAlumno">
+          <div class="col s6 offset-s2 alert-box success"><span>correcto: </span>El Alumno se ha Habilitado con éxito.</div> 
+        </div>
         <div class="row" ng-show="avisoEditarAlumno">
           <div class="col s6 offset-s2 alert-box success"><span>correcto: </span>El Alumno se ha Modificado con éxito.</div> 
         </div>
@@ -127,8 +130,8 @@
             </td>
           -->
             
-              <button type="submit" data-ng-hide="editar || {{alumno.estado}}" data-ng-click="deshabilitarAlumno($index);avisoDeshabilitarAlumno=true;" class="btn waves-effect waves-light red"><i class="material-icons">block</i></button>
-              <button type="submit" data-ng-hide="editar || !{{alumno.estado}}" data-ng-click="habilitarAlumno($index);avisoDeshabilitarAlumno=true" class="btn waves-effect waves-light green"><i class="material-icons">check_box</i></button>
+              <button type="submit" data-ng-hide="editar || deshabilitado" data-ng-click="deshabilitarAlumno($index);avisoDeshabilitarAlumno=true;" class="btn waves-effect waves-light red"><i class="material-icons">block</i></button>
+              <button type="submit" data-ng-hide="editar || !deshabilitado" data-ng-click="habilitarAlumno($index);avisoDeshabilitarAlumno=true" class="btn waves-effect waves-light green"><i class="material-icons">check_box</i></button>
             </td>
         </tbody>
       </table>

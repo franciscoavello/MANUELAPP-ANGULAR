@@ -18,6 +18,9 @@
         <div class="row" ng-show="avisoDeshabilitarProfesor">
           <div class="col s6 offset-s2 alert-box success"><span>correcto: </span>El Profesor se ha Deshabilitado con éxito.</div> 
         </div>
+        <div class="row" ng-show="avisoHabilitarProfesor">
+          <div class="col s6 offset-s2 alert-box success"><span>correcto: </span>El Profesor se ha Habilitado con éxito.</div> 
+        </div>
 
         <tbody ng-repeat="profesor in profesores| limitTo:30 | filter:searchText" id="{{profesor.id}}">
             
