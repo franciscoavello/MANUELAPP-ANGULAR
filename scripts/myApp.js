@@ -340,7 +340,7 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
     // FIN ADMIN -------------------------------------------
     
     // Ayudante
-    .state('cursos-ayudante', {
+     .state('cursos-ayudante', {
       url: "/ayudante/cursos",
       templateUrl: "views/ayudante/cursos.html",
       authenticate: true,
@@ -369,48 +369,64 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
       templateUrl: "views/ayudante/profesor-alumnos.html",
       authenticate: true,
       rolVista: 4
+
     })
     .state('detalle-curso-ayudante.evaluaciones', {
       url: "/ayudante/evaluaciones",
       templateUrl: "views/ayudante/profesor-evaluaciones.html",
       authenticate: true,
       rolVista: 4
+
     })
   .state('detalle-curso-ayudante.detalle-grupo',{
     url:"/ayudante/detalle-grupo",
     templateUrl: "views/ayudante/detalle-grupo.html",
     authenticate: true,
     rolVista: 4
+
   })
   .state('detalle-curso-ayudante.detalle-alumno',{
     url:"/ayudante/detalle-alumno",
     templateUrl: "views/ayudante/detalle-alumno.html",
     authenticate: true,
     rolVista: 4
+
   })
   .state('detalle-curso-ayudante.detalle-evaluacion',{
     url:"/ayudante/detalle-evaluacion",
     templateUrl: "views/ayudante/detalle-evaluacion.html",
     authenticate: true,
     rolVista: 4
+
   })
   .state('detalle-curso-ayudante.agregar-alumno',{
     url:"/ayudante/agregar-alumno",
     templateUrl: "views/ayudante/agregar-alumno.html",
     authenticate: true,
     rolVista: 4
+
   })
   .state('detalle-curso-ayudante.agregar-grupo',{
     url:"/ayudante/agregar-grupo",
     templateUrl: "views/ayudante/agregar-grupo.html",
     authenticate: true,
     rolVista: 4
+
   })
   .state('detalle-curso-ayudante.nueva-encuesta',{
     url:"/ayudante/nueva-encuesta",
     templateUrl: "views/ayudante/nueva-encuesta.html",
     authenticate: true,
     rolVista: 4
+
+  })
+
+  .state('detalle-curso-ayudante.ayudante',{
+    url:"/ayudante/ayudante",
+    templateUrl: "views/ayudante/profesor-ayudante.html",
+    authenticate: true,
+    rolVista: 4
+
   })
   .state('404',   {
     url: '/404',

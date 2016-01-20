@@ -1,0 +1,60 @@
+<div ng-controller="AsignarAyudanteAyudante">
+  <br></br>
+  <h5 class="azul-oscuro" style="font-weight: bold;">Ayudante del curso</h5>
+  <br></br>
+  <div class="row">
+    <div class="col s6" ng-show="!$parent.sinAyudante">
+      <div class="icon-block">
+        <h2 class="turquesa"><i class="large material-icons">info_outline</i></h2>
+        <h5 class="azul-oscuro">Datos Ayudante</h5>
+        <br><br>
+        <div class="row">
+          <p class="azul-oscuro col s6">Nombre</p>
+          <p class="azul-oscuro col s6" align="justify">{{ayudante[0].nombre}} {{ayudante[0].apellido_paterno}} {{ayudante[0].apellido_materno}}</p>
+        </div>
+        <div class="row">
+          <p class="azul-oscuro col s6"  align="justify">Correo</p>
+          <p class="azul-oscuro col s6" align="justify">{{ayudante[0].correo}}</p>
+        </div>
+        <div class="row">
+          <p class="azul-oscuro col s6"  align="justify">RUT</p>
+          <p class="azul-oscuro col s6" align="justify">{{ayudante[0].rut}}</p>
+        </div>
+        <a href=""></a>
+      </div>
+    </div>
+    <form ng-submit="asignarAyudante()">
+      <div class="icon-block col s6">
+        <h2 class="turquesa"><i class="large material-icons">new_releases</i></h2>
+        <h5 ng-show="!$parent.sinAyudante">Cambiar Ayudante</h5>
+        <h5 ng-show="$parent.sinAyudante">Asignar Ayudante</h5>        
+        <br><br>
+        <div class="input-field col s7">
+          <select material-select watch ng-model="respuesta.alumno_id">
+            <option ng-repeat="alumno in alumnos" value={{alumno.id}}>{{alumno.nombre}} {{alumno.apellido_paterno}}</option>
+          </select>
+          <label>Seleccione un alumno</label>
+        </div>
+      <button class="col s5 btn waves-effect waves-light" align="middle" type="submit" style="padding:0px;">  
+        Asignar Ayudante
+      </button>
+      </div>
+    </form>
+  </div>
+  <form ng-submit="asignarFuncionalidades()" ng-show="!$parent.sinAyudante">
+    <div class="row icon-block">
+      <h2 class="turquesa"><i class="large material-icons">vpn_key</i></h2>
+      <h5>Asignar Funcionalidades</h5>
+      <br><br>
+      <div class="col s6" flex="50" ng-repeat="funcionalidad in funcionalidades">
+          <input type="checkbox"/ ng-checked="exists(funcionalidad,selected)" ng-click="toggle(funcionalidad,selected)" id="{{funcionalidad.id}}">
+          <label for="{{funcionalidad.id}}">{{funcionalidad.descripcion}}</label>
+      </div>
+    </div>
+    <button class="col s4 btn waves-effect waves-light" align="middle" type="submit" style="padding:0px;">  
+      Asignar Funcionalidades
+    </button>
+  </form>
+  <!--<code style="display: block; padding: 8 px;">{{selected | json}}</code>-->
+</div>
+

@@ -1,6 +1,6 @@
 <br><br>
 <div ng-controller="AgregarGrupoAyudante">
-	<h3 class="row azul-oscuro">Agregar Grupo</h3>
+	<h5 class="row azul-oscuro" style="font-weight:bold;">Agregar Grupo</h5>
 	<br><br>
   <form ng-submit="agregarGrupo()">
   	<h5 class="row">Nombre</h5>
@@ -11,16 +11,29 @@
   	<h5 class="row s6">Descripción</h5>
 		<div input-field>
 		  <textarea ng-model="entrada.descripcionGrupo" required class="materialize-textarea"></textarea>
-		  <label>Ingrese una descripcion</label>
+		  <label>Ingrese una descripción</label>
 		</div>
-	  <div class="row s2 offset-s2">
-		  <button class="btn waves-effect waves-light right" align="middle" type="submit">  
+  	<br><br>
+    <div class="row">
+      <h5>Alumnos</h5>
+      <br>
+      <p style="color:grey">		Seleccione alumnos para agregar al nuevo grupo</p>
+      <br>
+      <div class="col s6" flex="50" ng-repeat="alumno in alumnos">
+          <input required type="checkbox" id="{{alumno.id}}"  ng-checked="exists(alumno,selected)" ng-click="toggle(alumno,selected)" />
+          <label for="{{alumno.id}}" >{{alumno.nombre}} {{alumno.apellido_paterno}} {{alumno.apellido_materno}}</label>
+      </div>
+    </div>
+  	<br><br>
+  	<div class="row">
+	  <div class="col s2">
+			<button class="btn waves-effect waves-light left" align="middle" type="submit">  
 	      Agregar Grupo
 	    </button>
 	  </div>
+	  	<button class="col s2 btn waves-effect waves-light right grey" ui-sref="detalle-curso-ayudante.grupos" align="middle" type="submit" name="action">
+				<span class="azul-oscuro">Volver</span>
+			</button>
+	</div>
   </form>
-  <br><br>
-    <button class="col s2 btn waves-effect waves-light left footerColor" ui-sref="detalle-curso-ayudante.grupos" align="middle" type="submit" name="action">
-		<span class="azul-oscuro">Volver</span>
-	</button>
 </div>

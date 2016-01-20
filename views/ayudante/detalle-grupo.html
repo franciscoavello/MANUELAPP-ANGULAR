@@ -13,7 +13,7 @@
             <a class='dropdown-button btn' data-hover="true" data-activates='drop1' dropdown><i class="tiny material-icons" style="vertical-align:middle">settings</i></a>
             <ul id='drop1' class='dropdown-content'>
               <li><a ng-click="asignarJefe($index)">Jefe de grupo</a></li>
-              <li><a ng-click="eliminarAlumnoGrupo($index)">Eliminar del grupo</a></li>
+              <li><a ng-if="!revisarFuncionalidad(8)" ng-click="eliminarAlumnoGrupo($index)">Eliminar del grupo</a></li>
             </ul>
           </div>
         </div>
@@ -25,7 +25,7 @@
   <button class="col s2 left btn waves-effect waves-light" ui-sref="detalle-curso-ayudante.grupos" align="middle" type="submit" name="action">
     Volver
   </button>
-  <button ng-hide="!revisarFuncionalidad(8)" class="btn waves-effect waves-light col s4 right footerColor" ng-click="eliminarGrupo()" align="middle" type="submit" name="action">
+  <button class="btn waves-effect waves-light col s4 right grey" ng-click="eliminarGrupo()" align="middle" type="submit" name="action">
     <span class="azul-oscuro">Eliminar Grupo</span>
   </button>
   </div>

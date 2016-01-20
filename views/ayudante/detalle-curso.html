@@ -1,6 +1,7 @@
 <div ng-controller="CursoCtrlAyudante">
 <div class="container">
-  <h4 class="orange-text">{{$parent.mi_curso.nombre}}</h4>
+  <h4 class="orange-text container">{{$parent.mi_curso.nombre}}</h4>
+  <br><br>
   <div class="contain blanco wrapper z-depth-2">
     <div class="container">
         <div class="row">
@@ -9,7 +10,7 @@
             <li class="tab col s3"><a class="active" ui-sref="detalle-curso-ayudante.perfil">Perfil</a></li>
             <li class="tab col s3"><a ui-sref="detalle-curso-ayudante.grupos">Grupos</a></li>
             <li class="tab col s3"><a ui-sref="detalle-curso-ayudante.alumnos">Alumnos</a></li>
-            <li class="tab col s3" ng-hide="!revisarFuncionalidad(2)"><a ui-sref="detalle-curso-ayudante.evaluaciones">Encuestas</a></li>
+            <li class="tab col s3"><a ng-if="!revisarFuncionalidad(2) || !revisarFuncionalidad(10)" ui-sref="detalle-curso-ayudante.evaluaciones">Encuestas</a></li>
           </ul>
           <div ui-view></div>
         </div>

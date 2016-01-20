@@ -112,8 +112,7 @@ myApp.controller('LoginCtrl', function (auth, $scope, $location, store, $http, $
                   $rootScope.respAyudante=true
                 }
                 if($rootScope.respAyudante){
-                  $rootScope.permisosAyudante=[
-                    1,
+                  $rootScope.permisosAyudante=[                    
                     2,
                     3,
                     4,
@@ -162,10 +161,10 @@ myApp.controller('LoginCtrl', function (auth, $scope, $location, store, $http, $
   $scope.revisarFuncionalidad = function(funcionalidad) {
     for (var i = 0; i < ($rootScope.permisosAyudante.length); i++) {
         if($rootScope.permisosAyudante[i]==funcionalidad){
-          return true;
+          return false;
         };
     };
-    return false;
+    return true;
   };
 
   $scope.reset = function() {

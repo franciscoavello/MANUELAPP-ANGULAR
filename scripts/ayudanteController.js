@@ -1,6 +1,7 @@
 var myApp = angular.module('myApp');
 
 myApp.controller('CursoCtrlAyudante',function ($http,$scope,$state,$rootScope){
+  $scope.hayAyudante=false;
   $scope.cantidadAlumnos=0;
   $scope.cantidadGrupos=0;
   $scope.cantidadEvaluaciones=0;
@@ -14,7 +15,13 @@ myApp.controller('CursoCtrlAyudante',function ($http,$scope,$state,$rootScope){
   $http.get("http://manuel-api.herokuapp.com/evaluaciones_curso?curso_id="+$rootScope.mi_curso.id)
     .success(function(data) {
       console.log(data);
-      $scope.cantidadEvaluaciones=data.length;
+      if(data.length>0){
+        for(i in data){
+          if(data[i].id==null){
+            $scope.cantidadEvaluaciones++;
+          }
+        }
+      }
     });
   $http.get("http://manuel-api.herokuapp.com/grupos_curso?id="+$rootScope.mi_curso.id)
     .success(function(data) {
@@ -24,7 +31,12 @@ myApp.controller('CursoCtrlAyudante',function ($http,$scope,$state,$rootScope){
   $http.get("http://manuel-api.herokuapp.com/datos_ayudante?curso_id="+$rootScope.mi_curso.id)
     .success(function(data) {
       console.log(data);
-      $scope.ayudante=data;
+      if(data.length>0){
+        $scope.hayAyudante=true;
+        $scope.ayudante=data;
+      }else {
+        $scope.hayAyudante=false;
+      }
     });
 });
 
@@ -49,7 +61,7 @@ myApp.controller('AlumnoCtrlAyudante',function ($http,$scope,$state,$rootScope){
     $http.delete("http://manuel-api.herokuapp.com/borrar_alumno_curso?alumno_id="+$rootScope.mi_alumno.id+"&curso_id="+$rootScope.mi_curso.id)
       .success(function() {
         $scope.alertaEliminacionAlumno=true;
-        go('detalle-curso.alumnos');
+        $state.go('detalle-curso.alumnos');
         setTimeout(function(){
           $rootScope.alertaEliminacionAlumno=false;
           console.log("alertaEliminacionAlumno=false");
@@ -61,9 +73,11 @@ myApp.controller('AlumnoCtrlAyudante',function ($http,$scope,$state,$rootScope){
 
 myApp.controller('GrupoCtrlAyudante',function ($http,$scope,$state,$rootScope){
   $scope.integrantes=[];
-  $scope.alertaEliminacionAlumno=false;
-  $scope.alertaEliminacionGrupo=false;
-  $scope.alertaAsignacionJefe=false;
+  $rootScope.alertaErrorEliminacionGrupo=false;
+  $rootScope.alertaEliminacionAlumno=false;
+  $rootScope.alertaEliminacionGrupo=false;
+  $rootScope.alertaAsignacionJefe=false;
+
   $http.get("http://manuel-api.herokuapp.com/buscar_por_grupo?grupo_id="+$rootScope.mi_grupo.id)
   .success(function(data) {
     console.log(data);
@@ -71,34 +85,70 @@ myApp.controller('GrupoCtrlAyudante',function ($http,$scope,$state,$rootScope){
       $scope.integrantes = data;
     }
   });
+
   $scope.eliminarGrupo = function () {
+
     $http.delete("http://manuel-api.herokuapp.com/grupos/"+$rootScope.mi_grupo.id)
       .success(function() {
-        $scope.alertaEliminacionGrupo=true;
+        $rootScope.alertaEliminacionGrupo=true;
         $state.go("detalle-curso-ayudante.grupos");
         setTimeout(function(){
           $rootScope.alertaEliminacionGrupo=false;
           console.log("alertaEliminacionGrupo=false");
         },2000);
+      })
+      .error(function(err){
+        $rootScope.alertaErrorEliminacionGrupo=true;
+        $state.go("detalle-curso-ayudante.grupos");
+        setTimeout(function(){
+          $rootScope.alertaErrorEliminacionGrupo=false;
+          console.log("alertaErrorEliminacionGrupo=false");
+        },2000);
       });
   };
   $scope.eliminarAlumnoGrupo = function (index) {
-    var id_alumno = $scope.integrantes[index].id;
-    $http.delete("http://manuel-api.herokuapp.com/borrar_alumno?alumno_id="+id_alumno+"&grupo_id="+$rootScope.mi_grupo.id)
+    $scope.id_alumno=$scope.integrantes[index].id;
+    console.log("se va a borrar el id_alumno "+$scope.id_alumno+" del grupo "+$rootScope.mi_grupo.id);
+    $http.delete("http://manuel-api.herokuapp.com/borrar_alumno?alumno_id="+$scope.id_alumno+"&grupo_id="+$rootScope.mi_grupo.id)
       .success(function() {
-        $scope.alertaEliminacionAlumno=true;
+        $rootScope.alertaEliminacionAlumno=true;
         $state.go('detalle-curso-ayudante.grupos');
         setTimeout(function(){
           $rootScope.alertaEliminacionAlumno=false;
           console.log("alertaEliminacionAlumno=false");
         },2000);
+      })
+      .error(function(err){
+        $rootScope.alertaErrorEliminacionAlumno=true;
+        setTimeout(function(){
+          $rootScope.alertaErrorEliminacionAlumno=false;
+          console.log("alertaErrorEliminacionAlumno=false");
+        },2000);
       });
   };
   $scope.asignarJefe = function (index) {
-    var id_alumno = $scope.integrantes[index].id;
-    $http.post("http://manuel-api.herokuapp.com/jefe_grupo?grupo_id="+$rootScope.mi_grupo.id+"&alumno_id="+id_alumno)
+    $scope.id_alumno=$scope.integrantes[index].id;
+    console.log("se va a asignar como jefe al id_alumno "+$scope.id_alumno+" del grupo "+$rootScope.mi_grupo.id);
+    $http.put("http://manuel-api.herokuapp.com/es_jefe", {
+      alumno_id: $scope.id_alumno,
+      grupo_id: $rootScope.mi_grupo.id,
+      jefe: true
+    })
       .success(function() {
-        $scope.alertaAsignacionJefe=true;
+        $rootScope.alertaAsignacionJefe=true;
+        $state.go('detalle-curso-ayudante.grupos');
+        setTimeout(function(){
+          $rootScope.alertaAsignacionJefe=false;
+          console.log("alertaAsignacionJefe=false");
+        },2000);
+      })
+      .error(function(err){
+        $rootScope.alertaErrorAsignacionJefe=true;
+        $state.go('detalle-curso-ayudante.grupos');
+        setTimeout(function(){
+          $rootScope.alertaErrorAsignacionJefe=false;
+          console.log("alertaErrorAsignacionJefe=false");
+        },2000);
       });
   };
 });
@@ -121,7 +171,7 @@ myApp.controller('VerCursosAyudante', function ($rootScope,$http, $scope, $state
       }
       $scope.id_curso_seleccionado =-1;
       $scope.nombreCurso="curso";
-  });
+    });
   $scope.seleccionarCurso = function (id) {
       $scope.id_curso_seleccionado = id;
       console.log("id_curso: "+$scope.id_curso_seleccionado);
@@ -174,7 +224,7 @@ myApp.controller('VerAlumnosAyudante', function ($rootScope,$http, $scope, $stat
     var id_alumno = $scope.alumnos[index].id;
     $http.delete("http://manuel-api.herokuapp.com/borrar_alumno_curso?alumno_id="+id_alumno+"&curso_id="+$rootScope.mi_curso.id)
       .success(function() {
-        $scope.alertaEliminacionAlumno=true;
+        $rootScope.alertaEliminacionAlumno=true;
         $state.go('detalle-curso-ayudante.alumnos');
         setTimeout(function(){
           $rootScope.alertaEliminacionAlumno=false;
@@ -187,7 +237,7 @@ myApp.controller('VerAlumnosAyudante', function ($rootScope,$http, $scope, $stat
 myApp.controller('VerEvaluacionesAyudante', function ($rootScope,$http, $scope, $state) {
   $scope.evaluaciones = [];
   $scope.encuestas = [];
-  $scope.alertaEliminacionEncuesta=false;
+  $rootScope.alertaEliminacionEncuesta=false;
   $http.get("http://manuel-api.herokuapp.com/evaluaciones_curso?curso_id="+$rootScope.mi_curso.id)
     .success(function(data) {
       console.log(data);
@@ -225,9 +275,9 @@ myApp.controller('VerEvaluacionesAyudante', function ($rootScope,$http, $scope, 
 myApp.controller('AgregarAlumnoAyudante', function ($rootScope,$http, $scope, $state) {
   $scope.alumnosFaltantes = [];
   $scope.grupos = [];
-  $scope.alertaAgregarAlumno=false;
-  $scope.alertaAsignarGrupo=false;
-  $http.get("http://manuel-api.herokuapp.com/buscar_por_rol?rol=2")
+  $rootScope.alertaAgregarAlumno=false;
+  $rootScope.alertaAsignarGrupo=false;
+  $http.get("http://manuel-api.herokuapp.com/alumnos.json")
     .success(function(data) {
       console.log(data);
       console.log($rootScope.alumnosCurso);
@@ -253,33 +303,34 @@ myApp.controller('AgregarAlumnoAyudante', function ($rootScope,$http, $scope, $s
     });
   $scope.jefe=false;
   $scope.id_grupo_seleccionado=-1;
+  $scope.selected=[];
+  $scope.toggle=function(item, list){
+    var id = list.indexOf(item);
+    if (id>-1) list.splice(id,1);
+    else list.push(item);
+  };
+  $scope.exists = function (item, list){
+    return list.indexOf(item) > -1;
+  }
   $scope.agregarAlumno = function () {
-    var arreglo={curso_id:$rootScope.mi_curso.id,alumno_id:parseInt($scope.respuesta.alumno_id)};
-    console.log(arreglo);
-    $http.post("http://manuel-api.herokuapp.com/curso_alumnos",arreglo)
-      .success(function() {
-        $scope.alertaAgregarAlumno=true;
-        $state.go("detalle-curso-ayudante.alumnos");
-        setTimeout(function(){
-          $rootScope.alertaAgregarAlumno=false;
-          console.log("desactiva alarma");
-        },2000);
-      });
+
+    for(i in $scope.selected){
+      var arreglo={curso_id:$rootScope.mi_curso.id,alumno_id:$scope.selected[i].id};
+      console.log(arreglo);
+      $http.post("http://manuel-api.herokuapp.com/curso_alumnos",arreglo)
+        .success(function() {
+          $rootScope.alertaAgregarAlumno=true;
+        })
+        .error(function(err){
+          console.log(err);
+        });
+    }
+      $state.go("detalle-curso-ayudante.alumnos");
+      setTimeout(function(){
+        $rootScope.alertaAgregarAlumno=false;
+        console.log("desactiva alarma");
+      },2000);
   }
-  /*
-  $scope.asignarGrupo = function (){
-    var arreglo = {alumno_id: $scope.nuevo_alumno_id , grupo_id: $scope.id_grupo_seleccionado, jefe: $scope.jefe }
-    $http.post("http://manuel-api.herokuapp.com/grupo_alumnos",arreglo)
-      .success(function() {
-        $scope.alertaAsignarGrupo=true;
-      });
-  }
-  $scope.asignarValor = function (index){
-    $scope.id_grupo_seleccionado=grupos[index].id;
-  }
-  $scope.asignarJefe = function (valor){
-    $scope.jefe=valor;
-  }*/
 });
 
 myApp.controller('NuevaEncuestaAyudante', function ($rootScope,$http, $scope, $state) {
@@ -295,29 +346,58 @@ myApp.controller('NuevaEncuestaAyudante', function ($rootScope,$http, $scope, $s
   $scope.nuevaEncuesta = function (){
     console.log($scope.encuesta_id);
     //hace un post y publica encuesta
-    $rootScope.alertaNuevaEncuesta=true;
-    $state.go("detalle-curso-ayudante.evaluaciones");
-    setTimeout(function(){
-      $rootScope.alertaNuevaEncuesta=false;
-      console.log("holi");
-    },2000);
+    var arreglo={contestada:0,curso_id:$rootScope.mi_curso.id,encuesta_id:$scope.encuesta_id};
+    $http.post("http://manuel-api.herokuapp.com/evaluaciones",arreglo)
+    .success(function() {
+      $rootScope.alertaNuevaEncuesta=true;
+      $state.go("detalle-curso-ayudante.evaluaciones");
+      setTimeout(function(){
+        $rootScope.alertaNuevaEncuesta=false;
+      },2000);
+    });
+
   }
 });
 
 myApp.controller('AgregarGrupoAyudante', function ($rootScope,$http, $scope, $state) {
   $rootScope.alertaAgregarGrupo=false;
   $scope.entrada={};
+  $scope.selected=[];
+  $scope.alumnos=[];
+  $http.get("http://manuel-api.herokuapp.com/buscar_alumnos_curso?curso_id="+$rootScope.mi_curso.id)
+    .success(function(data) {
+      if(data.length>0){
+        console.log(data);
+        $scope.alumnos = data;
+      }
+    });
+  $scope.toggle=function(item, list){
+    var id = list.indexOf(item);
+    if (id>-1) list.splice(id,1);
+    else list.push(item);
+  };
+  $scope.exists = function (item, list){
+    return list.indexOf(item) > -1;
+  }
   $scope.agregarGrupo = function (){
     console.log($scope.entrada.nombreGrupo+" "+$scope.entrada.descripcionGrupo);
-    var arreglo={nombre:$scope.entrada.nombreGrupo,curso_id:$rootScope.mi_curso.id,descripcion:$scope.entrada.descripcionGrupo}
-    $http.post("http://manuel-api.herokuapp.com/grupos",arreglo)
+    var arreglo={nombre:$scope.entrada.nombreGrupo,curso_id:$rootScope.mi_curso.id,descripcion:$scope.entrada.descripcionGrupo};
+    /*$http.post("http://manuel-api.herokuapp.com/grupos",arreglo)
       .success(function() {
         $rootScope.alertaAgregarGrupo=true;
+        for(i in selected){
+          $http.post("http://manuel-api.herokuapp.com/grupo_alumnos", { 
+            alumno_id: $scope.selected[i].id, 
+            grupo_id: ,
+            jefe: false
+          });
+        }
+        $state.go("detalle-curso-ayudante.grupos");
+        setTimeout(function(){
+          $rootScope.alertaAgregarGrupo=false;
+          console.log("AlertaAgregarGrupo=false");
+        },2000);
       });
-    $state.go("detalle-curso-ayudante.grupos");
-    setTimeout(function(){
-      $rootScope.alertaAgregarGrupo=false;
-      console.log("AlertaAgregarGrupo=false");
-    },2000);
+    */
   }
 });

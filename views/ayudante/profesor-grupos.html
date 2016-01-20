@@ -1,11 +1,11 @@
 <div ng-controller="VerGruposAyudante">
   <br></br>
+  <h5 class="azul-oscuro" style="font-weight: bold;">Grupos del curso</h5>
   <br></br>
   <div class="row">
     <div class="col s3 right">
-      <button ng-hide="!revisarFuncionalidad(5)" class="btn waves-effect waves-light right row" ui-sref="detalle-curso-ayudante.agregar-grupo" style="padding:0px;" align="middle" type="submit" name="action">   
-        <div class="col s1"><h5 class="top" style="padding:5px;border:0px;margin:0px;">+</h5></div>
-        <div class="col s10 right" >Nuevo grupo</div>
+      <button ng-if="!revisarFuncionalidad(5) || !revisarFuncionalidad(9)" class="btn waves-effect waves-light right row" ui-sref="detalle-curso-ayudante.agregar-grupo" align="middle" type="submit" name="action">
+        Nuevo grupo
       </button>
     </div>
   </div>

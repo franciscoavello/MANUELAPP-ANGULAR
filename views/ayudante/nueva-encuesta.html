@@ -1,20 +1,21 @@
 <br><br>
 <div ng-controller="NuevaEncuestaAyudante">
-	<h3 class="row azul-oscuro">Nueva encuesta</h3>
+	<h5 class="row azul-oscuro" style="font-weight:bold;">Publicar encuesta</h5>
 	<br><br>
   <form ng-submit="nuevaEncuesta()">
-   	<div class="input-field col s6">
-   		<select material-select watch ng-model="encuesta_id">
-      	<option ng-repeat="encuesta in encuestas" value="{{encuesta.id}}">{{encuesta.nombre}}</option>
+   	<div required class="input-field row s8">
+   		<select required material-select watch ng-model="encuesta_id">
+      	<option required ng-repeat="encuesta in encuestas" value="{{encuesta.id}}">{{encuesta.nombre}}</option>
     	</select>
     <label>Seleccione una encuesta</label>
   	</div>
-		  <button class="col s2 btn waves-effect waves-light right" align="middle" type="submit">  
-	      Publicar encuesta
+    <div class="row">
+		  <button class="col s2 btn waves-effect waves-light left" align="middle" type="submit">  
+	      Publicar
 	    </button>
-      <button class="col s2 btn waves-effect waves-light left footerColor" ui-sref="detalle-curso-ayudante.evaluaciones" align="middle" type="submit" name="action">
+      <button class="col s2 btn waves-effect waves-light grey right" ui-sref="detalle-curso-ayudante.evaluaciones" align="middle" type="submit" name="action">
         <span class="azul-oscuro">Volver</span>
-    </button>
-	  </div>
+      </button>
+    </div>
   </form>
 </div>
