@@ -20,8 +20,7 @@
         <tbody ng-repeat="curso in cursos| limitTo:15 | filter:searchText" id="{{curso.id}}">
 
             <td>
-              <span data-ng-hide="editar">{{curso.nombre}}</span>
-              <input type="text" data-ng-show="editar" data-ng-model="curso.nombre" data-ng-required>
+              {{curso.nombre}}
             </td>
             <!--
             <td>
@@ -34,8 +33,7 @@
             </td>
           -->
             <td>
-              <span data-ng-hide="editar">{{curso.ano}}</span>  
-              <input type="text" data-ng-show="editar" data-ng-model="curso.ano" data-ng-required>
+              {{curso.ano}}
             </td>
             <td>
           <!--
@@ -66,23 +64,37 @@
                               {{detalle.id}}
                             </td>
                             <td>
-                              {{detalle.nombre}}
+                              
+                              <span data-ng-hide="editar">{{detalle.nombre}}</span>  
+                              <input required type="text" data-ng-show="editar" data-ng-model="curso.nombre" data-ng-required>
                             </td>
                             <td>
-                              {{detalle.descripcion}}
+                              
+                              <span data-ng-hide="editar">{{detalle.descripcion}}</span>  
+                              <input required type="text" data-ng-show="editar" data-ng-model="curso.descripcion" data-ng-required>
                             </td>
                             <td>
-                              {{detalle.semestre}}
+                              
+                              <span data-ng-hide="editar">{{detalle.semestre}}</span>  
+                              <input required type="text" data-ng-show="editar" data-ng-model="curso.semestre" data-ng-required>
                             </td>
                             <td>
-                              {{detalle.ano}}
+                              
+                              <span data-ng-hide="editar">{{detalle.ano}}</span>  
+                              <input required type="text" data-ng-show="editar" data-ng-model="curso.ano" data-ng-required>
                             </td>
                             <td>
-                              {{detalle.profesor}}
+                              
+                              <span data-ng-hide="editar">{{detalle.profesor}}</span>  
+                              <input required type="text" data-ng-show="editar" data-ng-model="curso.profesor" data-ng-required>
                             </td>
                           </tbody>
                         </table>
-
+                        <div class="row col s12">
+                        <button type="submit" data-ng-hide="editar" data-ng-click="editar=true; editarCurso(curso)" class="btn waves-effect waves-light green"><i class="material-icons">create</i></button>
+                        <button type="submit" data-ng-show="editar" data-ng-click="editar=false;guardarCampo($index)" class="btn waves-effect waves-light green"><i class="material-icons">done</i></button>
+                        <button type="submit" data-ng-show="editar" data-ng-click="editar=false; cancelar($index)" class="btn waves-effect waves-light red"><i class="material-icons">clear</i></button>
+                        </div>
                         <h5 class="azul-oscuro">Alumnos del Curso</h5>
                         <table class="striped"  ng-hide="loadingDetalle">
                           <thead>
@@ -111,14 +123,12 @@
                     </div>
                 </div>
 
-            </td>
-
-
-            <td>
+              <!--
               <button type="submit" data-ng-hide="editar" data-ng-click="editar=true; editarCurso(curso)" class="btn waves-effect waves-light green"><i class="material-icons">create</i></button>
               <button type="submit" data-ng-show="editar" data-ng-click="editar=false;guardarCampo($index)" class="btn waves-effect waves-light green"><i class="material-icons">done</i></button>
               <button type="submit" data-ng-show="editar" data-ng-click="editar=false; cancelar($index)" class="btn waves-effect waves-light red"><i class="material-icons">clear</i></button>
             </td>
+          -->
         </tbody>
       </table>
   </div>

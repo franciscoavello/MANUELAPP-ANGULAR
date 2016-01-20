@@ -20,8 +20,7 @@
 
         <tbody ng-repeat="tipo in tipos| limitTo:15 | filter:searchText" id="{{tipo.id}}">
             <td>
-              <span data-ng-hide="editar">{{tipo.nombre}}</span>
-              <input type="text" data-ng-show="editar" data-ng-model="tipo.nombre" data-ng-required>
+              {{tipo.nombre}}
             </td>
           <!--  <td>
               <span data-ng-hide="editar">{{tipo.descripcion}}</span>
@@ -55,25 +54,32 @@
                               {{detalle.id}}
                             </td>
                             <td>
-                              {{detalle.nombre}}
+                              <span data-ng-hide="editar">{{detalle.nombre}}</span>
+                              <input type="text" data-ng-show="editar" data-ng-model="tipo.nombre" data-ng-required>
                             </td>
                             <td>
-                              {{detalle.descripcion}}
+                              <span data-ng-hide="editar">{{detalle.descripcion}}</span>
+                              <input type="text" data-ng-show="editar" data-ng-model="tipo.descripcion" data-ng-required>
                             </td>
                           </tbody>
                         </table>
-
+                        <div class="row col s12"> 
+                        <button type="submit" data-ng-hide="editar" data-ng-click="editar=true; editarTipoEncuesta(tipo)" class="btn waves-effect waves-light green"><i class="material-icons">create</i></button>
+                        <button type="submit" data-ng-show="editar" data-ng-click="editar=false;guardarCampo($index); avisoEditarTipo=true" class="btn waves-effect waves-light green"><i class="material-icons">done</i></button>
+                        <button type="submit" data-ng-show="editar" data-ng-click="editar=false; cancelar($index)" class="btn waves-effect waves-light red"><i class="material-icons">clear</i></button>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <a  class=" modal-action modal-close waves-effect waves-green btn-flat">Salir</a>
                     </div>
                 </div>
             </td>
+            <!--
             <td>
               <button type="submit" data-ng-hide="editar" data-ng-click="editar=true; editarTipoEncuesta(tipo)" class="btn waves-effect waves-light green"><i class="material-icons">create</i></button>
               <button type="submit" data-ng-show="editar" data-ng-click="editar=false;guardarCampo($index); avisoEditarTipo=true" class="btn waves-effect waves-light green"><i class="material-icons">done</i></button>
               <button type="submit" data-ng-show="editar" data-ng-click="editar=false; cancelar($index)" class="btn waves-effect waves-light red"><i class="material-icons">clear</i></button>
-            </td>
+            </td>-->
         </tbody>
       </table>
   </div>
