@@ -1,32 +1,36 @@
 <div class="row" ng-controller="GrupoCtrl">
   <br></br>
-  <h4 class="azul-oscuro">{{$parent.mi_grupo.nombre}}</h4>
+  <h5 class="azul-oscuro" style="font-weight:bold;">{{$parent.mi_grupo.nombre}}</h5>
   <p class="azul-oscuro" align="justify">{{$parent.mi_grupo.descripcion}}.</p>
-  <div class="row">
-    <div class="col s12">
-      <div class="divider row" style="margin:0px;"></div>
-      <div ng-repeat="integrante in integrantes">
-        <div class="section row" style="margin:0px;">
-          <div class="col s5"><h5 class="azul-oscuro">{{integrante.nombre}} {{integrante.apellido_paterno}} {{integrante.apellido_materno}}</h5></div>
-          <div class="col s2"><p class="azul-oscuro">{{integrante.correo}}</p></div>
-          <div class="col s2 right">
-            <a class='dropdown-button btn' data-hover="true" data-activates='drop1' dropdown><i class="tiny material-icons" style="vertical-align:middle">settings</i></a>
-            <ul id='drop1' class='dropdown-content'>
-              <li><a ng-click="asignarJefe($index)">Jefe de grupo</a></li>
-              <li><a ng-click="eliminarAlumnoGrupo($index)">Eliminar del grupo</a></li>
-            </ul>
+  <div class="row s12">
+    <div class="divider row" style="margin:0px;"></div>
+    <div ng-repeat="integrante in integrantes">
+      <div class="section row" style="margin:0px;">
+        <div class="col s4"><h5 class="azul-oscuro">{{integrante.nombre}} {{integrante.apellido_paterno}} {{integrante.apellido_materno}}</h5></div>
+        <div class="col s3"><p class="azul-oscuro">{{integrante.correo}}</p></div>
+          <button ng-show="!integrante.jefe" class="col s3 btn waves-effect waves-light " ng-click="asignarJefe(integrante)" align="middle" type="button">  
+            Asignar Jefe
+          </button>
+          <div class="col s3 card-panel footerColor" style="padding:0 px;margin:0 px;" ng-show="integrante.jefe">
+            <p class="azul-oscuro" align="center" style="font-weight:bold;">Jefe de grupo</p>
           </div>
-        </div>
-        <div class="divider row" style="margin:0px;"></div>
+        <div class>
+        <div class="col s2">
+          <button class="btn waves-effect waves-light right grey" ng-click="eliminarAlumnoGrupo(integrante)" align="middle" type="button">
+            Eliminar del grupo
+          </button>
+        </div> 
       </div>
+      <div class="divider row" style="margin:0px;"></div>
     </div>
   </div>
   <div class="row">
+  <br>
   <button class="col s2 left btn waves-effect waves-light" ui-sref="detalle-curso.grupos" align="middle" type="submit" name="action">
     Volver
   </button>
   <button class="btn waves-effect waves-light col s4 right grey" ng-click="eliminarGrupo()" align="middle" type="submit" name="action">
-    <span class="azul-oscuro">Eliminar Grupo</span>
+    Eliminar Grupo
   </button>
   </div>
   <br></br>

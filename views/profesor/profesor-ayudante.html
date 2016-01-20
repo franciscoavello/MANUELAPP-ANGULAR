@@ -30,8 +30,8 @@
         <h5 ng-show="$parent.sinAyudante">Asignar Ayudante</h5>        
         <br><br>
         <div class="input-field col s7">
-          <select material-select watch ng-model="respuesta.alumno_id">
-            <option ng-repeat="alumno in alumnos" value={{alumno.id}}>{{alumno.nombre}} {{alumno.apellido_paterno}}</option>
+          <select material-select watch ng-model="respuesta.alumno">
+            <option ng-repeat="alumno in alumnos" value={{alumno}}>{{alumno.nombre}} {{alumno.apellido_paterno}}</option>
           </select>
           <label>Seleccione un alumno</label>
         </div>

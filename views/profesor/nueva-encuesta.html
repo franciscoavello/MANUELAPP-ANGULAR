@@ -3,6 +3,7 @@
 	<h5 class="row azul-oscuro" style="font-weight:bold;">Publicar encuesta</h5>
 	<br><br>
   <form ng-submit="nuevaEncuesta()">
+    <h5>Plantilla</h5>
    	<div required class="input-field row s8">
    		<select required material-select watch ng-model="encuesta_id">
       	<option required ng-repeat="encuesta in encuestas" value="{{encuesta.id}}">{{encuesta.nombre}}</option>
