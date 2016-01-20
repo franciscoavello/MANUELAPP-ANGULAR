@@ -199,6 +199,7 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
       authenticate: true,
       rolVista: 1
     })
+
     .state('detalle-curso.alumnos', {
       url: "/alumnos",
       templateUrl: "views/profesor/profesor-alumnos.html",
@@ -216,6 +217,13 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
   .state('detalle-curso.detalle-grupo',{
     url:"/detalle-grupo",
     templateUrl: "views/profesor/detalle-grupo.html",
+    authenticate: true,
+    rolVista: 1
+
+  })
+  .state('detalle-curso.agregar-alumnos-grupo',{
+    url:"/agregar-alumnos",
+    templateUrl: "views/profesor/agregar-alumnos-grupo.html",
     authenticate: true,
     rolVista: 1
 

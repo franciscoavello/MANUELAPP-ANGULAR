@@ -14,26 +14,16 @@
 		  <label>Ingrese una descripción</label>
 		</div>
   	<br><br>
-    <div class="row">
-      <h5>Alumnos</h5>
-      <br>
-      <p style="color:grey">		Seleccione alumnos para agregar al nuevo grupo</p>
-      <br>
-      <div class="col s6" flex="50" ng-repeat="alumno in alumnos">
-          <input required type="checkbox" id="{{alumno.id}}"  ng-checked="exists(alumno,selected)" ng-click="toggle(alumno,selected)" />
-          <label for="{{alumno.id}}" >{{alumno.nombre}} {{alumno.apellido_paterno}} {{alumno.apellido_materno}}</label>
-      </div>
-    </div>
   	<br><br>
   	<div class="row">
-	  <div class="col s2">
-			<button class="btn waves-effect waves-light left" align="middle" type="submit">  
-	      Agregar Grupo
-	    </button>
-	  </div>
+		  <div class="col s2">
+				<button class="btn waves-effect waves-light left" align="middle" type="submit">  
+		      Agregar Grupo
+		    </button>
+		  </div>
 	  	<button class="col s2 btn waves-effect waves-light right grey" ui-sref="detalle-curso.grupos" align="middle" type="submit" name="action">
 				<span class="azul-oscuro">Volver</span>
 			</button>
-	</div>
+		</div>
   </form>
 </div>

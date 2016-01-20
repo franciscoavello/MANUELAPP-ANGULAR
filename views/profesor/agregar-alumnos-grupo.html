@@ -1,0 +1,24 @@
+<div ng-controller="AgregarAlumnosGrupo">
+  <h5 class="row azul-oscuro" style="font-weight:bold;">Agregar Alumnos al grupo</h5>
+  <br>
+  <p style="color:grey">		Seleccione alumnos para agregar al nuevo grupo</p>
+  <br>
+  <form ng-submit="asignarAlumnos()">
+	  <div class="col s6" flex="50" ng-repeat="alumno in alumnosFueraGrupo">
+	      <input type="checkbox" id="{{alumno.id}}"  ng-checked="exists(alumno,selected)" ng-click="toggle(alumno,selected)" />
+	      <label for="{{alumno.id}}" >{{alumno.nombre}} {{alumno.apellido_paterno}} {{alumno.apellido_materno}}</label>
+	  </div>
+		<br><br>
+		<br><br>
+		<div class="row">
+		  <div class="col s4">
+				<button class="btn waves-effect waves-light left" align="middle" type="submit">  
+		      Agregar alumnos
+		    </button>
+		  </div>
+	  	<button class="col s2 btn waves-effect waves-light right grey" ui-sref="detalle-curso.detalle-grupo" align="middle" name="action">
+				<span class="azul-oscuro">Volver</span>
+			</button>
+		</div>
+  </form>
+</div>

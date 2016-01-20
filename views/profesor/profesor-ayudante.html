@@ -47,7 +47,7 @@
       <h5>Asignar Funcionalidades</h5>
       <br><br>
       <div class="col s6" flex="50" ng-repeat="funcionalidad in funcionalidades">
-          <input type="checkbox"/ ng-checked="exists(funcionalidad,selected)" ng-click="toggle(funcionalidad,selected)" id="{{funcionalidad.id}}">
+          <input type="checkbox"/ ng-checked="exists(funcionalidad)" ng-click="toggle(funcionalidad)" id="{{funcionalidad.id}}">
           <label for="{{funcionalidad.id}}">{{funcionalidad.descripcion}}</label>
       </div>
     </div>
@@ -55,6 +55,9 @@
       Asignar Funcionalidades
     </button>
   </form>
-  <!--<code style="display: block; padding: 8 px;">{{selected | json}}</code>-->
+  <!--
+  <code class="row" style="display: block; padding: 8 px;">{{selected | json}}</code>
+  <code class="row" style="display: block; padding: 8 px;">{{funcionalidadesAntiguas | json}}</code>-->
+
 </div>
 

@@ -1,8 +1,13 @@
 <div class="row" ng-controller="GrupoCtrl">
   <br></br>
-  <h5 class="azul-oscuro" style="font-weight:bold;">{{$parent.mi_grupo.nombre}}</h5>
-  <p class="azul-oscuro" align="justify">{{$parent.mi_grupo.descripcion}}.</p>
-  <div class="row s12">
+  <div class="row">
+    <h5 class="col s2 azul-oscuro left" style="font-weight:bold;">{{$parent.mi_grupo.nombre}}</h5>
+    <p class="col s6 azul-oscuro left" align="justify">{{$parent.mi_grupo.descripcion}}.</p>
+    <button class="col s3 btn waves-effect waves-light right" ui-sref="detalle-curso.agregar-alumnos-grupo" align="middle" type="button">  
+      Agregar alumnos
+    </button>
+  </div>
+  <div class="s12">
     <div class="divider row" style="margin:0px;"></div>
     <div ng-repeat="integrante in integrantes">
       <div class="section row" style="margin:0px;">
@@ -11,7 +16,7 @@
           <button ng-show="!integrante.jefe" class="col s3 btn waves-effect waves-light " ng-click="asignarJefe(integrante)" align="middle" type="button">  
             Asignar Jefe
           </button>
-          <div class="col s3 card-panel footerColor" style="padding:0 px;margin:0 px;" ng-show="integrante.jefe">
+          <div class="col s3 card-panel footerColor" style="padding:0 px;margin:0 px;border:0px;" ng-show="integrante.jefe">
             <p class="azul-oscuro" align="center" style="font-weight:bold;">Jefe de grupo</p>
           </div>
         <div class>
@@ -23,6 +28,7 @@
       </div>
       <div class="divider row" style="margin:0px;"></div>
     </div>
+  </div>
   </div>
   <div class="row">
   <br>
