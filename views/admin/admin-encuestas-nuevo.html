@@ -50,13 +50,12 @@
   <div class="container1">
   <span ng-repeat="pregunta in preguntas | filter:searchText">
       <p>
-      <input type="checkbox" id="{{pregunta.id}}" />
+      <input type="checkbox" id="{{pregunta.id}}" ng-model="seleccionadas[$index]" ng-true-value="{{pregunta.id}}" ng-false-value="-1"/>
       <label for="{{pregunta.id}}">{{pregunta.enunciado}}</label>
     </p>
     </span>
   </div>  
 </div>
-
 
 <div class="row">
  

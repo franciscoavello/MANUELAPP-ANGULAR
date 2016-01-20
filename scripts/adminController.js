@@ -485,6 +485,7 @@ $scope.avisoCrearCurso = false;
 
 myApp.controller('agregarEncuesta', ['$scope','$http', function($scope,$http) {
  $scope.preguntas= [];
+ $scope.seleccionadas= [];
   $http.get("http://manuel-api.herokuapp.com/pregunta.json")
         .success(function(data){
           $scope.preguntas = data;
@@ -510,8 +511,18 @@ $http.get("http://manuel-api.herokuapp.com/mostrar_tipos_encuestas")
         descripcion: $scope.descripcion,
         tipo_encuesta_id: $scope.tipo 
     }).success(function(data) {
+      $scope.salida = data;
+      //$scope.salida.id  // id de la encuesta creada
+       for(x=0; x< $scope.seleccionadas.length; x++) {
+            if($scope.seleccionadas[x]!="null" && $scope.seleccionadas[x]!="-1" ){
+              $http.post("http://manuel-api2.herokuapp.com/encuesta_pregunta",{
+                encuesta_id : $scope.salida.id,
+                pregunta_id : $scope.seleccionadas[x]
+              });
+            }
+        }
+      console.log(data);
       $scope.avisoCrearEncuesta = true;
-      //console.log(data);
       //$scope.cantidadGrupos=data.length;
     });
   };
