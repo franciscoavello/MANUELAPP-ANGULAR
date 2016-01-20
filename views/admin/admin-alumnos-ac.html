@@ -72,29 +72,29 @@
                             <td>
                               
                               <span data-ng-hide="editar">{{detalle.nombre}}</span>
-                              <input required type="text" data-ng-show="editar" data-ng-model="alumno.nombre" data-ng-required>
+                              <input required type="text" data-ng-show="editar" data-ng-model="detalle.nombre" data-ng-required>
                             </td>
                             <td>
                               
                               <span data-ng-hide="editar">{{detalle.apellido_paterno}}</span>
-                              <input required type="text" data-ng-show="editar" data-ng-model="alumno.apellido_paterno" data-ng-required>
+                              <input required type="text" data-ng-show="editar" data-ng-model="detalle.apellido_paterno" data-ng-required>
                             </td>
                             <td>
                               
                               <span data-ng-hide="editar">{{detalle.apellido_materno}}</span>
-                              <input required type="text" data-ng-show="editar" data-ng-model="alumno.apellido_materno" data-ng-required>
+                              <input required type="text" data-ng-show="editar" data-ng-model="detalle.apellido_materno" data-ng-required>
                             </td>
                             <td>
                               
                               <span data-ng-hide="editar">{{detalle.correo}}</span>
-                              <input required type="text" data-ng-show="editar" data-ng-model="alumno.correo" data-ng-required>
+                              <input required type="text" data-ng-show="editar" data-ng-model="detalle.correo" data-ng-required>
                             </td>
                           </tbody>
                         </table>
                         <div class="row col s12">
-                        <button type="submit" data-ng-hide="editar" data-ng-click="editar=true; editarAlumno(alumno)" class="btn waves-effect waves-light green"><i class="material-icons">create</i></button>
+                        <button type="submit" data-ng-hide="editar" data-ng-click="editar=true; editarAlumno(detalle)" class="btn waves-effect waves-light green"><i class="material-icons">create</i></button>
                         <button type="submit" data-ng-show="editar" data-ng-click="editar=false;guardarCampo($index);" class="btn waves-effect waves-light green"><i class="material-icons">done</i></button>
-                        <button type="submit" data-ng-show="editar" data-ng-click="editar=false; cancelar($index)" class="btn waves-effect waves-light red"><i class="material-icons">clear</i></button>
+                        <button type="submit" data-ng-show="editar" data-ng-click="editar=false" class="btn waves-effect waves-light red"><i class="material-icons">clear</i></button>
                         </div>
                       <h5 class="azul-oscuro">Cursos a los que Pertenece</h5>
                         <table class="striped">

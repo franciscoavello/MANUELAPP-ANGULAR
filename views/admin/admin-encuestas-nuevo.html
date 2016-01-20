@@ -35,12 +35,12 @@
 <div class="col s6 card teal offset-s1">
   <div class="card-content white-text">
     <h5>Encuesta a Generar</h5>
-    <p>Nombre: <input required id="first_name" type="text" ng-model="nombre" class="validate" >
+    <p>Nombre: <input ng-required="true" required id="first_name" type="text" ng-model="nombre" class="validate" >
                 <label for="first_name"></label></p>
-    <p>Tipo: <select required material-select watch  ng-model="tipo">
+    <p>Tipo: <select ng-required="true" required material-select watch  ng-model="tipo">
                   <option ng-repeat="tipo in tipos" value="{{tipo.id}}">{{tipo.nombre}}</option>
                 </select></p>
-    <p>Descripcion: <input required id="descripcion" type="text" ng-model="descripcion" class="validate" ></p>
+    <p>Descripcion: <input ng-required="true" required id="descripcion" type="text" ng-model="descripcion" class="validate" ></p>
   </div>
 </div>
 
@@ -59,6 +59,7 @@
 
 <div class="row">
  
+ {{aAgregar}}
 
     <div class="input-field col s12" >
         <button class="btn waves-effect waves-light" ng-click="update();avisoCrearEncuesta=true" name="action"  type="reset">Aceptar

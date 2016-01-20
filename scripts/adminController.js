@@ -206,7 +206,7 @@ myApp.controller("verProfesores", function($scope,$http){
     };
 
     $scope.habilitarProfesor = function(index){
-      
+
       $http.put("http://"+direccion+"/actualizar_profesor/", {
       id: index,
       estado: true
@@ -407,7 +407,10 @@ myApp.controller('verCursos', function ($http, $scope, $state) {
 
 myApp.controller('agregarAlumno', ['$scope','$http', function($scope,$http) {
   $scope.avisoCrearAlumno = false;
+  $
+
  $scope.SendData = function () {
+
           var alumno={
             nombre:$scope.nombre,
             apellido_paterno: $scope.apellido_paterno,
@@ -417,13 +420,17 @@ myApp.controller('agregarAlumno', ['$scope','$http', function($scope,$http) {
             rol: 2
             
           }
-    $http.post("http://"+direccion+"/usuarios",alumno)
+    if (alumno.nombre.length>0 &&  alumno.apellido_paterno.length>0 && alumno.correo.length>0 && alumno.rut.length>0) {
+      $http.post("http://"+direccion+"/usuarios",alumno)
 
-      .success(function() {
+      .success(function(data) {
         $scope.avisoCrearAlumno = true;
+        console.log(data);
       });
 
         };
+    }
+    
 }]);
 
 myApp.controller('agregarProfesor', ['$scope','$http', function($scope,$http) {
@@ -524,6 +531,7 @@ $http.get("http://"+direccion+"/mostrar_tipos_encuestas")
         tipo_encuesta_id: $scope.tipo 
     }).success(function(data) {
       $scope.salida = data;
+      $scope.contador = 0;
       //$scope.salida.id  // id de la encuesta creada
        for(x=0; x< $scope.seleccionadas.length; x++) {
             if($scope.seleccionadas[x]!="null" && $scope.seleccionadas[x]!="-1" ){
@@ -532,7 +540,9 @@ $http.get("http://"+direccion+"/mostrar_tipos_encuestas")
                 pregunta_id : $scope.seleccionadas[x]
               });
             }
+            $scope.contador +=1;
         }
+        $scope.seleccionadas = [];
       console.log(data);
       $scope.avisoCrearEncuesta = true;
       //$scope.cantidadGrupos=data.length;
