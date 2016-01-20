@@ -5,7 +5,7 @@
   <div class="row">
     <div class="col s3 right">
       <button class="btn waves-effect waves-light right row" ui-sref="detalle-curso.nueva-encuesta" align="middle" type="submit" name="action"> 
-        Nueva encuesta
+        Publicar encuesta
       </button>
     </div>
   </div>
@@ -13,11 +13,12 @@
     <div class="col s6 offset-s2 alert-box success"><span>correcto: </span>La encuesta se ha publicada con éxito.</div> 
   </div>
   <div class="divider s10 row"></div>
-  <div ng-repeat="encuesta in encuestas">
-    <div class="section s10 row">
-        <div class="col s4"><h5 class="azul-oscuro">{{encuesta.nombre}}</h5></div>
-        <div class="col s4"><p class="azul-oscuro">{{encuesta.descripcion}}</p></div>
-        <div class="col s2"><p class="azul-oscuro">{{evaluaciones[$index].contestada}} encuesta(s) respondida(s)</p></div>
+  <div ng-repeat="evaluacion in evaluaciones">
+    <div class="section s12 row">
+        <div class="col s5"><h5 class="azul-oscuro">{{$parent.encuestas[$index].nombre}} {{evaluacion.nombre}}</h5></div>
+        <div class="col s3"><p class="azul-oscuro">{{$parent.encuestas[$index].descripcion}}</p></div>
+        <div class="col s2"><p class="azul-oscuro" ng-show="evaluacion.contestada">Ha sido contestada</p></div>
+        <div class="col s2"><p class="azul-oscuro" ng-show="!evaluacion.contestada">No ha sido contestada</p></div>
         <div class="col s2">
           <button class="btn waves-effect waves-light right"  ng-click="seleccionarEvaluacion($index)" align="middle" type="button">  
             Detalle
