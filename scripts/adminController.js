@@ -1,5 +1,8 @@
 
 var myApp = angular.module('myApp');
+var direccion = "localhost:3000"
+var heroku ="manuel-api.herokuapp.com"
+var heroku2 ="manuel-api2.herokuapp.com"
 
 
 myApp.controller("verEncuestas", function($scope,$http,$rootScope){
@@ -7,7 +10,7 @@ myApp.controller("verEncuestas", function($scope,$http,$rootScope){
     $scope.editando = false;
     $scope.loading = true;
     $scope.alertaEditarEncuesta = false;
-      $http.get("http://manuel-api.herokuapp.com/mostrar_encuestas")
+      $http.get("http://"+direccion+"/mostrar_encuestas")
         .success(function(data){
           $scope.encuestas = data;          
           $scope.loading = false;
@@ -23,7 +26,7 @@ myApp.controller("verEncuestas", function($scope,$http,$rootScope){
     $scope.obtenerEncuesta= function(index){
       $scope.detalle = $scope.encuestas[index];
       $scope.preguntas = [];
-      $http.get("http://manuel-api.herokuapp.com/preguntas_encuesta?encuesta_id="+index)
+      $http.get("http://"+direccion+"/preguntas_encuesta?encuesta_id="+index)
         .success(function(data){
           $scope.preguntas = data;          
           $scope.loadingDetalle = false;
@@ -36,7 +39,7 @@ myApp.controller("verEncuestas", function($scope,$http,$rootScope){
         //if ($scope.editing !== false) {
             //$scope.encuestas[$scope.editando] = $scope.newField;
 
-      $http.put("http://manuel-api.herokuapp.com/encuesta/"+index, {
+      $http.put("http://"+direccion+"/encuesta/"+index, {
           nombre: $scope.newField[$scope.editando].nombre, 
           descripcion: $scope.newField[$scope.editando].descripcion
        }).success(function() {
@@ -56,7 +59,7 @@ myApp.controller("verEncuestas", function($scope,$http,$rootScope){
   $scope.eliminarEncuesta = function(index){
     $scope.alertaEliminarEncuesta=false;
 
-    $http.delete("http://manuel-api.herokuapp.com/encuesta/"+$scope.encuestas[index].id)
+    $http.delete("http://"+direccion+"/encuesta/"+$scope.encuestas[index].id)
       .success(function(){
         $scope.alertaEliminarEncuesta=true;
         $state.go('adminencuestas.ver');
@@ -79,7 +82,7 @@ myApp.controller("verTiposEncuestas", function($scope,$http,$rootScope){
   $scope.loading=true;
 
 
-  $http.get("http://manuel-api.herokuapp.com/mostrar_tipos_encuestas")
+  $http.get("http://"+direccion+"/mostrar_tipos_encuestas")
     .success(function(data){
         $scope.tipos = data;   
         $scope.loading = false;      
@@ -103,7 +106,7 @@ myApp.controller("verTiposEncuestas", function($scope,$http,$rootScope){
         //if ($scope.editing !== false) {
             //$scope.encuestas[$scope.editando] = $scope.newField;
 
-      $http.put("http://manuel-api.herokuapp.com/tipos_encuesta/"+index, {
+      $http.put("http://"+direccion+"/tipos_encuesta/"+index, {
           nombre: $scope.newField[$scope.editando].nombre, 
           descripcion: $scope.newField[$scope.editando].descripcion
        }).success(function() {
@@ -123,7 +126,7 @@ myApp.controller("verTiposEncuestas", function($scope,$http,$rootScope){
   $scope.eliminarTipoDeEncuesta = function(index){
     $scope.alertaEliminacionTipo=false;
 
-    $http.delete("http://manuel-api.herokuapp.com/tipos_encuesta/"+$scope.tipos[index].id)
+    $http.delete("http://"+direccion+"/tipos_encuesta/"+$scope.tipos[index].id)
       .success(function(){
         $scope.alertaEliminacionTipo=true;
         $state.go('admintencuestas.ver');
@@ -149,7 +152,7 @@ myApp.controller("verProfesores", function($scope,$http){
   $scope.alertaEditarProfesor = false;
   $scope.avisoDeshabilitarProfesor= false;
   $scope.avisoHabilitarProfesor= false;
- $http.get("http://manuel-api.herokuapp.com/buscar_por_rol?rol=1")
+ $http.get("http://"+direccion+"/buscar_por_rol?rol=1")
     .success(function(data) {
       $scope.profesores = data;
       $scope.loading = false;
@@ -162,7 +165,7 @@ myApp.controller("verProfesores", function($scope,$http){
     $scope.obtenerProfesor= function(index){
       $scope.detalle = $scope.profesores[index];
       $scope.loadingDetalle = true;
-      $http.get("http://manuel-api.herokuapp.com/cursos_profesor?profesor_id="+index)
+      $http.get("http://"+direccion+"/cursos_profesor?profesor_id="+index)
         .success(function(data) {
           $scope.cursos = data;
           $scope.loadingDetalle = false;
@@ -173,7 +176,7 @@ myApp.controller("verProfesores", function($scope,$http){
         //if ($scope.editing !== false) {
             //$scope.encuestas[$scope.editando] = $scope.newField;
 
-      $http.put("http://manuel-api.herokuapp.com/profesores/"+index, {
+      $http.put("http://"+direccion+"/profesores/"+index, {
           nombre: $scope.newField[$scope.editando].nombre, 
           apellido_paterno: $scope.newField[$scope.editando].apellido_paterno,
           apellido_materno: $scope.newField[$scope.editando].apellido_materno,
@@ -193,7 +196,7 @@ myApp.controller("verProfesores", function($scope,$http){
     };
 
     $scope.deshabilitarProfesor = function(index){
-      $http.put("http://manuel-api.herokuapp.com/actualizar_profesor/", {
+      $http.put("http://"+direccion+"/actualizar_profesor/", {
       id: index,
       estado: false
       }).success(function() {
@@ -203,7 +206,8 @@ myApp.controller("verProfesores", function($scope,$http){
     };
 
     $scope.habilitarProfesor = function(index){
-      $http.put("http://manuel-api.herokuapp.com/actualizar_profesor/", {
+      
+      $http.put("http://"+direccion+"/actualizar_profesor/", {
       id: index,
       estado: true
       }).success(function() {
@@ -220,7 +224,7 @@ myApp.controller('verAlumnos', function ($http, $scope, $state) {
   $scope.detalle = [];
   $scope.editando = false;
   $scope.alertaEditarAlumno = false;
-  $http.get("http://manuel-api.herokuapp.com/buscar_por_rol?rol=2")
+  $http.get("http://"+direccion+"/buscar_por_rol?rol=2")
     .success(function(data) {
       $scope.alumnos = data;
       $scope.loading = false;
@@ -235,7 +239,7 @@ myApp.controller('verAlumnos', function ($http, $scope, $state) {
       $scope.indice = $scope.alumnos.indexOf(field);
       $scope.grupos= [];
       $scope.loadingDetalle = true;
-      $http.put("http://manuel-api.herokuapp.com/grupos_alumno?correo="+$scope.alumnos[$scope.indice].correo, {
+      $http.put("http://"+direccion+"/grupos_alumno?correo="+$scope.alumnos[$scope.indice].correo, {
 
        }).success(function(data) {
         $scope.grupos = data;
@@ -248,7 +252,7 @@ myApp.controller('verAlumnos', function ($http, $scope, $state) {
         //if ($scope.editing !== false) {
             //$scope.encuestas[$scope.editando] = $scope.newField;
 
-      $http.put("http://manuel-api.herokuapp.com/alumnos/"+index, {
+      $http.put("http://"+direccion+"/alumnos/"+index, {
           nombre: $scope.newField[$scope.editando].nombre, 
           apellido_paterno: $scope.newField[$scope.editando].apellido_paterno,
           apellido_materno: $scope.newField[$scope.editando].apellido_materno,
@@ -261,28 +265,36 @@ myApp.controller('verAlumnos', function ($http, $scope, $state) {
    };
 
   $scope.deshabilitarAlumno = function (index){
-      $http.put("http://manuel-api.herokuapp.com/actualizar_alumno/", {
+
+      $http.put("http://"+direccion+"/actualizar_alumno/", {
         id: index,
         estado: false
+
         }).success(function() {
           $scope.avisoDeshabilitarAlumno = true;
+          
         });
-
   };
 
   $scope.habilitarAlumno = function (index){
-      $http.put("http://manuel-api.herokuapp.com/actualizar_alumno/", {
+      $http.put("http://"+direccion+"/actualizar_alumno/", {
         id: index,
         estado: true
         }).success(function() {
           $scope.avisoHabilitarAlumno = true;
         });
-
   };
 
 
     $scope.obtenerAlumno= function(index){
-      $scope.detalle = $scope.alumnos[index];      
+      $scope.detalle = $scope.alumnos[index];
+      $scope.loadingDetalle = true;
+      $scope.cursos = [];
+      $http.get("http://"+direccion+"/cursos_alumno?alumno_id="+index)
+        .success(function(data) {
+          $scope.cursos = data;
+          $scope.loadingDetalle = false;
+        });      
     };
 
 
@@ -296,7 +308,7 @@ myApp.controller('verAlumnos', function ($http, $scope, $state) {
   $scope.eliminarAlumno = function(index){
     $scope.avisoDeshabilitarAlumno=false;
 
-    $http.delete("http://manuel-api.herokuapp.com/alumnos/"+$scope.alumnos[index].id)
+    $http.delete("http://"+direccion+"/alumnos/"+$scope.alumnos[index].id)
       .success(function(){
         $scope.avisoDeshabilitarAlumno=true;
         $state.go('adminalumnos.ver');
@@ -321,7 +333,7 @@ myApp.controller('verCursos', function ($http, $scope, $state) {
     $scope.alertaEditarCurso = true;
     $scope.editando = false;
     $scope.alumnos = [];
-  $http.get("http://manuel-api.herokuapp.com/mostrar_cursos")
+  $http.get("http://"+direccion+"/mostrar_cursos")
     .success(function(data) {
       $scope.cursos = data;
       $scope.loading = false;
@@ -337,7 +349,7 @@ myApp.controller('verCursos', function ($http, $scope, $state) {
     $scope.obtenerCurso= function(index){
       $scope.detalle = $scope.cursos[index];
       $scope.loadingDetalle = true;
-      $http.get("http://manuel-api.herokuapp.com/buscar_alumnos_curso?curso_id="+index)
+      $http.get("http://"+direccion+"/buscar_alumnos_curso?curso_id="+index)
         .success(function(data) {
           $scope.alumnos = data;
           $scope.loadingDetalle = false;
@@ -348,7 +360,7 @@ myApp.controller('verCursos', function ($http, $scope, $state) {
         //if ($scope.editing !== false) {
             //$scope.encuestas[$scope.editando] = $scope.newField;
 
-      $http.put("http://manuel-api.herokuapp.com/cursos/"+index, {
+      $http.put("http://"+direccion+"/cursos/"+index, {
           nombre: $scope.newField[$scope.editando].nombre, 
           descripcion: $scope.newField[$scope.editando].descripcion,
           semestre: $scope.newField[$scope.editando].semestre,
@@ -372,7 +384,7 @@ myApp.controller('verCursos', function ($http, $scope, $state) {
   $scope.eliminarCurso = function(index){
     $scope.avisoEliminarCurso=false;
 
-    $http.delete("http://manuel-api.herokuapp.com/cursos/"+$scope.cursos[index].id)
+    $http.delete("http://"+direccion+"/cursos/"+$scope.cursos[index].id)
       .success(function(){
         $scope.avisoEliminarCurso=true;
         $state.go('admincursos.ver');
@@ -405,7 +417,7 @@ myApp.controller('agregarAlumno', ['$scope','$http', function($scope,$http) {
             rol: 2
             
           }
-    $http.post("http://manuel-api.herokuapp.com/usuarios",alumno)
+    $http.post("http://"+direccion+"/usuarios",alumno)
 
       .success(function() {
         $scope.avisoCrearAlumno = true;
@@ -418,7 +430,7 @@ myApp.controller('agregarProfesor', ['$scope','$http', function($scope,$http) {
   $scope.avisoCrearProfesor = false;
   $scope.agregarProfe = function(){
     $scope.avisoCrearEncuesta = false;
-    $http.post("http://manuel-api.herokuapp.com/usuarios", {
+    $http.post("http://"+direccion+"/usuarios", {
         
         rut: $scope.rut,
         nombre: $scope.nombre,
@@ -440,7 +452,7 @@ myApp.controller('agregarProfesor', ['$scope','$http', function($scope,$http) {
 
 myApp.controller('agregarCurso', ['$scope','$http', function($scope,$http) {
 $scope.profesores = [];
-$http.get("http://manuel-api.herokuapp.com/buscar_por_rol?rol=1")
+$http.get("http://"+direccion+"/buscar_por_rol?rol=1")
         .success(function(data){
           $scope.profesores = data;
         })
@@ -451,7 +463,7 @@ $http.get("http://manuel-api.herokuapp.com/buscar_por_rol?rol=1")
 $scope.avisoCrearCurso = false;
   $scope.agregar = function() {
     $scope.avisoCrearCurso = false;
-    $http.post("http://manuel-api.herokuapp.com/cursos", {
+    $http.post("http://"+direccion+"/cursos", {
       
         profesor_id: $scope.profesor,
         nombre: $scope.nombre,
@@ -486,7 +498,7 @@ $scope.avisoCrearCurso = false;
 myApp.controller('agregarEncuesta', ['$scope','$http', function($scope,$http) {
  $scope.preguntas= [];
  $scope.seleccionadas= [];
-  $http.get("http://manuel-api.herokuapp.com/pregunta.json")
+  $http.get("http://"+direccion+"/pregunta.json")
         .success(function(data){
           $scope.preguntas = data;
         })
@@ -494,7 +506,7 @@ myApp.controller('agregarEncuesta', ['$scope','$http', function($scope,$http) {
         });
 $scope.avisoCrearEncuesta = false;
 $scope.loading = true;
-$http.get("http://manuel-api.herokuapp.com/mostrar_tipos_encuestas")
+$http.get("http://"+direccion+"/mostrar_tipos_encuestas")
     .success(function(data){
         $scope.tipos = data;    
         $scope.loading = false;      
@@ -504,7 +516,7 @@ $http.get("http://manuel-api.herokuapp.com/mostrar_tipos_encuestas")
 
   $scope.update = function() {
     $scope.avisoCrearEncuesta = false;
-    $http.post("http://manuel-api.herokuapp.com/encuesta", {
+    $http.post("http://"+direccion+"/encuesta", {
       
         estado: true,
         nombre: $scope.nombre,
@@ -515,7 +527,7 @@ $http.get("http://manuel-api.herokuapp.com/mostrar_tipos_encuestas")
       //$scope.salida.id  // id de la encuesta creada
        for(x=0; x< $scope.seleccionadas.length; x++) {
             if($scope.seleccionadas[x]!="null" && $scope.seleccionadas[x]!="-1" ){
-              $http.post("http://manuel-api2.herokuapp.com/encuesta_pregunta",{
+              $http.post("http://"+direccion+"/encuesta_pregunta",{
                 encuesta_id : $scope.salida.id,
                 pregunta_id : $scope.seleccionadas[x]
               });
@@ -544,7 +556,7 @@ myApp.controller('agregartEncuesta', ['$scope','$http', function($scope,$http) {
 $scope.alertaCreacionTipo=false;
   $scope.agregar = function() {
     
-      $http.post("http://manuel-api.herokuapp.com/tipos_encuesta", {
+      $http.post("http://"+direccion+"/tipos_encuesta", {
       
         nombre: $scope.nombre,
         descripcion: $scope.descripcion 

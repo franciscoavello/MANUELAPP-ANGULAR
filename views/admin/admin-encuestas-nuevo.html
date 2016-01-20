@@ -35,12 +35,12 @@
 <div class="col s6 card teal offset-s1">
   <div class="card-content white-text">
     <h5>Encuesta a Generar</h5>
-    <p>Nombre: <input id="first_name" type="text" ng-model="nombre" class="validate" required="" aria-required="true">
+    <p>Nombre: <input required id="first_name" type="text" ng-model="nombre" class="validate" >
                 <label for="first_name"></label></p>
-    <p>Tipo: <select material-select watch required="" aria-required="true" ng-model="tipo">
+    <p>Tipo: <select required material-select watch  ng-model="tipo">
                   <option ng-repeat="tipo in tipos" value="{{tipo.id}}">{{tipo.nombre}}</option>
                 </select></p>
-    <p>Descripcion: <input id="descripcion" type="text" ng-model="descripcion" class="validate" required="" aria-required="true"></p>
+    <p>Descripcion: <input required id="descripcion" type="text" ng-model="descripcion" class="validate" ></p>
   </div>
 </div>
 
