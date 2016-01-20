@@ -78,18 +78,47 @@ myApp.controller("VerEncuestasCompletadas", function($scope,$http,$rootScope, $s
 });
 
 myApp.controller("ResponderEncuesta", function($scope,$http,$rootScope){
+    $scope.datosGrupo = [];
     $http.get("http://manuel-api.herokuapp.com/grupo_encuesta_pendiente?correo="+$rootScope.correoUsuarioLogueado+"&encuesta_id="+$scope.idEncuesta)
     .success(function(data1){
-        $http.get("http://manuel-api.herokuapp.com/buscar_por_grupo?grupo_id="+data1[0].id)
+        $http.get("http://manuel-api.herokuapp.com/evaluaciones_curso_encuesta?curso_id="+data1[0].curso_id+"&encuesta_id="+$scope.idEncuesta)
         .success(function(data2){
-            $scope.datosGrupo = data2;
-        })
+            $http.get("http://manuel-api.herokuapp.com/buscar_por_grupo?grupo_id="+data1[0].id)
+            .success(function(data3){
+                $http.get("http://manuel-api.herokuapp.com/datos_alumno?correo="+$rootScope.correoUsuarioLogueado)
+                .success(function(data4){
+                            $scope.recursivo(data2,data3,data4,data3.length);
+                })
+                .error(function(err){
+                });
+            })
         .error(function(err){
 
         });
+        })
+            .error(function(err){
+            });
     })
     .error(function(err){
     });
+
+    $scope.recursivo = function (data2, data3, data4,bandera) {
+        if(bandera==0){
+        }
+        else{
+            $http.get("http://manuel-api2.herokuapp.com/entregar_respuesta?encuestador_id="+data4[0].id+"&encuestado_id="+data3[bandera-1].id+"&evaluacion_id="+data2[0].id)
+                        .success(function(data5){
+                            console.log(data2[0].id);
+                            if(data5.length==0){
+                                $scope.datosGrupo.push(data3[bandera-1]);
+                            }
+                            $scope.recursivo(data2,data3,data4,bandera-1);
+                        })
+                        .error(function(err){
+
+                        });
+        }
+    };
 
     $scope.ingresarNombreAlumno = function (idAlumno, nomAlumno,apAlumno,amAlumno) {
         $rootScope.alumnoSeleccionado = nomAlumno+" "+apAlumno+" "+amAlumno;
