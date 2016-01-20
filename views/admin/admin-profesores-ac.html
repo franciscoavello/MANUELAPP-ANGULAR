@@ -142,8 +142,8 @@
             </td>
             <td>
               -->
-              <button type="submit" data-ng-hide="editar || deshabilitado" data-ng-click="deshabilitarProfesor($index);avisoDeshabilitarProfesor=true;deshabilitado=true;" class="btn waves-effect waves-light red"><i class="material-icons">block</i></button>
-              <button type="submit" data-ng-hide="editar || !deshabilitado" data-ng-click="habilitarProfesor($index);avisoDeshabilitarProfesor=true;deshabilitado=false" class="btn waves-effect waves-light green"><i class="material-icons">check_box</i></button>
+              <button type="submit" data-ng-hide="editar || deshabilitado" data-ng-click="deshabilitarProfesor(profesor.id);avisoDeshabilitarProfesor=true;deshabilitado=true;" class="btn waves-effect waves-light red"><i class="material-icons">block</i></button>
+              <button type="submit" data-ng-hide="editar || !deshabilitado" data-ng-click="habilitarProfesor(profesor.id);avisoDeshabilitarProfesor=true;deshabilitado=false" class="btn waves-effect waves-light green"><i class="material-icons">check_box</i></button>
             </td>  
         </tbody>
       </table>

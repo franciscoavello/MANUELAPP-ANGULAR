@@ -152,7 +152,7 @@ myApp.controller("verProfesores", function($scope,$http){
   $scope.alertaEditarProfesor = false;
   $scope.avisoDeshabilitarProfesor= false;
   $scope.avisoHabilitarProfesor= false;
- $http.get("http://"+direccion+"/buscar_por_rol?rol=1")
+ $http.get("http://"+direccion+"/profesores.json")
     .success(function(data) {
       $scope.profesores = data;
       $scope.loading = false;
@@ -224,7 +224,7 @@ myApp.controller('verAlumnos', function ($http, $scope, $state) {
   $scope.detalle = [];
   $scope.editando = false;
   $scope.alertaEditarAlumno = false;
-  $http.get("http://"+direccion+"/buscar_por_rol?rol=2")
+  $http.get("http://"+direccion+"/alumnos.json")
     .success(function(data) {
       $scope.alumnos = data;
       $scope.loading = false;
