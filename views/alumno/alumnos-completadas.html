@@ -6,7 +6,7 @@
             En esta sección usted puede consultar sus encuestas respondidas asi como sus estadísticas.
           </p>
       </div>
-      <table class="striped">
+      <table class="striped centered">
         <thead>
           <tr >             
               <th data-field="name">Nombre de la encuesta</th>
@@ -20,7 +20,7 @@
             <td>{{encuesta.nombre}}</td>
             <td>{{tipoencuesta[encuesta.tipo_encuesta_id-1]}}</td>
             <td>
-              <button ng-click="ingresarNombreEncuesta(encuesta.nombre,encuesta.id)" id="{{encuesta.id}}" class="btn waves-effect waves-light center" type="submit" name="action" >Estadísticas
+              <button ng-if="encuesta.tipo_encuesta_id==1" ng-click="ingresarNombreEncuesta(encuesta.nombre,encuesta.id)" id="{{encuesta.id}}" class="btn waves-effect waves-light center" type="submit" name="action" >Estadísticas
               </button>
             </td>
           </tr>
