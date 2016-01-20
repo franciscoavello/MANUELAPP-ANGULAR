@@ -2,6 +2,36 @@
 	<br><br><br>
 	<h4>{{$parent.mi_encuesta.nombre}}</h4>
 </div>
+
+        <div class="text-center aspect-ratio" id="container" ng-controller="RadarCtrl_profesor">
+
+<div class="row">
+          <canvas id="bar" class="chart chart-radar" chart-data="data" chart-labels="labels" chart-series="series" chart-colours="colores" chart-legend="true">
+          </canvas>
+          <div class="row center">
+            <div class="col s12">
+              <h5 class="azul-oscuro">Módulo de la encuesta: {{modulo | number:2}}</h5>
+            </div>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                  <th data-field="id">Pregunta</th>
+                  <th data-field="price">Promedio grupo</th>
+                  <th data-field="name">Promedio curso</th>                  
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr ng-repeat="enunciado in enunciados" id="{{enunciado.id}}" name="{{enunciado.id}}">
+                <td >{{$index + 1}}.- {{enunciado.enunciado}}</td>
+                <td>{{valoresGrupo[$index]}}</td>
+                <td>{{valoresCurso[$index]}}</td>                
+              </tr>
+            </tbody>
+          </table>            
+      </div>
+      </div>
   <button class="col s2 btn waves-effect waves-light left" ui-sref="detalle-curso.evaluaciones" align="middle" type="submit" name="action">
 		Volver
 	</button>

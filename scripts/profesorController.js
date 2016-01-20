@@ -581,3 +581,70 @@ myApp.controller('AgregarGrupo', function ($rootScope,$http, $scope, $state) {
       });
   }
 });
+
+myApp.controller("RadarCtrl_profesor", function ($scope,$http,$rootScope) {
+
+    $http.get("http://manuel-api2.herokuapp.com/grupos_curso?id="+$rootScope.mi_curso.id)
+    .success(function(data){
+        $scope.datosCurso = data;
+    })
+    .error(function(err){
+
+    });
+    $http.get("http://manuel-api2.herokuapp.com/preguntas_encuesta?encuesta_id="+$rootScope.mi_evaluacion.encuesta_id)
+    .success(function(data){
+        var label= [];
+        var enunciados= [];
+        for(x=0; x<data.length; x++){
+            label.push(x+1);
+            enunciados.push(data[x]);
+        }
+        $scope.labels = label;
+        $scope.colores = [{ 
+          "fillColor": "rgba(167, 208, 167, 0.5)",
+          "strokeColor": "rgba(0,128,0,0.8)"
+        },
+        { 
+          "fillColor": "rgba(255, 115, 53, 0.4)",
+          "strokeColor": "rgba(255,115,53,0.8 )"
+        }];
+        $scope.enunciados = enunciados;
+
+        $scope.series = ['Promedio grupo', 'Promedio curso'];    
+      
+        var datos= [];
+        var datos1= [];
+        var datos2= [];
+        var datos3= [];
+        for(x=0; x<data.length; x++) {
+            datos1.push(Math.floor((Math.random() * 5) + 1));
+        }
+        for(x=0; x<data.length; x++) {
+            datos3.push(Math.floor((Math.random() * 5) + 1));
+        }
+        for(x=data.length-1; x>-1; x--) {
+            datos2.push(data[x].id);
+        }
+        datos1[0]=5;
+        datos2[0]=2;
+        datos3[0]=4;
+        $scope.valoresAlumno=datos1;
+        $scope.valoresCurso=datos2;
+        $scope.valoresGrupo=datos3;
+           
+        
+        datos.push(datos1);
+        
+        datos.push(datos2);
+        var totalSuma=0;
+        
+            for(i=0;i<datos1.length;i++){
+                totalSuma = totalSuma + (datos1[i]-datos2[i]);
+            }
+            $scope.modulo=totalSuma/datos1.length;
+        
+        $scope.data = datos;
+    })
+    .error(function(err){
+    });
+});
