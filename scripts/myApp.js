@@ -70,82 +70,107 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
       rolVista: 2
     })
     .state('encuestas.estadisticas', {
-      url: "/estadisticas?idEncuesta",
+      url: "/estadisticas",
       templateUrl: "views/alumno/encuesta-estadisticas.html",
       parent: 'encuestas',
       controller: function($scope, $stateParams) {
          $scope.idEncuesta = $stateParams.idEncuesta;
       },
+      params: {
+        idEncuesta: '0' //default category
+      },
       authenticate: true,
       rolVista: 2
     })
     .state('encuestas.estadisticasJefe', {
-      url: "/estadisticasJefe?idEncuesta",
+      url: "/estadisticasJefe",
       templateUrl: "views/alumno/encuesta-estadisticasJefe.html",
       parent: 'encuestas',
       controller: function($scope, $stateParams) {
          $scope.idEncuesta = $stateParams.idEncuesta;
       },
+      params: {
+        idEncuesta: '0' //default category
+      },
       authenticate: true,
       rolVista: 2
     })
     .state('encuestas.estadisticasJefe.graficoJefe', {
-      url: "/graficoJefe?idAlumno",
+      url: "/graficoJefe",
       templateUrl: "views/alumno/encuesta-graficoJefe.html",
       parent: 'encuestas.estadisticasJefe',
       controller: function($scope, $stateParams) {
          $scope.idAlumno = $stateParams.idAlumno;
       },
+      params: {
+        idAlumno: '0' //default category
+      },
       authenticate: true,
       rolVista: 2
     })
     .state('encuestas.estadisticasJefeProyecto', {
-      url: "/estadisticasJefeProyecto?idEncuesta",
+      url: "/estadisticasJefeProyecto",
       templateUrl: "views/alumno/encuesta-estadisticasJefeProyecto.html",
       parent: 'encuestas',
       controller: function($scope, $stateParams) {
          $scope.idEncuesta = $stateParams.idEncuesta;
       },
+      params: {
+        idEncuesta: '0' //default category
+      },
       authenticate: true,
       rolVista: 2
     })
     .state('encuestas.estadisticasJefeProyecto.graficoJefeProyecto', {
-      url: "/graficoJefeProyecto?idGrupo",
+      url: "/graficoJefeProyecto",
       templateUrl: "views/alumno/encuesta-graficoJefeProyecto.html",
       parent: 'encuestas.estadisticasJefeProyecto',
       controller: function($scope, $stateParams) {
          $scope.idGrupo = $stateParams.idGrupo;
       },
+      params: {
+        idGrupo: '0' //default category
+      },
       authenticate: true,
       rolVista: 2
     })
     .state('encuestas.responder360', {
-      url: "/responder360?idEncuesta",
+      url: "/responder360",
       templateUrl: "views/alumno/responder-encuestas-360.html",
       parent: 'encuestas',
       controller: function($scope, $stateParams) {
          $scope.idEncuesta = $stateParams.idEncuesta;
       },
+      params: {
+        idEncuesta: '0' //default category
+      },
       authenticate: true,
       rolVista: 2
     })
     .state('encuestas.responder360.preguntas', {
-      url: "/pregunta360?idAlumno",
+      url: "/pregunta360",
       templateUrl: "views/alumno/preguntas-encuesta-360.html",
       parent: 'encuestas.responder360',
       controller: function($scope, $stateParams) {
          $scope.idEncuesta = $stateParams.idEncuesta;
          $scope.idAlumno = $stateParams.idAlumno;
       },
+      params: {
+        idEncuesta: '0', //default category
+        idAlumno: '0'
+      },
       authenticate: true,
       rolVista: 2
     })
     .state('encuestas.responder', {
-      url: "/responder?idEncuesta",
+      url: "/responder",
       templateUrl: "views/alumno/preguntas-encuesta.html",
       parent: 'encuestas',
       controller: function($scope, $stateParams) {
          $scope.idEncuesta = $stateParams.idEncuesta;
+      },
+      params: {
+        idEncuesta: '0' //default category
       },
       authenticate: true,
       rolVista: 2
