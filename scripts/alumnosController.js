@@ -317,7 +317,6 @@ myApp.controller("RadarCtrl", function ($scope,$http,$rootScope) {
     $http.get("http://manuel-api.herokuapp.com/preguntas_encuesta?encuesta_id="+$scope.idEncuesta)
     .success(function(data){
         var label= [];
-
         var enunciados= [];
         for(x=0; x<data.length; x++){
             label.push(x+1);
@@ -333,7 +332,7 @@ myApp.controller("RadarCtrl", function ($scope,$http,$rootScope) {
           "strokeColor": "rgba(255,115,53,0.8 )"
         }];
         $scope.enunciados = enunciados;
-        $scope.series = ['Mi promedio', 'Promedio grupo'];
+        $scope.series = ['Promedio alumno', 'Promedio grupo'];
         var datos= [];
         var datos1= [];
         var datos2= [];

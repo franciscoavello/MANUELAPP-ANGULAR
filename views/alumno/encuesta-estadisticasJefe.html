@@ -4,12 +4,12 @@
       <h5 class="azul-oscuro">Estadísticas</h5>
       <div class="container-fluid">
         <div class="text-center aspect-ratio" id="container" ng-controller="RadarCtrl">
-          <h8 class="azul-oscuro" ng-if="soyjefe">Seleccione al compañero cuyas estadísticas quiere revisar:</h8>
+          <h8 class="azul-oscuro">Seleccione al compañero cuyas estadísticas quiere revisar:</h8>
     <div class="row">
-    <div ng-if="soyjefe" class="collection col s4" >
-      <a ng-click="ingresarNombreAlumno(grupo.id)" ng-repeat="grupo in datosGrupo" class="collection-item" id="{{grupo.id}}" ui-sref="encuestas.estadisticasJefe.graficoJefe({idAlumno: {{grupo.id}}})">{{grupo.nombre}}  {{grupo.apellido_paterno}} {{grupo.apellido_materno}} </a>
+    <div class="collection col s4" >
+      <a ng-repeat="grupo in datosGrupo" class="collection-item" id="{{grupo.id}}" ui-sref="encuestas.estadisticasJefe.graficoJefe({idAlumno: {{grupo.id}}})">{{grupo.nombre}}  {{grupo.apellido_paterno}} {{grupo.apellido_materno}} </a>
     </div>
-    <div ng-if="soyjefe" class="collection col s8" >
+    <div class="collection col s8" >
       <div ui-view></div>
     </div>
           
