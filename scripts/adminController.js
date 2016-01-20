@@ -136,7 +136,11 @@ myApp.controller("verProfesores", function($scope,$http){
     $scope.newField = [];
   $scope.editando = false;
   $scope.loading = true;
+  $scope.detalle = [];
+  $scope.cursos = [];
   $scope.alertaEditarProfesor = false;
+  $scope.avisoDeshabilitarProfesor= false;
+  $scope.avisoHabilitarProfesor= false;
  $http.get("http://manuel-api.herokuapp.com/buscar_por_rol?rol=1")
     .success(function(data) {
       $scope.profesores = data;
@@ -149,6 +153,12 @@ myApp.controller("verProfesores", function($scope,$http){
 
     $scope.obtenerProfesor= function(index){
       $scope.detalle = $scope.profesores[index];
+      $scope.loadingDetalle = true;
+      $http.get("http://manuel-api.herokuapp.com/cursos_profesor?profesor_id="+index)
+        .success(function(data) {
+          $scope.cursos = data;
+          $scope.loadingDetalle = false;
+        });
     };
     
     $scope.guardarCampo = function(index) {
@@ -174,6 +184,25 @@ myApp.controller("verProfesores", function($scope,$http){
         //}       
     };
 
+    $scope.deshabilitarProfesor = function(index){
+      $http.put("http://manuel-api.herokuapp.com/actualizar_profesor/", {
+      id: index,
+      estado: false
+      }).success(function() {
+        $scope.avisoDeshabilitarProfesor = true;
+      });
+
+    };
+
+    $scope.habilitarProfesor = function(index){
+      $http.put("http://manuel-api.herokuapp.com/actualizar_profesor/", {
+      id: index,
+      estado: true
+      }).success(function() {
+        $scope.avisoHabilitarProfesor = true;
+      });
+
+    };
   
 });
 
@@ -193,6 +222,19 @@ myApp.controller('verAlumnos', function ($http, $scope, $state) {
         $scope.editando = $scope.alumnos.indexOf(field);
         $scope.newField[$scope.editando] = angular.copy(field);
     }
+
+    $scope.obtenerGrupos = function(field){
+      $scope.indice = $scope.alumnos.indexOf(field);
+      $scope.grupos= [];
+      $scope.loadingDetalle = true;
+      $http.put("http://manuel-api.herokuapp.com/grupos_alumno?correo="+$scope.alumnos[$scope.indice].correo, {
+
+       }).success(function(data) {
+        $scope.grupos = data;
+        $scope.loadingDetalle = false;
+      });
+
+    };
     
     $scope.guardarCampo = function(index) {
         //if ($scope.editing !== false) {
@@ -232,7 +274,7 @@ myApp.controller('verAlumnos', function ($http, $scope, $state) {
 
 
     $scope.obtenerAlumno= function(index){
-      $scope.detalle = $scope.alumnos[index];
+      $scope.detalle = $scope.alumnos[index];      
     };
 
 
@@ -270,11 +312,14 @@ myApp.controller('verCursos', function ($http, $scope, $state) {
     $scope.newField = [];
     $scope.alertaEditarCurso = true;
     $scope.editando = false;
+    $scope.alumnos = [];
   $http.get("http://manuel-api.herokuapp.com/mostrar_cursos")
     .success(function(data) {
       $scope.cursos = data;
       $scope.loading = false;
     });
+
+
   
     $scope.editarCurso = function(field) {
         $scope.editando = $scope.cursos.indexOf(field);
@@ -283,6 +328,12 @@ myApp.controller('verCursos', function ($http, $scope, $state) {
     
     $scope.obtenerCurso= function(index){
       $scope.detalle = $scope.cursos[index];
+      $scope.loadingDetalle = true;
+      $http.get("http://manuel-api.herokuapp.com/buscar_alumnos_curso?curso_id="+index)
+        .success(function(data) {
+          $scope.alumnos = data;
+          $scope.loadingDetalle = false;
+        });
     };
 
     $scope.guardarCampo = function(index) {
@@ -380,19 +431,32 @@ myApp.controller('agregarProfesor', ['$scope','$http', function($scope,$http) {
 }]);
 
 myApp.controller('agregarCurso', ['$scope','$http', function($scope,$http) {
+$scope.profesores = [];
+$http.get("http://manuel-api.herokuapp.com/buscar_por_rol?rol=1")
+        .success(function(data){
+          $scope.profesores = data;
+        })
+        .error(function(err){
+        });
+
+
 $scope.avisoCrearCurso = false;
   $scope.agregar = function() {
     $scope.avisoCrearCurso = false;
     $http.post("http://manuel-api.herokuapp.com/cursos", {
       
-        profesor_id: "1",
+        profesor_id: $scope.profesor,
         nombre: $scope.nombre,
         semestre: $scope.semestre,
         año: $scope.ano,
         descripcion: $scope.descripcion
 }).success(function(data) {
-      //console.log(data);
+      console.log(response);
+      $scope.id = response.value.data.id;
+
       $scope.avisoCrearCurso = true;
+    // asignar profesor
+
       //$scope.cantidadGrupos=data.length;
       
     });

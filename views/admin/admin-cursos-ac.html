@@ -53,8 +53,28 @@
                         <p>Semestre: {{detalle.semestre}}</p>
                         <p>Año: {{detalle.ano}}</p>
                         <p>Profesor: {{detalle.profesor_id}}</p>
-                        
+                        <h5 class="azul-oscuro">Alumnos del Curso</h5>
+                        <table class="striped">
+                          <thead>
+                            <tr>
+                                <th data-field="id">Nombre</th>
+                                <th data-field="name">Apellidos</th>
+                                <th data-field="price">Correo</th>
+                            </tr>
+                          </thead>
 
+                          <tbody ng-repeat="alumno in alumnos" id="{{alumno.id}}">   
+                            <td>
+                              {{alumno.nombre}}
+                            </td>
+                            <td>
+                              {{alumno.apellido_paterno}} {{alumno.apellido_materno}}
+                            </td>
+                            <td>
+                              {{alumno.correo}}
+                            </td>
+                          </tbody>
+                        </table>
                     </div>
                     <div class="modal-footer">
                         <a  class=" modal-action modal-close waves-effect waves-green btn-flat">Salir</a>

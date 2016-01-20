@@ -8,11 +8,21 @@
         </div>
 
         <div class="row" align="center">
-          <div class="input-field col s12">
+          <div class="input-field col s6">
             <input id="first_name" type="text" ng-model="nombre"class="validate" required="" aria-required="true">
             <label for="first_name">Nombre</label>
           </div>
+
+
+          <div class="input-field col s6">
+            <select material-select watch ng-model="profesor">
+              <option ng-repeat="profesor in profesores" value="{{profesor.id}}">{{profesor.nombre}} {{profesor.apellido_paterno}} {{profesor.apellido_materno}}</option>
+            </select>
+            <label>Asignar Profesor</label>
+          </div>
         </div>
+
+
         <div class="row" >
           <div class="input-field col s6">
             <input id="first_name" type="number" ng-model="semestre"class="validate" required="" aria-required="true">

@@ -40,7 +40,7 @@
             -->
                 <!-- Modal Trigger -->
                 <div class="col">
-                    <a class='btn' href='#demoModal' data-ng-click="obtenerAlumno($index)" modal><i class="material-icons">visibility</i></a>
+                    <a class='btn' href='#demoModal' data-ng-click="obtenerAlumno($index);obtenerGrupos(alumno);" modal><i class="material-icons">visibility</i></a>
                 </div>
                 <!-- Modal Structure -->
                 <div id="demoModal" class="modal">
@@ -52,7 +52,25 @@
                         <p>Apellido Materno: {{detalle.apellido_materno}}</p>
                         <p>Rut: {{detalle.rut}}</p>
                         <p>Correo: {{detalle.correo}}</p>
+                      <!--<h5 class="azul-oscuro">Grupos a los que Pertenece</h5>
+                        <table class="striped">
+                          <thead>
+                            <tr>
+                                <th data-field="id">Nombre</th>
+                                <th data-field="name">Descripcion</th>
+                                
+                            </tr>
+                          </thead>
 
+                          <tbody ng-repeat="grupo in grupos" id="{{grupo.id}}">   
+                            <td>
+                              {{grupo.nombre}}
+                            </td>
+                            <td>
+                              {{grupo.descripcion}}
+                            </td>
+                          </tbody>
+                        </table>-->
 
                     </div>
                     <div class="modal-footer">
