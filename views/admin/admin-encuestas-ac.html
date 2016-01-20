@@ -41,10 +41,48 @@
                 <div id="demoModal" class="modal">
                     <div class="modal-content">
                         <h4>Detalle Encuesta</h4>
-                        <p>Id: {{detalle.id}}</p>
-                        <p>Nombre: {{detalle.nombre}}</p>
-                        <p>Descripcion: {{detalle.descripcion}}</p>
-                        <p>Tipo de Encuesta: {{detalle.tipo_encuesta_id}}</p>
+                        <table class="striped">
+                          <thead>
+                            <tr>
+                                <th data-field="id">Id</th>
+                                <th data-field="id">Nombre</th>
+                                <th data-field="id">Descripcion</th>
+                                <th data-field="id">Tipo de Encuesta</th>
+                            </tr>
+                          </thead>
+
+                          <tbody>   
+                            <td>
+                              {{detalle.id}}
+                            </td>
+                            <td>
+                              {{detalle.nombre}}
+                            </td>
+                            <td>
+                              {{detalle.descripcion}}
+                            </td>
+                            <td>
+                              {{detalle.tipo_encuesta_id}}
+                            </td>
+                          </tbody>
+                        </table>
+
+
+                        <h5 class="azul-oscuro">Preguntas de la Encuesta</h5>
+                        <div class="progress" ng-show="loadingDetalle"><div class="indeterminate"></div></div>
+                        <table class="striped" ng-hide="loadingDetalle">
+                          <thead>
+                            <tr>
+                                <th data-field="id">Enunciado</th>
+                            </tr>
+                          </thead>
+
+                          <tbody ng-repeat="pregunta in preguntas" id="{{pregunta.id}}">   
+                            <td>
+                              {{pregunta.enunciado}}
+                            </td>
+                          </tbody>
+                        </table>
                     </div>
                     <div class="modal-footer">
                         <a  class=" modal-action modal-close waves-effect waves-green btn-flat">Salir</a>

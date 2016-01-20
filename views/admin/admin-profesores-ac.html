@@ -51,12 +51,41 @@
                 <div id="demoModal" class="modal">
                     <div class="modal-content">
                         <h4>Detalle Profesor</h4>
-                        <p>Id: {{detalle.id}}</p>
-                        <p>Nombre: {{detalle.nombre}}</p>
-                        <p>Apellido Paterno: {{detalle.apellido_paterno}}</p>
-                        <p>Apellido Materno: {{detalle.apellido_materno}}</p>
-                        <p>Rut: {{detalle.rut}}</p>
-                        <p>Correo: {{detalle.correo}}</p>
+                        <table class="striped">
+                          <thead>
+                            <tr>
+                                <th data-field="id">Id</th>
+                                <th data-field="id">Rut</th>
+                                <th data-field="id">Nombre</th>
+                                <th data-field="id">Apellido Paterno</th>
+                                <th data-field="id">Apellido Materno</th>
+                                <th data-field="id">Correo</th>
+
+                            </tr>
+                          </thead>
+
+                          <tbody>   
+                            <td>
+                              {{detalle.id}}
+                            </td>
+                            <td>
+                              {{detalle.rut}}
+                            </td>
+                            <td>
+                              {{detalle.nombre}}
+                            </td>
+                            <td>
+                              {{detalle.apellido_paterno}}
+                            </td>
+                            <td>
+                              {{detalle.apellido_materno}}
+                            </td>
+                            <td>
+                              {{detalle.correo}}
+                            </td>
+                          </tbody>
+                        </table>
+
                         <h5 class="azul-oscuro">Cursos del Profesor</h5>
                         <div class="progress" ng-show="loadingDetalle"><div class="indeterminate"></div></div>
                         <table class="striped" ng-hide="loadingDetalle">

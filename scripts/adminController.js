@@ -22,6 +22,14 @@ myApp.controller("verEncuestas", function($scope,$http,$rootScope){
     
     $scope.obtenerEncuesta= function(index){
       $scope.detalle = $scope.encuestas[index];
+      $scope.preguntas = [];
+      $http.get("http://manuel-api.herokuapp.com/preguntas_encuesta_opciones?encuesta_id="+index)
+        .success(function(data){
+          $scope.preguntas = data;          
+          $scope.loadingDetalle = false;
+        })
+        .error(function(err){
+        });
     };
 
     $scope.guardarCampo = function(index) {
