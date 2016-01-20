@@ -192,6 +192,7 @@ myApp.controller("ObtenerPreguntas", function($scope,$http, $state,$rootScope, $
             $scope.selected_ids.push(pregunta.selected_id.id);
             $scope.selected_ids.push(pregunta.selected_id.val);
         });
+        console.log($scope.selected_ids);
         for (var i = 0; i < ($scope.selected_ids.length); i=i+3) {
             $http.post("http://manuel-api.herokuapp.com/respuestum_pregunta", {
                 respuesta_id: $scope.selected_ids[i+1], 
@@ -361,7 +362,12 @@ myApp.controller("RadarCtrl", function ($scope,$http,$rootScope) {
           "strokeColor": "rgba(255,115,53,0.8 )"
         }];
         $scope.enunciados = enunciados;
-        $scope.series = ['Promedio alumno', 'Promedio grupo'];
+        if($scope.soyjefeProyecto){
+            $scope.series = ['Promedio grupo', 'Promedio curso'];    
+        }
+        else{
+            $scope.series = ['Promedio alumno', 'Promedio grupo'];   
+        }
         var datos= [];
         var datos1= [];
         var datos2= [];

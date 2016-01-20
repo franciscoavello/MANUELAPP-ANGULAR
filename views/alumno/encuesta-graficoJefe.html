@@ -12,16 +12,16 @@
             <thead>
               <tr>
                   <th data-field="id">Pregunta</th>
-                  <th data-field="name">Promedio grupo</th>
                   <th data-field="price">Promedio alumno</th>
+                  <th data-field="name">Promedio grupo</th>              
               </tr>
             </thead>
 
             <tbody>
               <tr ng-repeat="enunciado in enunciados" id="{{enunciado.id}}" name="{{enunciado.id}}">
-                <td >{{$index + 1}}.- {{enunciado.enunciado}}</td>
-                <td>{{valoresCurso[$index]}}</td>
+                <td >{{$index + 1}}.- {{enunciado.enunciado}}</td>                
                 <td>{{valoresAlumno[$index]}}</td>
+                <td>{{valoresCurso[$index]}}</td>
               </tr>
             </tbody>
           </table>            
