@@ -18,6 +18,9 @@ myApp.controller("VerEncuestasPendientes", function($scope,$http,$rootScope){
     });
     
     $scope.ingresarNombreEncuesta = function (nomEncuesta) {
+        console.log($rootScope.matrizRespuestas);
+        $rootScope.matrizRespuestas = []; 
+        console.log($rootScope.matrizRespuestas);
         $rootScope.encuestaSeleccionada = nomEncuesta;
     };
 
@@ -112,7 +115,7 @@ myApp.controller("ResponderEncuesta", function($scope,$http,$rootScope,$state){
         $rootScope.idAlumnoSeleccionado = idAlumno;
     };
     
-    $scope.completarEncuesta = function (){
+    $scope.completarEncuesta = function (){          
         $http.get("http://manuel-api.herokuapp.com/datos_alumno?correo="+$rootScope.correoUsuarioLogueado)
         .success(function(data){
             $http.put("http://manuel-api.herokuapp.com/actualizar_encuesta", {
@@ -120,7 +123,8 @@ myApp.controller("ResponderEncuesta", function($scope,$http,$rootScope,$state){
                 alumno_id: data[0].id,
                 encuesta_id: $scope.idEncuesta
             })
-            .success(function() {             
+            .success(function() { 
+                $rootScope.matrizRespuestas = [];             
             });
         })
         .error(function(err){
