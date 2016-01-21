@@ -259,14 +259,20 @@ myApp.controller('verAlumnos', function ($http, $scope, $state) {
     };
     
     $scope.guardarCampo = function(index) {
+      $scope.alumno = $scope.newField;
         //if ($scope.editing !== false) {
             //$scope.encuestas[$scope.editando] = $scope.newField;
 
-      $http.put("http://"+direccion+"/alumnos/"+index, {
-          nombre: $scope.newField[$scope.editando].nombre, 
+      $http.put("http://"+direccion+"/alumnos/"+$scope.editando, {
+          /*nombre: $scope.newField[$scope.editando].nombre, 
           apellido_paterno: $scope.newField[$scope.editando].apellido_paterno,
           apellido_materno: $scope.newField[$scope.editando].apellido_materno,
           correo: $scope.newField[$scope.editando].correo
+          */
+          nombre: $scope.alumno.nombre, 
+          apellido_paterno: $scope.alumno.apellido_paterno,
+          apellido_materno: $scope.alumno.apellido_materno,
+          correo: $scope.alaumno.correo
        }).success(function() {
         $scope.alertaEditarAlumno = true;
       });
