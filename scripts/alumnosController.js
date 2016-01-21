@@ -273,7 +273,7 @@ myApp.controller("ObtenerPreguntas", function($scope,$http, $state,$rootScope, $
         });
         $state.go('encuestas.pendientes');  
         $rootScope.message.text = 'Encuesta enviada correctamente';
-        $rootScope.mostrarAvisoExito = true;
+        $rootScope.mostrarAvisoExitoLocal = true;
         $timeout($scope.desaparecer, 2000);
     }  
 
@@ -289,7 +289,7 @@ myApp.controller("ObtenerPreguntas", function($scope,$http, $state,$rootScope, $
             .success(function() {
               $state.go('encuestas.pendientes');  
               $rootScope.message.text = 'Encuesta enviada correctamente';
-              $rootScope.mostrarAvisoExito = true;
+              $rootScope.mostrarAvisoExitoLocal = true;
               $timeout($scope.desaparecer, 2000);
             });
         })
