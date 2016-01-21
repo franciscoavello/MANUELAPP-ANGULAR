@@ -272,7 +272,7 @@ myApp.controller('verAlumnos', function ($http, $scope, $state) {
           nombre: $scope.alumno.nombre, 
           apellido_paterno: $scope.alumno.apellido_paterno,
           apellido_materno: $scope.alumno.apellido_materno,
-          correo: $scope.alaumno.correo
+          correo: $scope.alumno.correo
        }).success(function() {
         $scope.alertaEditarAlumno = true;
       });
