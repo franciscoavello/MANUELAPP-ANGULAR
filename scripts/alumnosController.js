@@ -45,7 +45,10 @@ myApp.controller("VerEncuestasCompletadas", function($scope,$http,$rootScope, $s
         $rootScope.encuestaSeleccionada  = nomEncuesta;
         $scope.idEncuesta = idEncuesta;
         $scope.soyjefe=false;
-        $scope.soyjefeProyecto=true;
+        $scope.soyjefeProyecto=false;
+        if($rootScope.correoUsuarioLogueado=='claudia.guzmans@usach.cl'){
+            $scope.soyjefeProyecto=true;
+        }
         $scope.ingresarNombre = function (idGrupo) {
             $rootScope.idGrupoSeleccionado = idGrupo;
         };
@@ -319,7 +322,10 @@ myApp.controller("ObtenerPreguntas", function($scope,$http, $state,$rootScope, $
 });
 
 myApp.controller("RadarCtrl", function ($scope,$http,$rootScope) {
-    $scope.soyjefeProyecto=true;
+    $scope.soyjefeProyecto=false;
+    if($rootScope.correoUsuarioLogueado=='claudia.guzmans@usach.cl'){
+        $scope.soyjefeProyecto=true;
+    }
     $http.get("http://manuel-api.herokuapp.com/encuestas_jefe?correo="+$rootScope.correoUsuarioLogueado)
     .success(function(data){
         for(i=0;i<data.length;i++){
