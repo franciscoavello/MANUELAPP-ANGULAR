@@ -2,6 +2,10 @@
 <div ng-controller="NuevaEncuesta">
 	<h5 class="row azul-oscuro" style="font-weight:bold;">Publicar encuesta</h5>
 	<br><br>
+  <div style="margin-top:10px">      
+          <div id='mensajes' class="check-element sample-show-hide alert-box success" ng-show="mostrarAvisoExitoLocal" style="margin:0px;"><span>correcto: </span>{{message.text}}</div>  
+          <div id='mensajes' class="check-element sample-show-hide alert-box error" ng-show="mostrarAvisoErrorLocal" style="margin:0px;"><span>error: </span>{{message.text}}</div> 
+      </div>
   <form ng-submit="nuevaEncuesta()">
     <h5>Plantilla</h5>
    	<div required class="input-field row s8">

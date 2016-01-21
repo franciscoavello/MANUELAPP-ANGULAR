@@ -1,5 +1,9 @@
 <div class="row" ng-controller="GrupoCtrl">
   <br></br>
+    <div style="margin-top:10px">      
+          <div id='mensajes' class="check-element sample-show-hide alert-box success" ng-show="mostrarAvisoExitoLocal" style="margin:0px;"><span>correcto: </span>{{message.text}}</div>  
+          <div id='mensajes' class="check-element sample-show-hide alert-box error" ng-show="mostrarAvisoErrorLocal" style="margin:0px;"><span>error: </span>{{message.text}}</div> 
+      </div>
   <div class="row">
     <h5 class="col s2 azul-oscuro left" style="font-weight:bold;">{{$parent.mi_grupo.nombre}}</h5>
     <p class="col s6 azul-oscuro left" align="justify">{{$parent.mi_grupo.descripcion}}.</p>
@@ -17,7 +21,7 @@
             Asignar Jefe
           </button>
           <div class="col s3 card-panel footerColor" style="padding:0 px;margin:0 px;border:0px;" ng-show="integrante.jefe">
-            <p class="azul-oscuro" align="center" style="font-weight:bold;">Jefe de grupo</p>
+            <p class="azul-oscuro" align="center" style="font-weight:bold; margin:0px;border:5px;">Jefe de grupo</p>
           </div>
         <div class>
         <div class="col s2">

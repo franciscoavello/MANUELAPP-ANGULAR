@@ -2,13 +2,15 @@
   <br></br>
   <h5 class="azul-oscuro" style="font-weight: bold;">Alumnos del curso</h5>
   <br></br>
+   <div style="margin-top:10px">      
+          <div id='mensajes' class="check-element sample-show-hide alert-box success" ng-show="$parent.mostrarAvisoExitoLocal2" style="margin:0px;"><span>correcto: </span>{{message.text}}</div>  
+          <div id='mensajes' class="check-element sample-show-hide alert-box error" ng-show="$parent.mostrarAvisoErrorLocal2" style="margin:0px;"><span>error: </span>{{message.text}}</div> 
+      </div>
+  <div style="margin-top:10px">      
+          <div id='mensajes' class="check-element sample-show-hide alert-box success" ng-show="mostrarAvisoExitoLocal" style="margin:0px;"><span>correcto: </span>{{message.text}}</div>  
+          <div id='mensajes' class="check-element sample-show-hide alert-box error" ng-show="mostrarAvisoErrorLocal" style="margin:0px;"><span>error: </span>{{message.text}}</div> 
+      </div>
   <div class="row">
-    <!--<div class="input-field col s8">
-      <input id="search" type="search" placeholder="Encontrar alumno" required>
-      <label for="search"><i class="material-icons prefix">search</i></label>
-      <i class="material-icons">close</i>
-      
-    </div>-->
 
       <button class="col s3 right btn waves-effect waves-light" ui-sref="detalle-curso.agregar-alumno" align="middle" type="submit" name="action">
       Agregar alumno

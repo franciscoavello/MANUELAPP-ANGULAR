@@ -1,6 +1,12 @@
 var myApp = angular.module('myApp');
 
-myApp.controller('AyudanteCtrl',function ($http,$scope,$state,$rootScope){
+myApp.controller('AyudanteCtrl',function ($http,$scope,$state,$rootScope,$timeout){
+  if($rootScope.mostrarAvisoErrorLocal==undefined){
+      $rootScope.mostrarAvisoErrorLocal=false;
+  }
+  if($rootScope.mostrarAvisoErrorLocal==undefined){
+      $rootScope.mostrarAvisoErrorLocal=false;
+  }
   $scope.ayudante=[];
   $http.get("http://manuel-api2.herokuapp.com/datos_ayudante?curso_id="+$rootScope.mi_curso.id)
     .success(function(data) {
@@ -10,7 +16,13 @@ myApp.controller('AyudanteCtrl',function ($http,$scope,$state,$rootScope){
 
 });
 
-myApp.controller('AsignarAyudante',function ($http,$scope,$state,$rootScope){
+myApp.controller('AsignarAyudante',function ($http,$scope,$state,$rootScope,$timeout){
+  if($scope.mostrarAvisoErrorLocal==undefined){
+      $scope.mostrarAvisoErrorLocal=false;
+  }
+  if($scope.mostrarAvisoErrorLocal==undefined){
+      $scope.mostrarAvisoErrorLocal=false;
+  }
   $scope.alumnos=[];
   //revisa si ya está asignado un ayudante
   $scope.ayudante=[];
@@ -47,7 +59,15 @@ myApp.controller('AsignarAyudante',function ($http,$scope,$state,$rootScope){
     .success(function(data) {
       if(data.length>0){
         console.log(data);
-        $scope.alumnos = data;
+        if($scope.ayudante.length>0){
+          for(i in data){
+            if(data[i].id!=$scope.ayudante[0].id){
+              $scope.alumnos.push(data[i]);
+            }
+          }
+        }else{
+          $scope.alumnos=data;
+        }
       }
     });
 
@@ -68,6 +88,13 @@ myApp.controller('AsignarAyudante',function ($http,$scope,$state,$rootScope){
       }
     }
   }
+
+  $scope.desaparecer = function(){     
+        $scope.mostrarAvisoExitoLocal = false;
+        $scope.mostrarAvisoErrorLocal = false;
+        $scope.message.text = '';                 
+  };
+
   $scope.asignarAyudante = function () {
     //se debe quitar el ayudante anterior
     if($scope.ayudante.length>0){
@@ -75,8 +102,9 @@ myApp.controller('AsignarAyudante',function ($http,$scope,$state,$rootScope){
           alumno_id: $scope.ayudante[0].id,
           curso_id: $rootScope.mi_curso.id,
           ayudante: "false"
+       }).success(function(){
+          $scope.ayudante.splice(0,1);
        });
-      $scope.ayudante.splice(0,1);
     }
     console.log($scope.respuesta.alumno);
     var alumno = JSON.parse($scope.respuesta.alumno);
@@ -87,17 +115,20 @@ myApp.controller('AsignarAyudante',function ($http,$scope,$state,$rootScope){
     $http.put("http://manuel-api2.herokuapp.com/es_ayudante", {
           alumno_id: alumno.id,
           curso_id: $rootScope.mi_curso.id,
-          ayudante: true
+          ayudante: "true"
        })
       .success(function() {
-        $scope.alertaEliminacionAlumno=true;
-        go('detalle-curso.alumnos');
-        setTimeout(function(){
-          $rootScope.alertaEliminacionAlumno=false;
-          console.log("alertaEliminacionAlumno=false");
-        },2000);
+        $scope.message.text = 'El ayudante se ha asignado correctamente';
+        $scope.mostrarAvisoExitoLocal = true;
+        $timeout($scope.desaparecer, 2000);
+      }).error(function(err){
+        $scope.message.text = 'Error al asignar ayudante';
+        $scope.mostrarAvisoErrorLocal = true;
+        $timeout($scope.desaparecer, 2000);
       });
+
   };
+
   $scope.asignarFuncionalidades = function (){
     console.log("Se van a asignar las funcionalidades");
     for(i in $scope.selected){
@@ -110,20 +141,23 @@ myApp.controller('AsignarAyudante',function ($http,$scope,$state,$rootScope){
           funcionalidad_id: $scope.selected[i].funcionalidad_id
         })
           .success(function(){
-            $rootScope.alertaAsignacionFuncionalidades=true;
-            setTimeout(function(){
-              $rootScope.alertaAsignacionFuncionalidades=false;
-              console.log("alertaAsignacionFuncionalidades=false");
-            },2000);
+            $scope.message.text = 'Las funcionalidades han sido asignadas correctamente';
+            $scope.mostrarAvisoExitoLocal = true;
+            $timeout($scope.desaparecer(), 2000);
 
+          }).error(function(){
+            $scope.message.text = 'Error al asignar funcionaliades al ayudante';
+            $scope.mostrarAvisoErrorLocal = true;
+            $timeout($scope.desaparecer(), 2000);
           });
       }
     }
-  $state.go('detalle-curso.ayudante');
+    $state.go('detalle-curso.ayudante');
   }
 });
 
 myApp.controller('CursoCtrl',function ($http,$scope,$state,$rootScope){
+
   $scope.hayAyudante=false;
   $scope.cantidadAlumnos=0;
   $scope.cantidadGrupos=0;
@@ -163,7 +197,13 @@ myApp.controller('CursoCtrl',function ($http,$scope,$state,$rootScope){
     });
 });
 
-myApp.controller('AlumnoCtrl',function ($http,$scope,$state,$rootScope){
+myApp.controller('AlumnoCtrl',function ($http,$scope,$state,$rootScope,$timeout){
+  if($scope.mostrarAvisoErrorLocal==undefined){
+      $scope.mostrarAvisoErrorLocal=false;
+  }
+  if($scope.mostrarAvisoErrorLocal==undefined){
+      $scope.mostrarAvisoErrorLocal=false;
+  }
   $scope.grupos=[];
   $scope.alertaEliminacionAlumno=false;
   $http.get("http://manuel-api2.herokuapp.com/grupos_alumno?correo="+$rootScope.mi_alumno.correo)
@@ -180,21 +220,33 @@ myApp.controller('AlumnoCtrl',function ($http,$scope,$state,$rootScope){
     }).error(function(err){
       console.log(err);
     });
+   $scope.desaparecer = function(){     
+        $scope.mostrarAvisoExitoLocal = false;
+        $scope.mostrarAvisoErrorLocal = false;
+        $scope.message.text = '';                 
+  };
   $scope.eliminarAlumnoDetalle = function () {
     $http.delete("http://manuel-api2.herokuapp.com/borrar_alumno_curso?alumno_id="+$rootScope.mi_alumno.id+"&curso_id="+$rootScope.mi_curso.id)
       .success(function() {
-        $scope.alertaEliminacionAlumno=true;
-        $state.go('detalle-curso.alumnos');
-        setTimeout(function(){
-          $rootScope.alertaEliminacionAlumno=false;
-          console.log("alertaEliminacionAlumno=false");
-        },2000);
+        $scope.message.text = 'El alumno ha sido eliminado correctamente';
+        $scope.mostrarAvisoExitoLocal = true;
+        $timeout($scope.desaparecer, 2000);
+      }).error(function(err){
+        $scope.message.text = 'Error al eliminar el alumno al grupo';
+        $scope.mostrarAvisoErrorLocal = true;
+        $timeout($scope.desaparecer(), 2000);
       });
   };        
       
 });
 
-myApp.controller('AgregarAlumnosGrupo',function ($http,$scope,$state,$rootScope){
+myApp.controller('AgregarAlumnosGrupo',function ($http,$scope,$state,$rootScope,$timeout){
+  if($scope.mostrarAvisoErrorLocal==undefined){
+      $scope.mostrarAvisoErrorLocal=false;
+  }
+  if($scope.mostrarAvisoErrorLocal==undefined){
+      $scope.mostrarAvisoErrorLocal=false;
+  }
   $scope.integrantes=[];
   $scope.alumnos=[];
   $scope.alumnosFueraGrupo=[];
@@ -234,6 +286,11 @@ myApp.controller('AgregarAlumnosGrupo',function ($http,$scope,$state,$rootScope)
   $scope.exists = function (item, list){
     return list.indexOf(item) > -1;
   }
+  $scope.desaparecer = function(){     
+        $scope.mostrarAvisoExitoLocal = false;
+        $scope.mostrarAvisoErrorLocal = false;
+        $scope.message.text = '';                 
+  };
   $scope.asignarAlumnos = function () {
     for(i in $scope.selected){
       console.log($scope.selected[i]);
@@ -241,19 +298,27 @@ myApp.controller('AgregarAlumnosGrupo',function ($http,$scope,$state,$rootScope)
         alumno_id: $scope.selected[i].id, 
         grupo_id: $rootScope.mi_grupo.id,
         jefe: false
-      }).success(function() {
-        $rootScope.alertaAgregarAlumnosGrupo=true;
-        $state.go("detalle-curso.detalle-grupo");
-        setTimeout(function(){
-          $rootScope.alertaAgregarAlumnosGrupo=false;
-          console.log("El alumno "+$scope.selected[i].nombre+" se agregó correctamente");
-        },2000);
       })
+      .success(function() {
+        $scope.message.text = 'Los alumnos han sido agregados al grupo correctamente';
+        $scope.mostrarAvisoExitoLocal = true;
+        $timeout($scope.desaparecer, 2000);
+      }).error(function(err){
+        $scope.message.text = 'Error al agregar los alumnos al grupo';
+        $scope.mostrarAvisoErrorLocal = true;
+        $timeout($scope.desaparecer(), 2000);
+      });
     }
   };
 });
 
-myApp.controller('GrupoCtrl',function ($http,$scope,$state,$rootScope){
+myApp.controller('GrupoCtrl',function ($http,$scope,$state,$rootScope,$timeout){
+  if($scope.mostrarAvisoErrorLocal==undefined){
+      $scope.mostrarAvisoErrorLocal=false;
+  }
+  if($scope.mostrarAvisoErrorLocal==undefined){
+      $scope.mostrarAvisoErrorLocal=false;
+  }
   $scope.integrantes=[];
   $scope.jefeGrupo=[];
   $rootScope.alertaErrorEliminacionGrupo=false;
@@ -287,44 +352,36 @@ myApp.controller('GrupoCtrl',function ($http,$scope,$state,$rootScope){
   });
 
 
-
+  $scope.desaparecer = function(){     
+        $scope.mostrarAvisoExitoLocal = false;
+        $scope.mostrarAvisoErrorLocal = false;
+        $scope.message.text = '';                 
+  };
   $scope.eliminarGrupo = function () {
 
     $http.delete("http://manuel-api2.herokuapp.com/grupos/"+$rootScope.mi_grupo.id)
       .success(function() {
-        $rootScope.alertaEliminacionGrupo=true;
-        $state.go("detalle-curso.grupos");
-        setTimeout(function(){
-          $rootScope.alertaEliminacionGrupo=false;
-          console.log("alertaEliminacionGrupo=false");
-        },2000);
-      })
-      .error(function(err){
-        $rootScope.alertaErrorEliminacionGrupo=true;
-        $state.go("detalle-curso.grupos");
-        setTimeout(function(){
-          $rootScope.alertaErrorEliminacionGrupo=false;
-          console.log("alertaErrorEliminacionGrupo=false");
-        },2000);
+        $scope.message.text = 'Los alumnos han sido agregados al grupo correctamente';
+        $scope.mostrarAvisoExitoLocal = true;
+        $timeout($scope.desaparecer, 2000);
+        $state.go('detalle-curso.grupos');
+      }).error(function(err){
+        $scope.message.text = 'Error al agregar los alumnos al grupo';
+        $scope.mostrarAvisoErrorLocal = true;
+        $timeout($scope.desaparecer(), 2000);
       });
   };
   $scope.eliminarAlumnoGrupo = function (integrante) {
     console.log("se va a borrar el alumno "+integrante.nombre+" del grupo "+$rootScope.mi_grupo.id);
     $http.delete("http://manuel-api2.herokuapp.com/borrar_alumno?alumno_id="+integrante.id+"&grupo_id="+$rootScope.mi_grupo.id)
       .success(function() {
-        $rootScope.alertaEliminacionAlumno=true;
-        $state.go('detalle-curso.grupos');
-        setTimeout(function(){
-          $rootScope.alertaEliminacionAlumno=false;
-          console.log("alertaEliminacionAlumno=false");
-        },2000);
-      })
-      .error(function(err){
-        $rootScope.alertaErrorEliminacionAlumno=true;
-        setTimeout(function(){
-          $rootScope.alertaErrorEliminacionAlumno=false;
-          console.log("alertaErrorEliminacionAlumno=false");
-        },2000);
+        $scope.message.text = 'El alumno ha sido eliminado del grupo correctamente';
+        $scope.mostrarAvisoExitoLocal = true;
+        $timeout($scope.desaparecer, 2000);
+      }).error(function(err){
+        $scope.message.text = 'Error al eliminar el alumno del grupo';
+        $scope.mostrarAvisoErrorLocal = true;
+        $timeout($scope.desaparecer(), 2000);
       });
       $scope.indice=$scope.integrantes.indexOf(integrante);
       console.log("Se va a eliminar el indice "+$scope.indice);
@@ -412,7 +469,13 @@ myApp.controller('VerGrupos', function ($rootScope,$http, $scope, $state) {
   }
 });
 
-myApp.controller('VerAlumnos', function ($rootScope,$http, $scope, $state) {
+myApp.controller('VerAlumnos', function ($rootScope,$http, $scope, $state,$timeout) {
+  if($scope.mostrarAvisoErrorLocal==undefined){
+      $scope.mostrarAvisoErrorLocal=false;
+  }
+  if($scope.mostrarAvisoErrorLocal==undefined){
+      $scope.mostrarAvisoErrorLocal=false;
+  }
   $rootScope.alumnosCurso = [];
   $scope.alertaEliminacionAlumno=false;
   $http.get("http://manuel-api2.herokuapp.com/buscar_alumnos_curso?curso_id="+$rootScope.mi_curso.id)
@@ -422,6 +485,11 @@ myApp.controller('VerAlumnos', function ($rootScope,$http, $scope, $state) {
         console.log($rootScope.alumnosCurso);
       }
     });
+  $scope.desaparecer = function(){     
+        $scope.mostrarAvisoExitoLocal = false;
+        $scope.mostrarAvisoErrorLocal = false;
+        $scope.message.text = '';                 
+  };
   $scope.seleccionarAlumno = function (id) {
       $scope.id_alumno_seleccionado = id;
       console.log("id_alumno: "+$scope.id_alumno_seleccionado);
@@ -433,12 +501,13 @@ myApp.controller('VerAlumnos', function ($rootScope,$http, $scope, $state) {
     var id_alumno = $rootScope.alumnosCurso[index].id;
     $http.delete("http://manuel-api2.herokuapp.com/borrar_alumno_curso?alumno_id="+id_alumno+"&curso_id="+$rootScope.mi_curso.id)
       .success(function() {
-        $rootScope.alertaEliminacionAlumno=true;
-        $state.go('detalle-curso.alumnos');
-        setTimeout(function(){
-          $rootScope.alertaEliminacionAlumno=false;
-          console.log("alertaEliminacionAlumno=false");
-        },2000);
+        $scope.message.text = 'El alumno ha sido eliminado correctamente';
+        $scope.mostrarAvisoExitoLocal = true;
+        $timeout($scope.desaparecer, 2000);
+      }).error(function(err){
+        $scope.message.text = 'Error al eliminar el alumno';
+        $scope.mostrarAvisoErrorLocal = true;
+        $timeout($scope.desaparecer(), 2000);
       });
     $rootScope.alumnosCurso.splice(index,1);
 
@@ -447,7 +516,7 @@ myApp.controller('VerAlumnos', function ($rootScope,$http, $scope, $state) {
 
 myApp.controller('VerEvaluaciones', function ($rootScope,$http, $scope, $state) {
   $rootScope.encuestas = [];
-  $rootScope.encuestas.evaluaciones = [];
+  $scope.evaluaciones=[];
   $rootScope.alertaEliminacionEncuesta=false;
   $http.get("http://manuel-api2.herokuapp.com/evaluaciones_curso?curso_id="+$rootScope.mi_curso.id)
     .success(function(data) {
@@ -457,10 +526,9 @@ myApp.controller('VerEvaluaciones', function ($rootScope,$http, $scope, $state) 
           if(data[i].id==null){
             $rootScope.encuestas.push(data[i]);
           }else{
-            $rootScope.encuestas.evaluaciones.push(data[i]);
+            $scope.evaluaciones.push(data[i]);
           }
         }
-              console.log("");
       }
     });
   $scope.seleccionarEvaluacion = function (id) {
@@ -470,10 +538,15 @@ myApp.controller('VerEvaluaciones', function ($rootScope,$http, $scope, $state) 
       $rootScope.mi_encuesta=$rootScope.encuestas[$scope.id_evaluacion_seleccionado];
       $state.go('detalle-curso.detalle-evaluacion');
   }
-  
 });
 
-myApp.controller('AgregarAlumno', function ($rootScope,$http, $scope, $state) {
+myApp.controller('AgregarAlumno', function ($rootScope,$http, $scope, $state,$timeout) {
+  if($rootScope.mostrarAvisoErrorLocal2==undefined){
+      $rootScope.mostrarAvisoErrorLocal2=false;
+  }
+  if($rootScope.mostrarAvisoErrorLocal2==undefined){
+      $rootScope.mostrarAvisoErrorLocal2=false;
+  }
   $scope.alumnosFaltantes = [];
   $scope.grupos = [];
   $rootScope.alertaAgregarAlumno=false;
@@ -513,25 +586,29 @@ myApp.controller('AgregarAlumno', function ($rootScope,$http, $scope, $state) {
   $scope.exists = function (item, list){
     return list.indexOf(item) > -1;
   }
+  $scope.desaparecer = function(){     
+        $rootScope.mostrarAvisoExitoLocal2 = false;
+        $rootScope.mostrarAvisoErrorLocal2 = false;
+        $scope.message.text = '';                 
+  };
   $scope.agregarAlumno = function () {
 
     for(i in $scope.selected){
       var arreglo={curso_id:$rootScope.mi_curso.id,alumno_id:$scope.selected[i].id,estado:false,jefe_proyecto:false};
       console.log(arreglo);
       $http.post("http://manuel-api2.herokuapp.com/curso_alumnos",arreglo)
-        .success(function() {
-          $rootScope.alertaAgregarAlumno=true;
-          $rootScope.alumnosCurso.push($scope.selected[i]);
-        })
-        .error(function(err){
-          console.log("No se pudo agregar al curso al alumno"+$scope.selected[i].nombre);
-        });
+      .success(function() {
+        $rootScope.message.text = 'Los alumnos han sido agregados correctamente';
+        $rootScope.mostrarAvisoExitoLocal2 = true;
+        $timeout($scope.desaparecer, 2000);
+        $state.go("detalle-curso.alumnos");
+
+      }).error(function(err){
+        $rootScope.message.text = 'Error al agregar los alumnos al curso';
+        $rootScope.mostrarAvisoErrorLocal2 = true;
+        $timeout($scope.desaparecer(), 2000);
+      });
     }
-      $state.go("detalle-curso.alumnos");
-      setTimeout(function(){
-        $rootScope.alertaAgregarAlumno=false;
-        console.log("desactiva alarma");
-      },2000);
   }
 });
 
@@ -565,20 +642,32 @@ myApp.controller('NuevaEncuesta', function ($rootScope,$http, $scope, $state) {
   }
 });
 
-myApp.controller('AgregarGrupo', function ($rootScope,$http, $scope, $state) {
+myApp.controller('AgregarGrupo', function ($rootScope,$http, $scope, $state,$timeout) {
+  if($scope.mostrarAvisoErrorLocal==undefined){
+      $scope.mostrarAvisoErrorLocal=false;
+  }
+  if($scope.mostrarAvisoErrorLocal==undefined){
+      $scope.mostrarAvisoErrorLocal=false;
+  }
   $rootScope.alertaAgregarGrupo=false;
   $scope.entrada={};
+  $scope.desaparecer = function(){     
+        $scope.mostrarAvisoExitoLocal = false;
+        $scope.mostrarAvisoErrorLocal = false;
+        $scope.message.text = '';                 
+  };
   $scope.agregarGrupo = function (){
     console.log($scope.entrada.nombreGrupo+" "+$scope.entrada.descripcionGrupo);
     var arreglo={nombre:$scope.entrada.nombreGrupo,curso_id:$rootScope.mi_curso.id,descripcion:$scope.entrada.descripcionGrupo};
     $http.post("http://manuel-api2.herokuapp.com/grupos",arreglo)
       .success(function() {
-        $rootScope.alertaAgregarGrupo=true;
-        $state.go("detalle-curso.grupos");
-        setTimeout(function(){
-          $rootScope.alertaAgregarGrupo=false;
-          console.log("AlertaAgregarGrupo=false");
-        },2000);
+        $scope.message.text = 'El grupo ha sido creado correctamente';
+        $scope.mostrarAvisoExitoLocal = true;
+        $timeout($scope.desaparecer, 2000);
+      }).error(function(err){
+        $scope.message.text = 'Error al crear el grupo';
+        $scope.mostrarAvisoErrorLocal = true;
+        $timeout($scope.desaparecer(), 2000);
       });
   }
 });

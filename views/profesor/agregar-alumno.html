@@ -9,6 +9,10 @@
           <label for="{{alumno.id}}" >{{alumno.nombre}} {{alumno.apellido_paterno}} {{alumno.apellido_materno}}</label>
       </div>
     </div>
+  <div style="margin-top:10px">      
+          <div id='mensajes' class="check-element sample-show-hide alert-box success" ng-show="mostrarAvisoExitoLocal" style="margin:0px;"><span>correcto: </span>{{message.text}}</div>  
+          <div id='mensajes' class="check-element sample-show-hide alert-box error" ng-show="mostrarAvisoErrorLocal" style="margin:0px;"><span>error: </span>{{message.text}}</div> 
+      </div>
   <br><br>
   <div class="row">
     <button class="col s2 btn waves-effect waves-light" align="middle" type="submit" style="padding:0px;">  

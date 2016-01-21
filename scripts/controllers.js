@@ -79,7 +79,7 @@ myApp.controller('LoginCtrl', function (auth, $scope, $location, store, $http, $
   };
 
   function onLoginSuccess(profile, token) {
-      $http.get("http://manuel-api.herokuapp.com/buscar_por_correo?correo="+profile.email) //A la espera de la api, se revisa directamente en rails.
+      $http.get("http://manuel-api2.herokuapp.com/buscar_por_correo?correo="+profile.email) //A la espera de la api, se revisa directamente en rails.
         .success(function(data){
           console.log(data);
           var rolUser = -1;
@@ -112,7 +112,7 @@ myApp.controller('LoginCtrl', function (auth, $scope, $location, store, $http, $
 
             }
             if(rolUser==2){
-              $http.get("http://manuel-api.herokuapp.com/ayudante_curso?correo="+$scope.usuario[0].correo)
+              $http.get("http://manuel-api2.herokuapp.com/ayudante_curso?correo="+$scope.usuario[0].correo)
               .success(function(data){
                 $scope.datosAyudante = data;
                 if($scope.datosAyudante.length > 0){  

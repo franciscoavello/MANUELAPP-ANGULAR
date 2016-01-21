@@ -1,6 +1,10 @@
 <div ng-controller="AgregarAlumnosGrupo">
   <h5 class="row azul-oscuro" style="font-weight:bold;">Agregar Alumnos al grupo</h5>
   <br>
+   <div style="margin-top:10px">      
+          <div id='mensajes' class="check-element sample-show-hide alert-box success" ng-show="mostrarAvisoExitoLocal" style="margin:0px;"><span>correcto: </span>{{message.text}}</div>  
+          <div id='mensajes' class="check-element sample-show-hide alert-box error" ng-show="mostrarAvisoErrorLocal" style="margin:0px;"><span>error: </span>{{message.text}}</div> 
+      </div>
   <p style="color:grey">		Seleccione alumnos para agregar al nuevo grupo</p>
   <br>
   <form ng-submit="asignarAlumnos()">
