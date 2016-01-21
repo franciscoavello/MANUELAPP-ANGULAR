@@ -33,14 +33,14 @@
           </div>
 -->
 <div class="col s6 card teal offset-s1">
-  <div class="card-content white-text">
+  <div input-field class="card-content white-text">
     <h5>Encuesta a Generar</h5>
-    <p>Nombre: <input ng-required="true" required id="first_name" type="text" ng-model="nombre" class="validate" >
+    <p>Nombre: <input ng-required="true" required id="first_name" type="text" ng-model="nombre"  >
                 <label for="first_name"></label></p>
     <p>Tipo: <select ng-required="true" required material-select watch  ng-model="tipo">
                   <option ng-repeat="tipo in tipos" value="{{tipo.id}}">{{tipo.nombre}}</option>
                 </select></p>
-    <p>Descripcion: <input ng-required="true" required id="descripcion" type="text" ng-model="descripcion" class="validate" ></p>
+    <p>Descripcion: <input ng-required="true" required id="descripcion" type="text" ng-model="descripcion" ></p>
   </div>
 </div>
 

@@ -92,9 +92,9 @@
                           </tbody>
                         </table>
                         <div class="row col s12">
-                        <button type="submit" data-ng-hide="editar" data-ng-click="editar=true; editarAlumno(detalle)" class="btn waves-effect waves-light green">Editar</button>
+                        <button type="submit" data-ng-hide="editar" data-ng-click="editar=true; editarAlumno(detalle.id)" class="btn waves-effect waves-light">Editar</button>
                         <button type="submit" data-ng-show="editar" data-ng-click="editar=false;guardarCampo($index);" class="btn waves-effect waves-light green">Aceptar</button>
-                        <button type="submit" data-ng-show="editar" data-ng-click="editar=false" class="btn waves-effect waves-light red">Cancelar</button>
+                        <button type="submit" data-ng-show="editar" data-ng-click="editar=false" class="waves-effect waves-light btn grey">Cancelar</button>
                         </div>
                       <h5 class="azul-oscuro">Cursos a los que Pertenece</h5>
                       <div align="right"><input ng-hide="loading" ng-model="searchText2"><i class="fa fa-search"></i></div>
@@ -103,7 +103,7 @@
                           <thead>
                             <tr>
                                 <th data-field="id">Nombre</th>
-                                <th data-field="name">Descripcion</th>
+                                <th data-field="name">Descripción</th>
                                 
                             </tr>
                           </thead>
@@ -132,8 +132,8 @@
             </td>
           -->
             
-              <button type="submit" data-ng-hide="editar || deshabilitado" data-ng-click="deshabilitarAlumno(alumno.id);avisoDeshabilitarAlumno=true;" class="btn waves-effect waves-light red"><i class="material-icons">block</i></button>
-              <button type="submit" data-ng-hide="editar || !deshabilitado" data-ng-click="habilitarAlumno(alumno.id);avisoDeshabilitarAlumno=true" class="btn waves-effect waves-light green"><i class="material-icons">check_box</i></button>
+              <button type="submit" data-ng-hide="editar || deshabilitado" data-ng-click="deshabilitarAlumno(alumno.id);avisoDeshabilitarAlumno=true;" class="btn waves-effect waves-light red">Deshabilitar</button>
+              <button type="submit" data-ng-hide="editar || !deshabilitado" data-ng-click="habilitarAlumno(alumno.id);avisoDeshabilitarAlumno=true" class="btn waves-effect waves-light green">Habilitar</button>
             </td>
         </tbody>
       </table>
