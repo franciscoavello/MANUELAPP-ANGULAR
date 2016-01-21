@@ -1,6 +1,6 @@
 
 var myApp = angular.module('myApp');
-var direccion = "localhost:3000"
+var direccion = "manuel-api2.herokuapp.com"
 var heroku ="manuel-api.herokuapp.com"
 var heroku2 ="manuel-api2.herokuapp.com"
 
