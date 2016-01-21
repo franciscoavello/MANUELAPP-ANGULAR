@@ -77,47 +77,31 @@ myApp.controller("VerEncuestasCompletadas", function($scope,$http,$rootScope, $s
 
 });
 
-myApp.controller("ResponderEncuesta", function($scope,$http,$rootScope){
-    $scope.datosGrupo = [];
-    $http.get("http://manuel-api.herokuapp.com/grupo_encuesta_pendiente?correo="+$rootScope.correoUsuarioLogueado+"&encuesta_id="+$scope.idEncuesta)
-    .success(function(data1){
-        $http.get("http://manuel-api.herokuapp.com/evaluaciones_curso_encuesta?curso_id="+data1[0].curso_id+"&encuesta_id="+$scope.idEncuesta)
+myApp.controller("ResponderEncuesta", function($scope,$http,$rootScope,$state){
+    document.body.scrollTop = 0;
+    if($rootScope.matrizRespuestas == undefined) {
+        $rootScope.matrizRespuestas = [];
+    }
+    if($scope.datosGrupo == undefined) {
+        $http.get("http://manuel-api.herokuapp.com/buscar_por_grupo?grupo_id=23")
         .success(function(data2){
-            $http.get("http://manuel-api.herokuapp.com/buscar_por_grupo?grupo_id="+data1[0].id)
-            .success(function(data3){
-                $http.get("http://manuel-api.herokuapp.com/datos_alumno?correo="+$rootScope.correoUsuarioLogueado)
-                .success(function(data4){
-                            $scope.recursivo(data2,data3,data4,data3.length);
-                })
-                .error(function(err){
-                });
-            })
+            $scope.datosGrupo = data2;
+            console.log(data2);
+            $scope.contestaron = data2;
+            $rootScope.cantidadAlGrupos=data2.length;
+        })
         .error(function(err){
 
         });
-        })
-            .error(function(err){
-            });
-    })
-    .error(function(err){
-    });
+    }
 
-    $scope.recursivo = function (data2, data3, data4,bandera) {
-        if(bandera==0){
+    $scope.pasarContestado = function (idAlumnoEncuestado) {
+        for(i=0;i<$scope.datosGrupo.length;i++){
+            if($scope.datosGrupo[i].id==idAlumnoEncuestado){
+                $scope.datosGrupo.splice(i,1);
+            }
         }
-        else{
-            $http.get("http://manuel-api2.herokuapp.com/entregar_respuesta?encuestador_id="+data4[0].id+"&encuestado_id="+data3[bandera-1].id+"&evaluacion_id="+data2[0].id)
-                        .success(function(data5){
-                            console.log(data2[0].id);
-                            if(data5.length==0){
-                                $scope.datosGrupo.push(data3[bandera-1]);
-                            }
-                            $scope.recursivo(data2,data3,data4,bandera-1);
-                        })
-                        .error(function(err){
-
-                        });
-        }
+        $state.go('encuestas.responder360');  
     };
 
     $scope.ingresarNombreAlumno = function (idAlumno, nomAlumno,apAlumno,amAlumno) {
@@ -183,7 +167,20 @@ myApp.controller("ObtenerPreguntas", function($scope,$http, $state,$rootScope, $
     })
     .error(function(err){
     });
-  
+
+    $scope.probar = function(idAlumno){
+        $scope.selected_ids = [];
+        $scope.selected_ids.push(idAlumno);
+        angular.forEach($scope.preguntas, function(pregunta) {
+            $scope.selected_ids.push(pregunta.id);
+            $scope.selected_ids.push(pregunta.selected_id.id);
+            $scope.selected_ids.push(pregunta.selected_id.val);
+        });
+        $rootScope.matrizRespuestas.push($scope.selected_ids);
+        if($rootScope.matrizRespuestas.length==$rootScope.cantidadAlGrupos){
+            $scope.completarEncuesta(); 
+        }
+    }  
     $scope.submitAnswers = function() {
         $scope.selected_ids = [];
         $scope.contador = 0;

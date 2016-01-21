@@ -119,11 +119,17 @@ myApp.controller('LoginCtrl', function (auth, $scope, $location, store, $http, $
                   $rootScope.respAyudante=true
                 }
                 if($rootScope.respAyudante){
-                  $rootScope.permisosAyudante=[                    
+                  $rootScope.permisosAyudante=[ 
+                    1,                   
                     2,
                     3,
                     4,
-                    6
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10
                   ];
                   store.set('profile', profile);
                   store.set('token', token);

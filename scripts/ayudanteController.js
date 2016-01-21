@@ -176,7 +176,6 @@ myApp.controller('VerCursosAyudante', function ($rootScope,$http, $scope, $state
       $scope.id_curso_seleccionado = id;
       console.log("id_curso: "+$scope.id_curso_seleccionado);
       $rootScope.mi_curso=$scope.cursos[$scope.id_curso_seleccionado];
-      console.log($rootScope.mi_curso.nombre);
       $state.go('detalle-curso-ayudante.perfil');
   }
 
