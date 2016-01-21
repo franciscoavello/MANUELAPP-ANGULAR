@@ -3,11 +3,6 @@
 	<h5 class="row azul-oscuro" style="font-weight:bold;">Publicar encuesta</h5>
 	<br><br>
   <form ng-submit="nuevaEncuesta()">
-    <h5>Nombre instancia</h5>
-      <div input-field>
-        <input type="text" required ng-model="entrada.nombre" length="250">
-        <label>Ingrese el nombre de la instancia de encuesta</label>
-      </div>
     <h5>Plantilla</h5>
    	<div required class="input-field row s8">
    		<select required material-select watch ng-model="entrada.encuesta_id">
@@ -15,12 +10,17 @@
     	</select>
     <label>Seleccione una encuesta</label>
   	</div>
+    <h5>Nombre instancia</h5>
+    <div input-field>
+      <input type="text" required ng-model="entrada.nombre" length="250">
+      <label>Ingrese el nombre de la instancia de encuesta</label>
+    </div>
     <div class="row">
 		  <button class="col s2 btn waves-effect waves-light left" align="middle" type="submit">  
 	      Publicar
 	    </button>
       <button class="col s2 btn waves-effect waves-light grey right" ui-sref="detalle-curso.evaluaciones" align="middle" type="submit" name="action">
-        <span class="azul-oscuro">Volver</span>
+        Volver
       </button>
     </div>
   </form>

@@ -87,7 +87,7 @@ myApp.controller('AsignarAyudante',function ($http,$scope,$state,$rootScope){
     $http.put("http://manuel-api2.herokuapp.com/es_ayudante", {
           alumno_id: alumno.id,
           curso_id: $rootScope.mi_curso.id,
-          ayudante: "true"
+          ayudante: true
        })
       .success(function() {
         $scope.alertaEliminacionAlumno=true;
@@ -446,8 +446,8 @@ myApp.controller('VerAlumnos', function ($rootScope,$http, $scope, $state) {
 });
 
 myApp.controller('VerEvaluaciones', function ($rootScope,$http, $scope, $state) {
-  $scope.evaluaciones = [];
   $rootScope.encuestas = [];
+  $rootScope.encuestas.evaluaciones = [];
   $rootScope.alertaEliminacionEncuesta=false;
   $http.get("http://manuel-api2.herokuapp.com/evaluaciones_curso?curso_id="+$rootScope.mi_curso.id)
     .success(function(data) {
@@ -457,9 +457,10 @@ myApp.controller('VerEvaluaciones', function ($rootScope,$http, $scope, $state) 
           if(data[i].id==null){
             $rootScope.encuestas.push(data[i]);
           }else{
-            $scope.evaluaciones.push(data[i]);
+            $rootScope.encuestas.evaluaciones.push(data[i]);
           }
         }
+              console.log("");
       }
     });
   $scope.seleccionarEvaluacion = function (id) {
