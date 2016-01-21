@@ -76,6 +76,7 @@
                         <button type="submit" data-ng-show="editar" data-ng-click="editar=false" class="btn waves-effect waves-light red">Cancelar</button>
                         </div>
                         <h5 class="azul-oscuro">Preguntas de la Encuesta</h5>
+                        <div align="right"><input ng-hide="loading" ng-model="searchText2"><i class="fa fa-search"></i></div>
                         <div class="progress" ng-show="loadingDetalle"><div class="indeterminate"></div></div>
                         <table class="striped" ng-hide="loadingDetalle">
                           <thead>
@@ -84,7 +85,7 @@
                             </tr>
                           </thead>
 
-                          <tbody ng-repeat="pregunta in preguntas" id="{{pregunta.id}}">   
+                          <tbody ng-repeat="pregunta in preguntas | filter:searchText2" id="{{pregunta.id}}">   
                             <td>
                               {{pregunta.enunciado}}
 

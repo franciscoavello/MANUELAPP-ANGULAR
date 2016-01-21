@@ -68,6 +68,26 @@
                         <button type="submit" data-ng-show="editar" data-ng-click="editar=false;guardarCampo($index); avisoEditarTipo=true" class="btn waves-effect waves-light green"><i class="material-icons">done</i></button>
                         <button type="submit" data-ng-show="editar" data-ng-click="editar=false" class="btn waves-effect waves-light red"><i class="material-icons">clear</i></button>
                         </div>
+                        <h5 class="azul-oscuro">Encuestas de este Tipo</h5>
+                        <div align="right"><input ng-hide="loading" ng-model="searchText2"><i class="fa fa-search"></i></div>
+                        <div class="progress" ng-show="loadingDetalle"><div class="indeterminate"></div></div>
+                        <table class="striped" ng-hide="loadingDetalle">
+                          <thead>
+                            <tr>
+                                <th data-field="id">Nombre</th>
+                                <th data-field="name">Descripcion</th>
+                            </tr>
+                          </thead>
+
+                          <tbody ng-repeat="encuesta in encuestas | filter:searchText2" id="{{encuesta.id}}">   
+                            <td>
+                              {{encuesta.nombre}}
+                            </td>
+                            <td>
+                              {{encuesta.descripcion}}
+                            </td>
+                          </tbody>
+                        </table>
                     </div>
                     <div class="modal-footer">
                         <a  class=" modal-action modal-close waves-effect waves-green btn-flat">Salir</a>

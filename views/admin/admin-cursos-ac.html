@@ -96,6 +96,8 @@
                         <button type="submit" data-ng-show="editar" data-ng-click="editar=false" class="btn waves-effect waves-light red">Cancelar</button>
                         </div>
                         <h5 class="azul-oscuro">Alumnos del Curso</h5>
+                        <div align="right"><input ng-hide="loading" ng-model="searchText2"><i class="fa fa-search"></i></div>
+                        <div class="progress" ng-show="loadingDetalle"><div class="indeterminate"></div></div>
                         <table class="striped"  ng-hide="loadingDetalle">
                           <thead>
                             <tr>
@@ -105,7 +107,7 @@
                             </tr>
                           </thead>
 
-                          <tbody ng-repeat="alumno in alumnos" id="{{alumno.id}}">   
+                          <tbody ng-repeat="alumno in alumnos | filter:searchText2" id="{{alumno.id}}">   
                             <td>
                               {{alumno.nombre}}
                             </td>

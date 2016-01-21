@@ -25,6 +25,7 @@ myApp.controller("verEncuestas", function($scope,$http,$rootScope){
     
     $scope.obtenerEncuesta= function(index){
       $scope.detalle = $scope.encuestas[index];
+      $scope.loadingDetalle = true;
       $scope.preguntas = [];
       $http.get("http://"+direccion+"/preguntas_encuesta?encuesta_id="+index)
         .success(function(data){
@@ -98,8 +99,17 @@ myApp.controller("verTiposEncuestas", function($scope,$http,$rootScope){
         $scope.newField[$scope.editando] = angular.copy(field);
     }
       
-      $scope.obtenerTEncuesta= function(index){
+    $scope.obtenerTEncuesta= function(index){
+      $scope.loadingDetalle = true;
       $scope.detalle = $scope.tipos[index];
+      $scope.encuestas = [];
+      $http.get("http://"+direccion+"/encuestas_por_tipo?tipo_id="+index)
+        .success(function(data){
+          $scope.encuestas = data;          
+          $scope.loadingDetalle = false;
+        })
+        .error(function(err){
+        });
     };
 
     $scope.guardarCampo = function(index) {
