@@ -178,11 +178,13 @@ myApp.controller("ObtenerPreguntas", function($scope,$http, $state,$rootScope, $
         });
         $rootScope.matrizRespuestas.push($scope.selected_ids);
         document.body.scrollTop = 0;
-        $rootScope.message.text = 'Alumno evaluado correctamente';
-        $rootScope.mostrarAvisoExitoLocal = true;
-        $timeout($scope.desaparecer, 2000);
         if($rootScope.matrizRespuestas.length==$rootScope.cantidadAlGrupos){
             $scope.completarEncuesta(); 
+        }
+        else{
+            $rootScope.message.text = 'Alumno evaluado correctamente';
+            $rootScope.mostrarAvisoExitoLocal = true;
+            $timeout($scope.desaparecer, 2000);
         }
     }  
     $scope.submitAnswers = function() {
