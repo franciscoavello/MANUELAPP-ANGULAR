@@ -132,7 +132,7 @@
             </td>
           -->
             
-              <button type="submit" data-ng-hide="editar || deshabilitado" data-ng-click="deshabilitarAlumno(alumno.id);avisoDeshabilitarAlumno=true;" class="btn waves-effect waves-light red">Deshabilitar</button>
+              <button type="submit" data-ng-hide="editar || deshabilitado" data-ng-click="deshabilitarAlumno(alumno.id);avisoDeshabilitarAlumno=true; deshabilitado = true" class="btn waves-effect waves-light red">Deshabilitar</button>
               <button type="submit" data-ng-hide="editar || !deshabilitado" data-ng-click="habilitarAlumno(alumno.id);avisoDeshabilitarAlumno=true;deshabilitado=false" class="btn waves-effect waves-light">Habilitar</button>
 
             </td>
