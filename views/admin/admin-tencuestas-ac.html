@@ -65,7 +65,7 @@
                         </table>
                         <div class="row col s12"> 
                         <button type="submit" data-ng-hide="editar" data-ng-click="editar=true; editarTipoEncuesta(detalle)" class="btn waves-effect waves-light green">Editar</button>
-                        <button type="submit" data-ng-show="editar" data-ng-click="editar=false;guardarCampo($index); avisoEditarTipo=true" class="btn waves-effect waves-light">Aceptar</button>
+                        <button type="submit" data-ng-show="editar" data-ng-click="editar=false;guardarCampo(detalle.id); avisoEditarTipo=true" class="btn waves-effect waves-light">Aceptar</button>
                         <button type="submit" data-ng-show="editar" data-ng-click="editar=false" class="waves-effect waves-light btn grey">Cancelar</button>
                         </div>
                         <h5 class="azul-oscuro">Encuestas de este Tipo</h5>
