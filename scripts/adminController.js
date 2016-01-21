@@ -79,7 +79,7 @@ myApp.controller("verEncuestas", function($scope,$http,$rootScope){
 });
 
 myApp.controller("verTiposEncuestas", function($scope,$http,$rootScope){
-    $scope.newField = [];
+    $scope.newField = {};
   $scope.loading=true;
 
 
@@ -154,10 +154,9 @@ myApp.controller("verTiposEncuestas", function($scope,$http,$rootScope){
 });
 
 myApp.controller("verProfesores", function($scope,$http){
-    $scope.newField = [];
+    $scope.newField = {};
   $scope.editando = false;
   $scope.loading = true;
-  $scope.detalle = [];
   $scope.cursos = [];
   $scope.alertaEditarProfesor = false;
   $scope.avisoDeshabilitarProfesor= false;
@@ -230,8 +229,7 @@ myApp.controller("verProfesores", function($scope,$http){
 
 myApp.controller('verAlumnos', function ($http, $scope, $state) {
   $scope.loading = true;
-  $scope.newField = [];
-  $scope.detalle = [];
+  $scope.newField = {};
   $scope.editando = false;
   $scope.alertaEditarAlumno = false;
   $http.get("http://"+direccion+"/alumnos.json")
@@ -259,7 +257,6 @@ myApp.controller('verAlumnos', function ($http, $scope, $state) {
     };
     
     $scope.guardarCampo = function(index) {
-      $scope.alumno = $scope.newField;
         //if ($scope.editing !== false) {
             //$scope.encuestas[$scope.editando] = $scope.newField;
 
@@ -267,9 +264,7 @@ myApp.controller('verAlumnos', function ($http, $scope, $state) {
           nombre: $scope.newField[$scope.editando].nombre, 
           apellido_paterno: $scope.newField[$scope.editando].apellido_paterno,
           apellido_materno: $scope.newField[$scope.editando].apellido_materno,
-          correo: $scope.newField[$scope.editando].correo
-          
-         
+          correo: $scope.newField[$scope.editando].correo         
        }).success(function() {
         $scope.alertaEditarAlumno = true;
       });
@@ -342,7 +337,7 @@ myApp.controller('verAlumnos', function ($http, $scope, $state) {
 
 myApp.controller('verCursos', function ($http, $scope, $state) {
   $scope.loading = true;
-    $scope.newField = [];
+    $scope.newField = {};
     $scope.alertaEditarCurso = true;
     $scope.editando = false;
     $scope.alumnos = [];
